@@ -1,19 +1,41 @@
 <script lang="ts">
 	export let title: string;
+	export let link_text: string;
+	export let link: string;
 </script>
 
-<section class="card-body">
-	<h1>{title}</h1>
+<section
+	class="flex flex-col justify-center items-center text-white bg-gradient-to-b from-teal-blue to-american-violet  rounded-3xl shadow-lg shadow-white/10 p-2 "
+>
+	<h1 class="text-3xl">{title}</h1>
+	<p>jihhdsjkhadkh</p>
+	<a href={link}>{link_text}</a>
 </section>
-
+<!-- 
 <style>
 	.card-body {
 		color: white;
-		background-color: #0c1d36;
+		/* background-color: #f8f6f6; */
+		background-color: rgba(255, 255, 255, 0.2);
 		width: 25vw;
-		height: 50vh;
+		height: 55vh;
 		border-radius: 25px;
 		margin: auto;
-		box-shadow: rgba(12, 29, 54, 0.25) 0px 14px 28px, rgba(12, 29, 54, 0.22) 0px 10px 10px;
+		box-shadow: rgba(47, 27, 99, 1) 0px 14px 28px, rgba(47, 27, 99, 1) 0px 10px 10px;
+		text-align: center;
+		position: relative;
+		/* border: 1px solid gold; */
 	}
-</style>
+
+	.card-body h1 {
+		font: 2em sans-serif;
+	}
+
+	.card-body a {
+		/* background-color: rgb(47, 27, 99); */
+		color: white;
+		text-decoration: none;
+		font-size: xx-large;
+		border-bottom: 1px solid gold;
+	}
+</style> -->

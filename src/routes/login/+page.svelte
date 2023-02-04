@@ -7,7 +7,7 @@
 </script>
 
 <section class="login-form">
-	<h2>Login</h2>
+	<h2>Log In</h2>
 	<form use:enhance method="POST">
 		<fieldset>
 			<h3>Email</h3>
@@ -18,12 +18,13 @@
 			<h3>Password</h3>
 			<input name="password" type="password" required placeholder="Enter password here" />
 		</fieldset>
-		<button type="submit">Login</button>
+		<button type="submit">Log In</button>
 	</form>
 </section>
 
 <style>
 	.login-form {
+		position: relative;
 		color: white;
 		/* background-color: #0c1d36; */
 		background: rgb(144, 20, 221);
@@ -40,6 +41,7 @@
 		border-radius: 2.5%;
 		box-shadow: rgba(12, 29, 54, 0.25) 0px 14px 28px, rgba(12, 29, 54, 0.22) 0px 10px 10px;
 		text-align: center;
+		border: 1px solid gold;
 	}
 
 	.login-form h2 {
@@ -50,17 +52,26 @@
 	.login-form input {
 		padding: 10px;
 		margin: 10px 0;
-		outline: none;
-		/* color: white; */
+		border: none;
+		border-bottom: 1px solid #f9cc0b;
+		color: white;
+		background-color: transparent;
+	}
+
+	.login-form input:focus {
+		border: none;
+		border-bottom: 1px solid #f9cc0b;
 	}
 
 	.login-form button {
 		padding: 10px;
 		margin: 10% 0;
-		background-color: #003153;
+		background-color: #0c1d36;
 		color: white;
 		width: 6vw;
 		border-radius: 10px;
+		border: 1px solid #f9cc0b;
+		/* border-color: rgb(167, 145, 24); */
 	}
 
 	.login-form fieldset {

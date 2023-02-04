@@ -1,39 +1,47 @@
 import { auth_service, post } from '$lib/api';
-import type { UserLogin } from '$lib/interfaces/user';
+import type { UserLogin, UserSession, UserLoginResponse } from '$lib/interfaces/user';
+import { user_session } from '$lib/stores';
 import { redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
+import { get } from 'svelte/store';
+import type { PageServerLoad, Actions } from './$types';
+
+/** @type {import('./$types').PageServerLoad} */
+export const load: PageServerLoad = async (event) => {
+	if (get(user_session).session_id) {
+		throw redirect(302, '/');
+	}
+};
 
 /** @type {import('./$types').Actions} */
 export const actions: Actions = {
-	default: async ({ request }) => {
-		const data: FormData = await request.formData();
-		//let value: string = '';
+	default: async (event) => {
+		// Get form data.
+		const data: FormData = await event.request.formData();
 
+		// Create new UserLogin object.
 		const user: UserLogin = {
 			email: data.get('email') as string,
 			password: data.get('password') as string
 		};
 
-		const res = await post(auth_service, 'login', user, '');
-		console.log(res);
-		// const response = await fetch('http://127.0.0.1:3001/login', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 		Accept: 'application.json'
-		// 	},
-		// 	body: JSON.stringify(user)
-		// });
+		// Send user login data to backend server and get response.
+		const res: UserLoginResponse = await post(auth_service, 'login', user, '');
 
-		// if (response.ok || response.status === 422) {
-		// 	const text = await response.text();
-		// 	value = JSON.stringify(text);
-		// }
+		// Set JWT in cookie
+		// event.cookies.set(
+		// 	'AuthToken',
+		// 	JSON.stringify(`${res.auth_body.token_type} ${res.auth_body.access_token}`),
+		// 	{ httpOnly: true, path: '/' }
+		// );
 
-		// const value = JSON.stringify(response.body);
+		// Set some user info in store for state management.
+		user_session.set({
+			first_name: res.first_name,
+			session_id: res.session_id,
+			token: res.auth_body
+		});
 
-		//	console.log(value);
-
+		// Redirect.
 		throw redirect(307, '/');
 	}
 };

@@ -32,7 +32,7 @@
 	// });
 </script>
 
-<section>
+<section class="booking_container">
 	<section class="device_option_container">
 		<h2>What is the type of device are you having trouble with?</h2>
 		{#each data.deviceOptions.dTypes as dt}
@@ -111,6 +111,11 @@
 </section>
 
 <style>
+	.booking_container {
+		width: 100%;
+		height: 100%;
+	}
+
 	h2 {
 		font-size: 2em;
 	}

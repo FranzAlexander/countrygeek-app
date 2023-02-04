@@ -24,7 +24,14 @@ export interface AuthBody {
 	token_type: string;
 }
 
-export interface UserTest {
+export interface UserLoginResponse {
 	first_name: string;
-	auth_token: AuthBody;
+	session_id: string;
+	auth_body: AuthBody;
+}
+
+export interface UserSession {
+	first_name: string;
+	session_id: string;
+	token: AuthBody;
 }
