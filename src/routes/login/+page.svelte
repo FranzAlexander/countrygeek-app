@@ -6,79 +6,40 @@
 	let errorMsg: string = '';
 </script>
 
-<section class="login-form">
-	<h2>Log In</h2>
-	<form use:enhance method="POST">
-		<fieldset>
-			<h3>Email</h3>
-			<input name="email" type="email" required placeholder="Enter email here" />
-			<i class="fa fa-envelope" />
-		</fieldset>
-		<fieldset>
-			<h3>Password</h3>
-			<input name="password" type="password" required placeholder="Enter password here" />
-		</fieldset>
-		<button type="submit">Log In</button>
-	</form>
-</section>
+<form
+	use:enhance
+	class=" relative h-[50vh] w-1/4 p-4 bg-gradient-to-br from-teal-blue to-american-violet m-auto mt-14 rounded-2xl shadow-lg shadow-american-violet/80 "
+	method="POST"
+>
+	<h2 class=" text-white text-5xl text-center p-2 mt-4">Log in</h2>
+	<fieldset class="w-2/4 p-2 mt-6 mb-6 m-auto flex flex-col gap-6">
+		<!-- Email -->
+		<input
+			class="appearance-none bg-white/10  outline-none p-1 text-white border-b-4  border-metallic-yellow  block text-xl"
+			type="email"
+			name="user_email"
+			placeholder="Email"
+			required
+		/>
 
-<style>
-	.login-form {
-		position: relative;
-		color: white;
-		/* background-color: #0c1d36; */
-		background: rgb(144, 20, 221);
-		background: linear-gradient(
-			343deg,
-			rgba(144, 20, 221, 1) 8%,
-			rgba(79, 26, 140, 1) 27%,
-			rgba(12, 29, 54, 1) 48%
-		);
-		width: 25vw;
-		height: 50vh;
-		margin: auto;
-		margin-top: 10vh;
-		border-radius: 2.5%;
-		box-shadow: rgba(12, 29, 54, 0.25) 0px 14px 28px, rgba(12, 29, 54, 0.22) 0px 10px 10px;
-		text-align: center;
-		border: 1px solid gold;
-	}
-
-	.login-form h2 {
-		font-size: 3.5em;
-		text-transform: uppercase;
-	}
-
-	.login-form input {
-		padding: 10px;
-		margin: 10px 0;
-		border: none;
-		border-bottom: 1px solid #f9cc0b;
-		color: white;
-		background-color: transparent;
-	}
-
-	.login-form input:focus {
-		border: none;
-		border-bottom: 1px solid #f9cc0b;
-	}
-
-	.login-form button {
-		padding: 10px;
-		margin: 10% 0;
-		background-color: #0c1d36;
-		color: white;
-		width: 6vw;
-		border-radius: 10px;
-		border: 1px solid #f9cc0b;
-		/* border-color: rgb(167, 145, 24); */
-	}
-
-	.login-form fieldset {
-		border: none;
-	}
-
-	/* .login-form div {
-	
-	} */
-</style>
+		<!-- Password -->
+		<input
+			type="password"
+			class="appearance-none bg-white/10  outline-none p-1 text-white border-b-4  border-metallic-yellow  block text-xl"
+			placeholder="Password"
+			required
+		/>
+	</fieldset>
+	<input
+		type="button"
+		value="Log In"
+		class="m-auto block text-white bg-white/10 rounded border-2 border-metallic-yellow p-1 text-xl cursor-pointer "
+	/>
+	<label class="text-white m-auto block w-2/4 mt-4 p-1 text-center ">
+		<input
+			type="checkbox"
+			name="remember_me"
+			class="cursor-pointer bg-white/10 border-2 border-metallic-yellow m-auto p-1 accent-metallic-yellow"
+		/> Remember Me?
+	</label>
+</form>

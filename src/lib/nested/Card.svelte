@@ -2,14 +2,20 @@
 	export let title: string;
 	export let link_text: string;
 	export let link: string;
+	export let desc_points: string[];
 </script>
 
 <section
-	class="flex flex-col justify-center items-center text-white bg-gradient-to-b from-teal-blue to-american-violet  rounded-3xl shadow-lg shadow-white/10 p-2 "
+	class="flex flex-col justify-center items-center text-white bg-white/10  rounded-3xl shadow-lg shadow-white/10 p-2 "
 >
-	<h1 class="text-3xl">{title}</h1>
-	<p>jihhdsjkhadkh</p>
-	<a href={link}>{link_text}</a>
+	<h1 class="text-3xl font-roboto">{title}</h1>
+	<ul class="list-disc p-2">
+		{#each desc_points as item}
+			<li class="text-xl p-2">{item}</li>
+		{/each}
+	</ul>
+
+	<a href={link} class="text-xl border-2 border-metallic-yellow rounded p-2 mt-3">{link_text}</a>
 </section>
 <!-- 
 <style>

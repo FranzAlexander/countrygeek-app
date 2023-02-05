@@ -15,7 +15,7 @@
 </section> -->
 
 <form
-	class=" relative h-[50vh] w-1/4 p-4 bg-gradient-to-br from-teal-blue to-american-violet m-auto mt-40 rounded-2xl shadow-lg shadow-american-violet/80 "
+	class=" relative h-[50vh] w-1/4 p-4 bg-gradient-to-br from-teal-blue to-american-violet m-auto mt-14 rounded-2xl shadow-lg shadow-american-violet/80 "
 	action=""
 >
 	<h2 class=" text-white text-5xl text-center p-2 mt-4">Sign Up</h2>
@@ -59,13 +59,6 @@
 		value="Sign Up"
 		class="m-auto block text-white bg-white/10 rounded border-2 border-metallic-yellow p-1 text-xl cursor-pointer "
 	/>
-	<label class="text-white m-auto block w-2/4 mt-4 p-1 text-center ">
-		<input
-			type="checkbox"
-			name="remember_me"
-			class="cursor-pointer bg-white/10 border-2 border-metallic-yellow m-auto p-1 accent-metallic-yellow"
-		/> Remember Me?
-	</label>
 
 	<!-- <fieldset class="bg-white/10 rounded-md w-3/4 mt-6 m-auto p-2 grid grid-cols-2 gap-6">
 		<input

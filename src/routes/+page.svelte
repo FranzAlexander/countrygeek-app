@@ -4,23 +4,15 @@
 
 	export let data: PageData;
 	data.name;
+
+	let repair_points: string[] = ['Computer', 'Laptop', 'Apple', 'Phone'];
 </script>
 
 <div class="grid grid-cols-3 gap-16 p-6">
-	<Card title={'Repair'} link_text={'Book'} link={'/booking'} />
-	<Card title={'Email'} link_text={'More'} link={''} />
-	<Card title={'Internet'} link_text={'More'} link={''} />
-	<Card title={'Store'} link_text={'Shop'} link={''} />
-	<Card title={'Business'} link_text={'See more'} link={''} />
-	<Card title={'Farms & Wineries'} link_text={'Specs'} link={''} />
+	<Card title={'Repairs'} link_text={'Book'} link={'/booking'} desc_points={repair_points} />
+	<Card title={'Email'} link_text={'More'} link={''} desc_points={[]} />
+	<Card title={'Internet'} link_text={'More'} link={''} desc_points={[]} />
+	<Card title={'Store'} link_text={'Shop'} link={''} desc_points={[]} />
+	<Card title={'Business'} link_text={'See more'} link={''} desc_points={[]} />
+	<Card title={'Farms & Wineries'} link_text={'Specs'} link={''} desc_points={[]} />
 </div>
-
-<!-- <style>
-	.services-container {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-		row-gap: 10vh;
-		margin-top: 10vh;
-		margin-bottom: 10vh;
-	}
-</style> -->
