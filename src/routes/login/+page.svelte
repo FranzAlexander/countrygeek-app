@@ -8,7 +8,7 @@
 
 <form
 	use:enhance
-	class=" relative h-[50vh] w-1/4 p-4 bg-gradient-to-br from-teal-blue to-american-violet m-auto mt-14 rounded-2xl shadow-lg shadow-american-violet/80 "
+	class="relative h-[50vh] w-1/4 p-4 bg-gradient-to-br from-teal-blue to-american-violet m-auto mt-14 rounded-2xl shadow-lg shadow-american-violet/80 "
 	method="POST"
 >
 	<h2 class=" text-white text-5xl text-center p-2 mt-4">Log in</h2>

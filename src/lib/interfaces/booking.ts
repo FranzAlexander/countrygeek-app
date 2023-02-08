@@ -13,3 +13,7 @@ export interface DeviceOptions {
 	dTypes: string[];
 	dBrands: string[];
 }
+
+export interface TestBooking {
+	service_type: number;
+}

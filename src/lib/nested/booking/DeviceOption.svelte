@@ -1,1 +1,1 @@
-<section />
+<input type="number" />

@@ -10,7 +10,7 @@
 
 	<ul class="flex justify-center items-center">
 		<li class="p-2">
-			<a href="/booking" class="text-xl">Services</a>
+			<a href="/booking" class="text-xl">Book Online</a>
 		</li>
 		<li class="p-2">
 			<a href="/" class="text-xl">Store</a>
