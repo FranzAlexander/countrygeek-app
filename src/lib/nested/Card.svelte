@@ -6,7 +6,7 @@
 </script>
 
 <section
-	class="flex flex-col justify-center items-center text-white bg-white/10  rounded-3xl shadow-lg shadow-white/10 p-2 "
+	class="flex flex-col justify-center items-center text-white bg-white  rounded-3xl shadow-lg shadow-white/10 p-2 "
 >
 	<h1 class="text-3xl font-roboto">{title}</h1>
 	<ul class="list-disc p-2">

@@ -17,3 +17,11 @@ export interface DeviceOptions {
 export interface TestBooking {
 	service_type: number;
 }
+
+export interface DayData {
+	day: string;
+	date: number;
+	bookings: number;
+	booked_out: boolean;
+	month: string;
+}
