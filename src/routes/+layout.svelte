@@ -1,4 +1,9 @@
 <script>
+	import Footer from '$lib/nested/Footer.svelte';
+	import Nav from '$lib/nested/Nav.svelte';
+</script>
+
+<!-- <script>
 	import logo from '$lib/images/countrygeeklogo.png';
 	import '../app.css';
 
@@ -23,7 +28,7 @@
 		</ul>
 	</nav>
 	<slot />
-</div>
+</div> -->
 <!-- </div>
 <nav
 	class="flex text-white bg-transparent justify-between w-full sticky top-0 h-18 p-2 box-border z-10 "
@@ -63,3 +68,8 @@
 		<img src={logo} alt="Country Geek Logo" class="object-fit " />
 	</a>
 </footer> -->
+<div class="flex flex-col">
+	<Nav />
+	<slot />
+	<Footer />
+</div>

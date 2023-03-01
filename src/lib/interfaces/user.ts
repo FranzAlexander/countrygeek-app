@@ -35,3 +35,13 @@ export interface UserSession {
 	session_id: string;
 	token: AuthBody;
 }
+
+export interface UserSignUp {
+	first_name: string;
+	last_name: string;
+	email: string;
+	email_confirm: string;
+	password: string;
+	password_confirm: string;
+	tnc: string;
+}

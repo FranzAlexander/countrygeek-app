@@ -25,3 +25,8 @@ export interface DayData {
 	booked_out: boolean;
 	month: string;
 }
+
+export interface BookingOptions {
+	service_category: string;
+	service_type: string;
+}

@@ -1,31 +1,20 @@
-import { createDeviceOptions } from '$lib/helpers/bookingHelper';
-import type { DeviceRepairBooking, DeviceOptions } from '$lib/interfaces/booking';
+import { backend_api } from '$lib/api';
+import type { Category } from '$lib/interfaces/service';
+import { selected_booking_info } from '$lib/stores';
+import { get } from 'svelte/store';
+import type { PageLoad } from './$types';
 
-// export let deviceRepair: DeviceRepairBooking;
-
-export const load = async () => {
-	// let testOptions = [
-	// 	'Computer',
-	// 	'Laptop',
-	// 	'Mobile',
-	// 	'Printer',
-	// 	'Other',
-	// 	'Apple',
-	// 	'Microsoft',
-	// 	'Samsung',
-	// 	'HP',
-	// 	'Dell',
-	// 	'Other'
-	// ];
-	// let deviceRepair: DeviceRepairBooking = {
-	// 	s_type: '',
-	// 	d_type: 'device',
-	// 	d_brand: '',
-	// 	d_description: '',
-	// 	user: { first_name: '', last_name: '', address: '' }
-	// };
-	// return {
-	// 	deviceRepair: deviceRepair,
-	// 	deviceOptions: createDeviceOptions(testOptions)
-	// };
-};
+export const load = (async ({ fetch }) => {
+	let response = await fetch(`${backend_api}/get_categories`);
+	const categories: Category[] = await response.json();
+	let types_response = await fetch(`${backend_api}/get_category_types`, {
+		method: 'POST',
+		mode: 'cors',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: get(selected_booking_info)
+	});
+	console.log(categories);
+	return { categories };
+}) satisfies PageLoad;

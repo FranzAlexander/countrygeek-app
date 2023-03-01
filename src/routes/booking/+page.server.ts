@@ -1,5 +1,15 @@
 import type { DeviceRepairBooking, TestBooking } from '$lib/interfaces/booking';
 import type { Actions } from './$types';
+import type { PageLoad } from '../$types';
+import { backend_api } from '$lib/api';
+
+// export const load = (async ({ fetch }) => {
+// 	let response = await fetch(`${backend_api}/service_categories`);
+// 	const all_services = await response.json();
+// 	return {
+// 		all_services
+// 	};
+// }) satisfies PageLoad;
 
 /** @type {import('./$types').Actions} */
 export const actions: Actions = {
