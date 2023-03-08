@@ -68,7 +68,7 @@
 		<img src={logo} alt="Country Geek Logo" class="object-fit " />
 	</a>
 </footer> -->
-<div class="flex flex-col">
+<div class="flex flex-col bg-country-geek-blue">
 	<Nav />
 	<slot />
 	<Footer />

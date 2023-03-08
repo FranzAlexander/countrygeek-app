@@ -5,7 +5,7 @@
 
 	export let computer_services: ServiceInfo[];
 
-	function update_booking(type: BookingOptions) {
+	async function update_booking(type: BookingOptions) {
 		selected_booking_info.set(type);
 	}
 </script>
@@ -28,9 +28,12 @@
 				<a
 					href="/booking"
 					class="text-center p-2 text-2xl bg-country-geek-light-purple/90 w-1/2 m-auto rounded-3xl"
-					on:click={() =>
-						update_booking({ service_category: service.category, service_type: service.s_type })}
-					>Book Now!</a
+					on:click={async () =>
+						await update_booking({
+							service_category: service.category,
+							service_category_id: service.category_id,
+							service_type: service.s_type
+						})}>Book Now!</a
 				>
 			</div>
 		{/each}

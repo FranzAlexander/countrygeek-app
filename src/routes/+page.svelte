@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Card from '$lib/nested/Card.svelte';
 	import type { PageData } from './$types';
 	import background from '$lib/images/homebackground.jpg';
 

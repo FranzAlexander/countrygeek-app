@@ -1,4 +1,4 @@
-import { auth_service, backend_api, get } from '$lib/api';
+import { backend_api } from '$lib/api';
 import type { PageLoad } from '../$types';
 
 export const load = (async ({ fetch }) => {

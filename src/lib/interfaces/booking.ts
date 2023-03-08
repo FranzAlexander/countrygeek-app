@@ -14,10 +14,6 @@ export interface DeviceOptions {
 	dBrands: string[];
 }
 
-export interface TestBooking {
-	service_type: number;
-}
-
 export interface DayData {
 	day: string;
 	date: number;
@@ -28,5 +24,6 @@ export interface DayData {
 
 export interface BookingOptions {
 	service_category: string;
+	service_category_id: number;
 	service_type: string;
 }
