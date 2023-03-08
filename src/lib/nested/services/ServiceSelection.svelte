@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import type { BookingOptions } from '$lib/interfaces/booking';
 	import type { ServiceInfo, Services } from '$lib/interfaces/service';
 	import { selected_booking_info } from '$lib/stores';
@@ -26,7 +26,7 @@
 					{service.description}
 				</p>
 				<a
-					href="/booking"
+					href="/booking?category"
 					class="text-center p-2 text-2xl bg-country-geek-light-purple/90 w-1/2 m-auto rounded-3xl"
 					on:click={async () =>
 						await update_booking({
@@ -38,4 +38,4 @@
 			</div>
 		{/each}
 	</div>
-</section>
+</section> -->

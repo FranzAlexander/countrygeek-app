@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { User } from '$lib/interfaces/user';
-	import UserPersonalDetails from '$lib/nested/UserPersonalDetails.svelte';
 	let user: User = {
 		first_name: '',
 		last_name: '',

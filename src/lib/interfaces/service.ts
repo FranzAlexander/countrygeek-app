@@ -28,6 +28,6 @@ export interface Category {
 
 export interface ServiceTypes {
 	type_id: number;
-	s_type: string;
-	description: string;
+	type_name: string;
+	type_description: string;
 }
