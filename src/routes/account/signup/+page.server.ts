@@ -1,4 +1,5 @@
-import type { UserSignUp } from '$lib/interfaces/user';
+import { backend_api } from '$lib/api';
+import type { UserSignUp, NewUser } from '$lib/interfaces/user';
 import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
@@ -8,24 +9,46 @@ export const actions: Actions = {
 		// Get form data.
 		const data: FormData = await event.request.formData();
 
-		// Create new UserSignUp object.
-		const user_sign_up: UserSignUp = {
-			first_name: data.get('first_name') as string,
-			last_name: data.get('last_name') as string,
-			email: data.get('email') as string,
-			email_confirm: data.get('email_confirm') as string,
-			password: data.get('password') as string,
-			password_confirm: data.get('password_confirm') as string,
-			tnc: data.get('tnc-checked') as string
+		const formValues = Array.from(data.entries()) as [keyof UserSignUp, string][];
+
+		const userSignUp: UserSignUp = formValues.reduce((acc, [key, value]) => {
+			acc[key] = value;
+			return acc;
+		}, {} as UserSignUp);
+
+		if (userSignUp.password !== userSignUp.password_confirm) {
+			return { status: 400, body: 'Passwords do not match' };
+		}
+
+		const headers = { 'Content-Type': 'application/json' };
+
+		const currentDate = new Date();
+		const format_date = `${currentDate.getFullYear()}-${
+			currentDate.getMonth() + 1
+		}-${currentDate.getDate()}`;
+
+		const new_user: NewUser = {
+			firstname: userSignUp.first_name,
+			lastname: userSignUp.last_name,
+			email: userSignUp.email,
+			password: userSignUp.password,
+			date_created: format_date,
+			date_updated: format_date,
+			role: 'Customer'
 		};
-		console.log(user_sign_up);
 
-		if (user_sign_up.email !== user_sign_up.email_confirm) {
-			return fail(400);
+		const res = await fetch(`${backend_api}/register`, {
+			method: 'POST',
+			headers,
+			body: JSON.stringify(new_user)
+		});
+
+		if (!res.ok) {
+			const errorResponse = { status: res.status, body: 'Registration Failed' };
+			return errorResponse;
 		}
 
-		if (user_sign_up.password !== user_sign_up.password_confirm) {
-			return fail(400);
-		}
+		const successResponse = { status: 200, body: 'Registration successful' };
+		return successResponse;
 	}
 };

@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { text } from 'svelte/internal';
 
-export const backend_api: string = 'http://127.0.0.1:3001';
+export const backend_api: string = 'http://localhost:3001';
 export const auth_service = 'http://127.0.0.1:3001';
 export const booking_service = 'http://127.0.0.1:3000';
 

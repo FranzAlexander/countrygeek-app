@@ -1,9 +1,8 @@
-import type { PageLoad } from './booking/$types';
-import { user_session } from '$lib/stores';
 import { get } from 'svelte/store';
+import type { PageLoad } from './$types';
 
 export const load: PageLoad = async () => {
-	return {
-		name: get(user_session).first_name
-	};
+	// return {
+	// 	name: get(user_session).first_name
+	// };
 };

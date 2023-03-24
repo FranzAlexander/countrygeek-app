@@ -1,9 +1,14 @@
+// export interface User {
+// 	first_name: string;
+// 	last_name: string;
+// 	email: string;
+// 	phone_number: number;
+// 	address: UserAddress;
+// }
+
 export interface User {
-	first_name: string;
-	last_name: string;
-	email: string;
-	phone_number: number;
-	address: UserAddress;
+	firstname: string;
+	role: string;
 }
 
 export interface UserAddress {
@@ -14,7 +19,7 @@ export interface UserAddress {
 	state: string;
 }
 
-export interface UserLogin {
+export interface UserSignIn {
 	email: string;
 	password: string;
 }
@@ -26,22 +31,39 @@ export interface AuthBody {
 
 export interface UserLoginResponse {
 	first_name: string;
-	session_id: string;
+	role: string;
 	auth_body: AuthBody;
 }
 
 export interface UserSession {
 	first_name: string;
-	session_id: string;
-	token: AuthBody;
+	role: string;
 }
 
 export interface UserSignUp {
 	first_name: string;
 	last_name: string;
 	email: string;
-	email_confirm: string;
 	password: string;
 	password_confirm: string;
-	tnc: string;
+}
+
+export interface NewUser {
+	firstname: string;
+	lastname: string;
+	email: string;
+	password: string;
+	date_created: string;
+	date_updated: string;
+	role: string;
+}
+
+export interface ProfileDetails {
+	personalDetails: PersonalDetails;
+}
+
+export interface PersonalDetails {
+	firstname: string;
+	lastname: string;
+	email: string;
 }
