@@ -8,26 +8,33 @@ export interface ServiceInfo {
 // 	services: ServiceInfo[];
 // }
 
-export interface AllServices {
-	all_services: Services[];
-}
+// export interface AllServices {
+// 	all_services: Services[];
+// }
 
-export interface CategoryId {
-	category_id: number;
-}
+// export interface CategoryId {
+// 	category_id: number;
+// }
+
+// export interface Services {
+// 	service_category: Category;
+// 	service_types: ServiceTypes[];
+// }
+
+// export interface Category {
+// 	category_id: number;
+// 	category: string;
+// }
+
+// export interface ServiceTypes {
+// 	type_id: number;
+// 	type_name: string;
+// 	type_description: string;
+// }
 
 export interface Services {
-	service_category: Category;
-	service_types: ServiceTypes[];
-}
-
-export interface Category {
-	category_id: number;
-	category: string;
-}
-
-export interface ServiceTypes {
-	type_id: number;
-	type_name: string;
-	type_description: string;
+	category_name: string;
+	category_image_url: string;
+	sub_service: ({ sub_service_name: string } | null)[] | null;
+	category_service_junction: ({ service_description: string } | null)[] | null;
 }

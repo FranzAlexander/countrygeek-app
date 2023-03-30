@@ -41,11 +41,9 @@ export interface UserSession {
 }
 
 export interface UserSignUp {
-	first_name: string;
-	last_name: string;
+	fullname: string;
 	email: string;
 	password: string;
-	password_confirm: string;
 }
 
 export interface NewUser {

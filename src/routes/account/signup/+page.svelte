@@ -1,105 +1,93 @@
-<script>
-	import { enhance } from '$app/forms';
+<script lang="ts">
+	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import SignInMailIcon from '$lib/icons/SignInMailIcon.svelte';
 	import SignInPasswordIcon from '$lib/icons/SignInPasswordIcon.svelte';
 	import SignUpPersonIcon from '$lib/icons/SignUpPersonIcon.svelte';
+	import type { ActionData } from './$types';
+
+	export let form: ActionData;
+	let loading = false;
+
+	const handleSubmit: SubmitFunction = () => {
+		loading = true;
+
+		return async ({ result }) => {
+			await applyAction(result);
+			loading = false;
+		};
+	};
 </script>
 
-<section class="bg-country-geek-blue">
-	<div
-		class="p-1 bg-gradient-to-br from-cyan-500 to-country-geek-light-purple w-1/4 rounded-xl m-auto"
+<svelte:head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Sign up for an account at Country Geek" />
+	<meta name="keywords" content="Country Geek, sign up, registration, account" />
+	<title>Sign Up - Country Geek</title>
+</svelte:head>
+
+<section class="w-full">
+	<form
+		method="POST"
+		use:enhance={handleSubmit}
+		class="m-auto mt-6 flex w-1/5 flex-col gap-4 rounded-xl border-2 border-gray-300 bg-country-geek-white p-4 shadow-md "
 	>
-		<form
-			method="POST"
-			use:enhance
-			class="text-white m-auto flex flex-col rounded-xl p-2 bg-neutral-800"
+		<h1 class="mb-4 text-3xl font-bold">Sign Up</h1>
+
+		{#if form?.error}
+			<div class="mb-4 font-bold text-red-500">{form.error}</div>
+		{/if}
+
+		{#if form?.message}
+			<div class="mb-4 font-bold text-red-500">{form.message}</div>
+		{/if}
+
+		<div class="flex flex-col">
+			<label for="fullname" class="mb-2 block text-2xl  text-gray-800">Fullname:</label>
+			<input
+				type="text"
+				name="fullname"
+				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
+				required
+			/>
+		</div>
+		<div class="flex flex-col">
+			<label for="email" class="mb-2 block text-2xl text-gray-800">Email:</label>
+			<input
+				type="email"
+				name="email"
+				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
+				required
+			/>
+		</div>
+
+		<div class="mb-4 flex flex-col">
+			<label for="password" class="mb-2 block text-2xl  text-gray-800">Password:</label>
+			<input
+				type="password"
+				name="password"
+				id=""
+				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
+				required
+			/>
+		</div>
+
+		<button
+			type="submit"
+			disabled={loading}
+			class="m-auto w-1/2 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-test-text"
 		>
-			<h2 class="m-auto text-4xl">Sign Up</h2>
-			<div class="flex flex-col gap-2 p-2">
-				<div class="flex flex-col rounded p-2 ">
-					<label for="" class="text-2xl">Firstname:</label>
-					<div class="flex bg-neutral-700 rounded-xl border-2 border-cyan-500 p-1 gap-4">
-						<SignUpPersonIcon />
-						<input
-							type="text"
-							name="first_name"
-							class="bg-transparent caret-cyan-500 focus:outline-none text-xl"
-							placeholder="Type Firstname Here"
-							required
-						/>
-					</div>
-				</div>
-				<div class="flex flex-col rounded p-2">
-					<label for="" class="text-2xl">Lastname:</label>
-					<div class="flex bg-neutral-700 rounded-xl border-2 border-cyan-500 p-1 gap-4">
-						<SignUpPersonIcon />
-						<input
-							type="text"
-							name="last_name"
-							class="bg-transparent caret-cyan-500 focus:outline-none text-xl"
-							placeholder="Type Lastname Here"
-							required
-						/>
-					</div>
-				</div>
-				<div class="flex flex-col rounded p-2">
-					<label for="" class="text-2xl">Email:</label>
-					<div class="flex bg-neutral-700 rounded-xl border-2 border-cyan-500 p-1 gap-4">
-						<SignInMailIcon />
-						<input
-							type="email"
-							name="email"
-							id=""
-							class="bg-transparent caret-cyan-500 focus:outline-none text-xl"
-							placeholder="Type Email Here"
-							required
-						/>
-					</div>
-				</div>
-				<div class="flex flex-col rounded p-2">
-					<label for="" class="text-2xl">Password:</label>
-					<div class="flex bg-neutral-700 rounded-xl border-2 border-cyan-500 p-1 gap-4">
-						<SignInPasswordIcon />
-						<input
-							type="password"
-							name="password"
-							id=""
-							class="bg-transparent caret-cyan-500 focus:outline-none text-xl"
-							placeholder="Type Password Here"
-							required
-						/>
-					</div>
-				</div>
-				<div class="flex flex-col rounded p-2">
-					<label for="" class="text-2xl">Password Confirmation:</label>
-					<div class="flex bg-neutral-700 rounded-xl border-2 border-cyan-500 p-1 gap-4">
-						<SignInPasswordIcon />
-						<input
-							type="password"
-							name="password_confirm"
-							id=""
-							class="bg-transparent caret-cyan-500 focus:outline-none text-xl"
-							placeholder="Confirm Password Here"
-							required
-						/>
-					</div>
-				</div>
-			</div>
-			<div class="flex m-auto gap-4 p-2">
-				<input
-					type="checkbox"
-					name="tnc-checked"
-					id="terms-and-conditions-checkbox "
-					class="accent-cyan-500"
-					required
-				/>
-				<label for="tnc-checked">I agree to the Terms & Conditions</label>
-			</div>
-			<button
-				type="submit"
-				class="p-2 bg-country-geek-light-purple rounded-md w-1/2 m-auto text-2xl hover:bg-gradient-to-r hover:from-cyan-500 hover:to-country-geek-light-purple"
-				>Sign Up</button
+			Sign Up
+		</button>
+	</form>
+	<div class="text-center text-country-geek-test-text">
+		<p>
+			Already have an account? <a href="/account/signin" class="text-purple-500 underline"
+				>Sign In</a
 			>
-		</form>
+		</p>
 	</div>
 </section>
+
+<style>
+</style>

@@ -10,10 +10,7 @@
 	}
 </script>
 
-<section
-	class="relative w-full text-white min-h-[600px]"
-	style="background-image: url({background});"
->
+<section class="relative w-full  min-h-[600px]">
 	<div class="ml-[6%] pt-10 p-5">
 		<div>
 			<h1 class="text-6xl pt-10 pb-10 p-2">
@@ -30,3 +27,4 @@
 </section>
 
 <HomepageServices />
+<!-- style="background-image: url({background});" -->

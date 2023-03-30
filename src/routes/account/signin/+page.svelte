@@ -29,12 +29,12 @@
 			</div>
 			<div class="flex flex-col rounded-md p-2">
 				<label for="user_password" class="text-2xl">Password:</label>
-				<div class="flex bg-neutral-700 rounded-xl border-2 border-cyan-500 p-1 gap-4">
+				<div class="flex bg-neutral-700 rounded-xl border-2 border-cyan-500/80 p-1 gap-4 w-full">
 					<SignInPasswordIcon />
 					<input
 						type="password"
 						name="password"
-						class="bg-transparent  caret-cyan-500  focus:outline-none  outline-cyan-500  text-xl"
+						class="bg-neutral-700  caret-cyan-500  focus:outline-none  outline-cyan-500  rounded-md text-xl w-full"
 						placeholder="Enter Password Here!"
 					/>
 				</div>

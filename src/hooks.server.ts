@@ -1,73 +1,25 @@
-import { backend_api } from '$lib/api';
-import type { User } from '$lib/interfaces/user';
 import type { Handle } from '@sveltejs/kit';
+import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
+import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public';
+import type { Database } from './database.types';
 
-export const handle: Handle = (async ({ event, resolve }) => {
-	const token = event.cookies.get('AuthorizationToken');
+export const handle: Handle = async ({ event, resolve }) => {
+	event.locals.supabase = createSupabaseServerClient<Database>({
+		supabaseUrl: PUBLIC_SUPABASE_URL,
+		supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
+		event
+	});
 
-	if (!token) {
-		return await resolve(event);
-	}
+	event.locals.getSession = async () => {
+		const {
+			data: { session }
+		} = await event.locals.supabase.auth.getSession();
+		return session;
+	};
 
-	if (!event.locals.user) {
-		let headers: HeadersInit = { 'Content-Type': 'application/json' };
-
-		if (!!token) {
-			headers['Authorization'] = `${token}`;
+	return resolve(event, {
+		filterSerializedResponseHeaders(name) {
+			return name === 'content-range';
 		}
-
-		const response = await fetch(`${backend_api}/get_user`, {
-			method: 'GET',
-			headers
-		});
-
-		const responseBody: User = await response.json();
-
-		event.locals.user = { name: responseBody.firstname, role: responseBody.role };
-	}
-
-	return await resolve(event);
-}) satisfies Handle;
-
-// export const handle: Handle = async ({ event, resolve }) => {
-// 	const cache = get(event.locals).cache;
-
-// 	const token = event.cookies.AuthorizationToken;
-
-// 	if (!token) {
-// 		return await resolve(event);
-// 	}
-
-// 	const cachedResponse = await cache.get(token);
-
-// 	if (cachedResponse) {
-// 		return cachedResponse;
-// 	}
-
-// 	const headers: HeadersInit = { 'Content-Type': 'application/json' };
-
-// 	if (!!token) {
-// 		headers['Authorization'] = `${token}`;
-// 	}
-
-// 	const response = await fetch(`${backend_api}/get_user`, {
-// 		method: 'GET',
-// 		headers
-// 	});
-
-// 	const responseBody: User = await response.json();
-
-// 	const userData = { name: responseBody.firstname, role: responseBody.role };
-
-// 	user.set(userData);
-
-// 	const responseWithUser = new Response(JSON.stringify(userData), {
-// 		status: response.status,
-// 		headers: response.headers
-// 	});
-
-// 	// Cache the response for 10 minutes
-// 	cache.set(token, responseWithUser, { ttl: 600000 });
-
-// 	return responseWithUser;
-// };
+	});
+};
