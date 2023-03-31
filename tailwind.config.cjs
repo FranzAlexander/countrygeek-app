@@ -13,7 +13,8 @@ module.exports = {
         'country-geek-test-purple':'#8B00FF',
         'country-geek-test-text': '#F8F8F8',
         'country-geek-test-accent': '#2086D5',
-        'country-geek-white':'#F8F8F8'
+        'country-geek-white':'#F8F8F8',
+        'country-geek-dark-gray':'#707070'
       },
       fontFamily:{
         sans: ['Roboto','sans-serif']
