@@ -10,6 +10,9 @@
 	let loadedData: Services[] = [];
 	let booking: boolean = false;
 
+	let bookingCategory: string = '';
+	let bookingService: string = '';
+
 	onMount(async () => {
 		const { data, error } = await supabase
 			.from('service_category')
@@ -30,10 +33,14 @@
 			return;
 		}
 
+		console.log(await supabase.auth.getUser());
+
 		loadedData = data;
 	});
 
-	function jumpToBooking() {}
+	function nowBooking() {
+		booking = true;
+	}
 </script>
 
 <section class="mt-12 flex flex-col gap-10 bg-country-geek-test">
@@ -54,12 +61,17 @@
 						<button
 							type="button"
 							class="rounded-xl bg-country-geek-test p-4 font-bold text-country-geek-white transition-all duration-200 ease-linear hover:bg-country-geek-test-accent"
-							>Book!</button
+							on:click={() => {
+								nowBooking();
+							}}>Book!</button
 						>
 					</div>
 				{/each}
 			</div>
 		</div>
 	{/each}
-	<!-- <ServiceBooking /> -->
+
+	{#if booking}
+		<ServiceBooking session={data.session} />
+	{/if}
 </section>

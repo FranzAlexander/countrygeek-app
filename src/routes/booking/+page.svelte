@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import type { BookingOptions } from '$lib/interfaces/booking';
 	import type { Category, Services } from '$lib/interfaces/service';
 	import AddressDetails from '$lib/nested/booking/AddressDetails.svelte';
@@ -223,4 +223,4 @@
 			</div>
 		</form>
 	</div> -->
-</section>
+<!-- </section> --> -->
