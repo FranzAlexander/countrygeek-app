@@ -8,12 +8,12 @@
 	// export let session: Session | null;
 </script>
 
-<nav class="flex text-white w-full justify-between box-border p-2 z-30">
-	<a href="/" class="w-32 h-32 ml-10 ">
-		<img src={logo} alt="Country Geek Logo" class="object-fill   box-border" /></a
+<nav class="z-30 box-border flex w-full justify-between p-2 text-white">
+	<a href="/" class="ml-10 h-32 w-32">
+		<img src={logo} alt="Country Geek Logo" class="box-border object-fill" /></a
 	>
 
-	<ul class="flex justify-center items-center">
+	<ul class="flex items-center justify-center">
 		<li class="p-2">
 			<a href="/services" class="text-2xl">Services</a>
 		</li>
@@ -38,8 +38,8 @@
 		</div> -->
 	<!-- {:else} -->
 
-	<ul class="flex justify-center items-center mr-10">
-		<li class="p-2 border-2 rounded-lg">
+	<ul class="mr-10 flex items-center justify-center shadow-lg">
+		<li class="rounded-lg border-2 p-2">
 			<a href="/account/signin" class="text-2xl">Sign In</a>
 		</li>
 		<li class="p-2"><a href="/account/signup" class="text-2xl">Sign Up</a></li>

@@ -30,7 +30,7 @@
 	<form
 		method="POST"
 		use:enhance={handleSubmit}
-		class="m-auto mt-6 flex w-1/5 flex-col gap-4 rounded-xl border-2 border-gray-300 bg-country-geek-white p-4 shadow-md "
+		class="m-auto mt-6 flex w-1/5 flex-col gap-4 rounded-xl border-2 border-gray-300 bg-country-geek-white p-4 shadow-md"
 	>
 		<h1 class="mb-4 text-3xl font-bold">Sign Up</h1>
 
@@ -43,7 +43,7 @@
 		{/if}
 
 		<div class="flex flex-col">
-			<label for="fullname" class="mb-2 block text-2xl  text-gray-800">Fullname:</label>
+			<label for="fullname" class="mb-2 block text-2xl text-gray-800">Fullname:</label>
 			<input
 				type="text"
 				name="fullname"
@@ -62,7 +62,7 @@
 		</div>
 
 		<div class="mb-4 flex flex-col">
-			<label for="password" class="mb-2 block text-2xl  text-gray-800">Password:</label>
+			<label for="password" class="mb-2 block text-2xl text-gray-800">Password:</label>
 			<input
 				type="password"
 				name="password"

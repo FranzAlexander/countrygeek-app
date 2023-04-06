@@ -42,5 +42,5 @@ export interface Services {
 
 export interface SubService {
 	sub_service_id: number;
-	sub_service_name: string | null;
+	sub_service_name: string;
 }
