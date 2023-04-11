@@ -64,7 +64,7 @@
 					<li
 						class="mt-4 flex rounded-lg border-2 border-country-geek-white bg-country-geek-test p-2 hover:bg-country-geek-test-accent"
 					>
-						<a href="/account/profile"> Profile</a>
+						<a href="/account/profile" class="w-full"> Profile</a>
 					</li>
 					<li>
 						<button
