@@ -7,16 +7,15 @@
 // }
 
 export interface User {
-	firstname: string;
-	role: string;
+	fullname: string | null;
+	phone: string | null;
+	userAddress: UserAddress | UserAddress[] | null;
 }
 
 export interface UserAddress {
-	street_number: number;
-	street_name: string;
-	suburb: string;
-	postcode: number;
-	state: string;
+	streetAddress: string | null;
+	city: string | null;
+	postcode: string | null;
 }
 
 export interface UserSignIn {

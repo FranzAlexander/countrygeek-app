@@ -1,7 +1,6 @@
 import { backend_api } from '$lib/api';
-import type { UserLoginResponse, UserSignIn } from '$lib/interfaces/user';
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
+import type { Actions } from '../$types';
 import { AuthApiError } from '@supabase/supabase-js';
 
 /** @type {import('./$types').Actions} */

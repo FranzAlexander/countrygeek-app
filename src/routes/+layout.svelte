@@ -10,11 +10,13 @@
 
 	export let data: LayoutData;
 
-	$: ({ supabase } = data);
+	$: ({ supabase, session } = data);
 
 	onMount(() => {
-		const { data } = supabase.auth.onAuthStateChange(() => {
-			invalidate('supabase:auth');
+		const { data } = supabase.auth.onAuthStateChange((event, _session) => {
+			if (_session?.expires_at !== session?.expires_at) {
+				invalidate('supabase:auth');
+			}
 		});
 
 		return () => data.subscription.unsubscribe();
@@ -47,10 +49,10 @@
 		{#if !data.session}
 			<ul class="mr-10 flex items-center justify-center">
 				<li class="rounded-lg border-2 p-2">
-					<a href="/account/signin" class="text-2xl">Sign In</a>
+					<a href="/signin" class="text-2xl">Sign In</a>
 				</li>
 				<li class="p-2">
-					<a href="/account/signup" class="text-2xl">Sign Up</a>
+					<a href="/signup" class="text-2xl">Sign Up</a>
 				</li>
 			</ul>
 		{:else}

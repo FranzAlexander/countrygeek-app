@@ -33,14 +33,14 @@ export interface ServiceInfo {
 // }
 
 export interface Services {
-	category_id: number;
-	category_name: string;
-	category_image_url: string;
-	sub_service: Array<SubService>;
-	category_service_junction: Array<{ service_description: string } | null>;
+	category_id: number | null;
+	category_name: string | null;
+	category_image_url: string | null;
+	sub_service: SubService[];
 }
 
 export interface SubService {
-	sub_service_id: number;
-	sub_service_name: string;
+	sub_service_id: number | null;
+	sub_service_name: string | null;
+	service_description: string | null;
 }

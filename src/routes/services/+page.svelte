@@ -1,42 +1,21 @@
 <script lang="ts">
 	import type { Services } from '$lib/interfaces/service';
 	import { onMount } from 'svelte';
-	import type { PageData } from '../$types';
 	import ServiceBooking from './ServiceBooking.svelte';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
-	$: supabase = data.supabase;
+	let { session, response } = data;
 
-	let loadedData: Services[] = [];
+	let loadedServices: Services[];
 	let booking: boolean = false;
 
 	let bookingCategory: string = '';
 	let bookingService: string = '';
 
-	onMount(async () => {
-		const { data, error } = await supabase
-			.from('service_category')
-			.select(
-				`id, category_name, category_image_url, sub_service(
-				id,
-				sub_service_name
-			),
-			category_service_junction(
-				service_description
-			)`
-			)
-			.order('id')
-			.returns<Services[]>();
-
-		if (error) {
-			console.log(error);
-			return;
-		}
-
-		console.log(data);
-
-		loadedData = data;
-	});
+	if (response) {
+		loadedServices = response;
+	}
 
 	function nowBooking(category: string, service: string) {
 		bookingCategory = category;
@@ -46,7 +25,7 @@
 </script>
 
 <section class="mt-12 flex flex-col gap-10 bg-country-geek-test">
-	{#each loadedData as service}
+	{#each loadedServices as service}
 		<div class="mb-8 flex flex-col gap-8 p-5">
 			<div class="flex rounded-xl bg-country-geek-white p-4">
 				<!-- <img src={service?.category_image_url} alt="" class="h-16 w-20" /> -->
@@ -59,13 +38,15 @@
 					>
 						<h2 class="text-2xl text-country-geek-test">{sub?.sub_service_name}</h2>
 						<p class="text-gray-900">
-							{service?.category_service_junction[sub?.sub_service_id - 1]?.service_description}
+							{sub?.service_description}
 						</p>
 						<button
 							type="button"
 							class="rounded-xl bg-country-geek-test p-4 font-bold text-country-geek-white transition-all duration-200 ease-linear hover:bg-country-geek-test-accent"
 							on:click={() => {
-								nowBooking(service?.category_name, sub?.sub_service_name);
+								if (service?.category_name && sub?.sub_service_name) {
+									nowBooking(service?.category_name, sub?.sub_service_name);
+								}
 							}}>Book!</button
 						>
 					</div>

@@ -21,6 +21,7 @@ export interface Database {
           id: number
           phone: string | null
           postcode: string | null
+          profile_id: string | null
           service_name: string | null
           street_address: string | null
         }
@@ -35,6 +36,7 @@ export interface Database {
           id?: number
           phone?: string | null
           postcode?: string | null
+          profile_id?: string | null
           service_name?: string | null
           street_address?: string | null
         }
@@ -49,28 +51,9 @@ export interface Database {
           id?: number
           phone?: string | null
           postcode?: string | null
+          profile_id?: string | null
           service_name?: string | null
           street_address?: string | null
-        }
-      }
-      category_service_junction: {
-        Row: {
-          category_id: number
-          service_description: string | null
-          service_id: number
-          service_image_url: string | null
-        }
-        Insert: {
-          category_id: number
-          service_description?: string | null
-          service_id: number
-          service_image_url?: string | null
-        }
-        Update: {
-          category_id?: number
-          service_description?: string | null
-          service_id?: number
-          service_image_url?: string | null
         }
       }
       payment_status: {
@@ -112,15 +95,30 @@ export interface Database {
       }
       sub_service: {
         Row: {
+          category_id: number | null
           id: number
+          image_url: string | null
+          is_active: boolean | null
+          list_order: number | null
+          service_description: string | null
           sub_service_name: string | null
         }
         Insert: {
+          category_id?: number | null
           id?: number
+          image_url?: string | null
+          is_active?: boolean | null
+          list_order?: number | null
+          service_description?: string | null
           sub_service_name?: string | null
         }
         Update: {
+          category_id?: number | null
           id?: number
+          image_url?: string | null
+          is_active?: boolean | null
+          list_order?: number | null
+          service_description?: string | null
           sub_service_name?: string | null
         }
       }
@@ -129,27 +127,26 @@ export interface Database {
           city: string | null
           id: number
           postcode: string | null
+          profile_id: string | null
           street_address: string | null
-          suburb: string | null
         }
         Insert: {
           city?: string | null
           id?: number
           postcode?: string | null
+          profile_id?: string | null
           street_address?: string | null
-          suburb?: string | null
         }
         Update: {
           city?: string | null
           id?: number
           postcode?: string | null
+          profile_id?: string | null
           street_address?: string | null
-          suburb?: string | null
         }
       }
       user_profile: {
         Row: {
-          address_id: number | null
           created_at: string | null
           email: string | null
           fullname: string | null
@@ -158,7 +155,6 @@ export interface Database {
           updated_at: string | null
         }
         Insert: {
-          address_id?: number | null
           created_at?: string | null
           email?: string | null
           fullname?: string | null
@@ -167,7 +163,6 @@ export interface Database {
           updated_at?: string | null
         }
         Update: {
-          address_id?: number | null
           created_at?: string | null
           email?: string | null
           fullname?: string | null
