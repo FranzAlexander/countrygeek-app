@@ -1,7 +1,18 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import SigninMailIcon from '$lib/icons/SignInMailIcon.svelte';
 	import SignInPasswordIcon from '$lib/icons/SignInPasswordIcon.svelte';
+
+	let loading = false;
+
+	const handleSubmit: SubmitFunction = () => {
+		loading = true;
+
+		return async ({ result }) => {
+			await applyAction(result);
+			loading = false;
+		};
+	};
 </script>
 
 <svelte:head>
@@ -15,7 +26,8 @@
 <section class="w-full">
 	<form
 		method="POST"
-		class="m-auto mt-6 flex w-1/5 flex-col gap-4 rounded-2xl bg-country-geek-white p-4 shadow-md"
+		use:enhance={handleSubmit}
+		class="m-auto mt-6 flex w-1/5 flex-col gap-4 rounded-xl border-2 border-gray-300 bg-country-geek-white p-4 shadow-md"
 	>
 		<h1 class="mb-4 text-3xl font-bold">Sign In</h1>
 		<div class="flex flex-col">
@@ -25,22 +37,25 @@
 				name="email"
 				id="email"
 				placeholder="Enter email here"
+				required
 				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
 			/>
 		</div>
 		<div class="mb-4 flex flex-col">
-			<label for="password" class="mb-2 block text-2xl text-gray-900">Password</label>
+			<label for="password" class="mb-2 block text-2xl text-gray-900">Password:</label>
 			<input
 				type="password"
 				name="password"
 				id="password"
 				placeholder="Enter password here"
+				required
 				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
 			/>
 		</div>
 
 		<button
 			type="submit"
+			disabled={loading}
 			class="m-auto w-1/2 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear hover:bg-country-geek-test-accent"
 			>Sign In</button
 		>

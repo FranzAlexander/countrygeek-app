@@ -9,7 +9,7 @@
 export interface User {
 	fullname: string | null;
 	phone: string | null;
-	userAddress: UserAddress | UserAddress[] | null;
+	userAddress: UserAddress[] | null;
 }
 
 export interface UserAddress {

@@ -15,6 +15,11 @@ declare global {
 			session: Session | null;
 		}
 		// interface Error {}
-		// interface Platform {}
+		interface Platform {
+			env?: {
+				YOUR_KV_NAMESPACE: KVNamespace;
+				YOUR_DURABLE_OBJECT_NAMESPACE: DurableObjectNamespace;
+			};
+		}
 	}
 }

@@ -71,6 +71,8 @@ export const actions: Actions = {
 			}
 		});
 
+		console.log(error);
+
 		// Handle any errors that occurred during sign-up
 		if (error) {
 			if (error instanceof AuthApiError && error.status === 400) {

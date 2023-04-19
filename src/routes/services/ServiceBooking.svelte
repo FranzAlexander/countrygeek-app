@@ -3,6 +3,7 @@
 	import type { Session } from '@supabase/supabase-js';
 	import { onMount } from 'svelte';
 	import StepperIndicator from './StepperIndicator.svelte';
+	import type { User } from '$lib/interfaces/user';
 
 	export let serviceCategory = '';
 	export let subService = '';
@@ -12,9 +13,7 @@
 	let description: string = '';
 	let descDisable = true;
 
-	// let fullname: string = (session?.user.user_metadata?.fullname as string) ?? '';
-	// let email: string = session?.user.email ?? '';
-	let fullname: string = '';
+	let fullname: string | null;
 	let email: string = 'testpersonok@gmail.com';
 	let phone: string = '';
 	let personalDetailsDisabled: boolean = true;
@@ -22,6 +21,10 @@
 	onMount(() => {
 		formElement.scrollIntoView({ behavior: 'smooth' });
 	});
+
+	export function scrollToForm() {
+		formElement.scrollIntoView({ behavior: 'smooth' });
+	}
 
 	function nextStep() {
 		if (currentStep < 4) {
@@ -46,7 +49,6 @@
 	function checkPersonalDetails() {
 		if (fullname !== '' && email !== '' && phone !== '') {
 			personalDetailsDisabled = false;
-			console.log(email);
 		}
 	}
 
@@ -77,7 +79,7 @@
 				placeholder="Please provide a brief description of your booking."
 				cols="30"
 				rows="10"
-				class="mb-2 rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none"
+				class="mb-2 resize-none rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none"
 				bind:value={description}
 				on:input={check}
 			/>
@@ -174,7 +176,7 @@
 				</div>
 				<div class="flex flex-col">
 					<label for="postcode" class="mb-2 block text-2xl font-semibold text-gray-800"
-						>Postcode</label
+						>Postcode:</label
 					>
 					<input
 						type="text"

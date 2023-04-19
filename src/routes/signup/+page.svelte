@@ -16,6 +16,8 @@
 			loading = false;
 		};
 	};
+
+	const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2, 4}$/g;
 </script>
 
 <svelte:head>
@@ -43,39 +45,45 @@
 		{/if}
 
 		<div class="flex flex-col">
-			<label for="fullname" class="mb-2 block text-2xl text-gray-800">Fullname:</label>
+			<label for="fullname" class="mb-2 block text-2xl text-gray-900">Fullname:</label>
 			<input
 				type="text"
 				name="fullname"
-				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
+				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
 				required
+				placeholder="Enter Name"
+				pattern=""
 			/>
 		</div>
 		<div class="flex flex-col">
-			<label for="email" class="mb-2 block text-2xl text-gray-800">Email:</label>
+			<label for="email" class="mb-2 block text-2xl text-gray-900">Email:</label>
 			<input
 				type="email"
 				name="email"
-				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
+				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
 				required
+				placeholder="Enter Email"
 			/>
 		</div>
 
 		<div class="mb-4 flex flex-col">
-			<label for="password" class="mb-2 block text-2xl text-gray-800">Password:</label>
+			<label for="password" class="mb-2 block text-2xl text-gray-900">Password:</label>
 			<input
 				type="password"
 				name="password"
 				id=""
-				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
+				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
 				required
+				placeholder="Enter Password"
 			/>
 		</div>
+
+		<p>By clicking sign up you are agreeing to the <a href="/privacy">Privacy Policy</a></p>
 
 		<button
 			type="submit"
 			disabled={loading}
-			class="m-auto w-1/2 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-test-text"
+			class="m-auto w-1/2 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear hover:bg-country-geek-test-accent"
 		>
 			Sign Up
 		</button>

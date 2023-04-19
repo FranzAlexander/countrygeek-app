@@ -11,49 +11,63 @@ export interface Database {
     Tables: {
       booking: {
         Row: {
-          category_name: string | null
-          city: string | null
+          category_name: string
+          city: string
           created_at: string | null
           date: string | null
-          description: string | null
-          email: string | null
-          full_name: string | null
+          description: string
+          email: string
+          full_name: string
           id: number
-          phone: string | null
-          postcode: string | null
+          phone: string
+          postcode: string
           profile_id: string | null
-          service_name: string | null
-          street_address: string | null
+          service_name: string
+          street_address: string
         }
         Insert: {
-          category_name?: string | null
-          city?: string | null
+          category_name: string
+          city: string
           created_at?: string | null
           date?: string | null
-          description?: string | null
-          email?: string | null
-          full_name?: string | null
+          description: string
+          email: string
+          full_name: string
           id?: number
-          phone?: string | null
-          postcode?: string | null
+          phone: string
+          postcode: string
           profile_id?: string | null
-          service_name?: string | null
-          street_address?: string | null
+          service_name: string
+          street_address: string
         }
         Update: {
-          category_name?: string | null
-          city?: string | null
+          category_name?: string
+          city?: string
           created_at?: string | null
           date?: string | null
-          description?: string | null
-          email?: string | null
-          full_name?: string | null
+          description?: string
+          email?: string
+          full_name?: string
           id?: number
-          phone?: string | null
-          postcode?: string | null
+          phone?: string
+          postcode?: string
           profile_id?: string | null
-          service_name?: string | null
-          street_address?: string | null
+          service_name?: string
+          street_address?: string
+        }
+      }
+      booking_status: {
+        Row: {
+          id: number
+          status: string | null
+        }
+        Insert: {
+          id?: number
+          status?: string | null
+        }
+        Update: {
+          id?: number
+          status?: string | null
         }
       }
       payment_status: {

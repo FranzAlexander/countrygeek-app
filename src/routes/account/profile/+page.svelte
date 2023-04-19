@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { User } from '$lib/interfaces/user';
+	import type { User, UserAddress } from '$lib/interfaces/user';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -16,21 +16,20 @@
 
 	let profileForm: any;
 	let fullName: string | null;
+	let phone: string | null;
 	let streetAddress: string | null;
+	let city: string | null;
+	let postcode: string | null;
 
 	if (profile) {
 		fullName = profile.fullname;
+		phone = profile.phone;
+		if (Array.isArray(profile.user_address)) {
+			streetAddress = profile.user_address[0]?.street_address ?? null;
+			city = profile.user_address[0]?.city ?? null;
+			postcode = profile.user_address[0]?.postcode ?? null;
+		}
 	}
-
-	if (Array.isArray(profile?.user_address)) {
-	}
-	// let user: User | null;
-
-	// user = profile;
-
-	// let fullName = user?.fullname;
-
-	// console.log(user?.fullname);
 
 	// let userAddress = profile?.userAddress?.streetAddress;
 	//Form current height 537.422px;
@@ -85,7 +84,7 @@
 					id="profile_phone_number"
 					name="phone_number"
 					disabled={inputDisabled[1]}
-					value={profile?.phone}
+					value={phone}
 					class="p-2 text-base text-gray-900 disabled:bg-transparent"
 				/>
 			</div>
@@ -106,91 +105,40 @@
 			>
 		</div>
 	</form>
-	<!-- 
+
 	<form action="" class="flex flex-col rounded-lg bg-country-geek-white">
 		<h2 class="border-b-2 border-gray-400 p-2 text-3xl text-gray-900">Address Details</h2>
-		<div class="flex justify-between gap-2 border-b-2 border-gray-300">
+		<div class="flex flex-col">
 			<label for="" class="p-2 text-2xl text-gray-900">Street Address:</label>
 			<input
 				type="text"
-				class="p-2 text-2xl text-gray-900 disabled:bg-transparent"
-				disabled
-				value={userAddress}
+				name=""
+				id=""
+				class="p-2 text-base text-gray-900 disabled:bg-transparent"
+				value={streetAddress}
 			/>
 		</div>
-		<div class="flex justify-between gap-2 border-b-2 border-gray-300">
-			<label for="" class="p-2 text-2xl text-gray-900">City:</label>
+
+		<div class="flex flex-col">
+			<label for="" class="text-gray p-2 text-2xl">City/Suburb:</label>
 			<input
 				type="text"
-				class="p-2 text-2xl text-gray-900 disabled:bg-transparent"
-				disabled
-				value={profile?.userAddress?.city}
+				name=""
+				id=""
+				class="text-gray p-2 text-base disabled:bg-transparent"
+				value={city}
 			/>
 		</div>
-		<div class="flex justify-between gap-2">
-			<label for="" class="p-2 text-2xl text-gray-900">Postcode:</label>
-			<input type="text" name="" id="" value={profile?.userAddress?.postcode} />
-		</div>
-	</form> -->
-	<!-- <div class="flex gap-8">
-		<div class="rounded-lg bg-country-geek-white p-4">
-			<div
-				class="mb-4 flex items-center justify-between gap-6 border-b-2 border-country-geek-dark-gray pb-2"
-			>
-				<h1 class="text-3xl">Personal Detials</h1>
-				<button
-					class="rounded-lg bg-country-geek-blue p-2 text-base text-country-geek-white hover:bg-country-geek-test-accent"
-					on:click={() => {
-						makeEditable(0);
-					}}>Edit</button
-				>
-			</div>
-			<form action="" class="flex flex-col gap-4" bind:this={profileForm}>
-				<div class="flex flex-col">
-					<label for="" class="mb-2 block text-2xl text-gray-900">Fullname:</label>
-					<input
-						type="text"
-						value={fullName}
-						disabled={groupDisabled[0]}
-						class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none disabled:border-transparent"
-					/>
-				</div>
 
-				<div class="flex flex-col">
-					<label for="" class="mb-2 block text-2xl text-gray-900">Email:</label>
-					<input
-						type="email"
-						disabled
-						value={session.user.email}
-						class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none disabled:border-transparent"
-					/>
-				</div>
-				<div class="flex flex-col">
-					<label for="" class="mb-2 block text-2xl text-gray-900">Phone:</label>
-					<input
-						type="text"
-						disabled={groupDisabled[0]}
-						class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
-					/>
-				</div>
-			</form>
+		<div class="flex flex-col">
+			<label for="" class="text-gray p-2 text-2xl">Postcode:</label>
+			<input
+				type="text"
+				name=""
+				id=""
+				class="text-gray p-2 text-base disabled:bg-transparent"
+				value={postcode}
+			/>
 		</div>
-
-		<div>
-			<form action="">
-				<div class="flex flex-col">
-					<label for="" class="mb-2 block text-2xl text-gray-900">Street Address:</label>
-					<input type="text" />
-				</div>
-				<div class="flex flex-col">
-					<label for="" class="mb-2 block text-2xl text-gray-900">City/Suburb:</label>
-					<input type="text" />
-				</div>
-				<div class="flex flex-col">
-					<label for="" class="mb-2 block text-2xl text-gray-900">Postcode:</label>
-					<input type="text" />
-				</div>
-			</form>
-		</div>
-	</div> -->
+	</form>
 </section>

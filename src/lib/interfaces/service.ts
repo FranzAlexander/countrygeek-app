@@ -44,3 +44,8 @@ export interface SubService {
 	sub_service_name: string | null;
 	service_description: string | null;
 }
+
+export interface SelectedService {
+	categoryName: string | null;
+	serviceName: string | null;
+}
