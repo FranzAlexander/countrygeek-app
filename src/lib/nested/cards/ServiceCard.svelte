@@ -4,7 +4,7 @@
 	export let title: string;
 </script>
 
-<div class="flex flex-col items-center border-2 text-black shadow shadow-black/80 rounded p-2">
+<div class="flex flex-col items-center rounded border-2 p-2 text-black shadow shadow-black/80">
 	<h2 class="text-4xl">{title}</h2>
 	<img src={icon} alt={icon_alt} class="h-3/4 object-cover" />
 </div>

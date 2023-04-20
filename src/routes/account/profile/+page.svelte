@@ -35,7 +35,7 @@
 	//Form current height 537.422px;
 </script>
 
-<section class="flex w-full flex-col gap-10">
+<section class="flex w-3/4 flex-col gap-10">
 	<form action="" class="flex flex-col rounded-lg bg-country-geek-white" bind:this={profileForm}>
 		<h2 class="border-b-2 border-gray-400 p-2 text-3xl text-gray-900">Profile Details</h2>
 		<div class="flex justify-between gap-2 border-b-2 border-gray-300 p-1">
@@ -52,7 +52,7 @@
 			</div>
 			<button
 				type="button"
-				class="h- mr-2 h-min self-center rounded-lg bg-country-geek-blue p-2 text-xl text-country-geek-white"
+				class="mr-2 h-min self-center rounded-lg bg-country-geek-blue p-2 text-xl text-country-geek-white"
 				>Edit</button
 			>
 		</div>

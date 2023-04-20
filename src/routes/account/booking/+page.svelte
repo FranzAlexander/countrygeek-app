@@ -6,27 +6,33 @@
 
 	let userBookings: Booking[] = [];
 
-	if (data.booking) {
-		const booking = data.booking;
-		userBookings[0].categoryName = booking[0].category_name;
-		userBookings[0].serviceName = booking[0].service_name;
-		userBookings[0].description = booking[0].description;
-
-		if (!booking[0].date) {
-			userBookings[0].date = 'Date to be confirmed';
-		} else {
-			userBookings[0].date = booking[0].date;
-		}
+	if (data.userBookings) {
+		userBookings = data.userBookings;
 	}
 </script>
 
-<section>
-	{#each userBookings as booking}
-		<div>
-			<p>{booking.categoryName}</p>
-			<p>{booking.serviceName}</p>
-			<p>{booking.description}</p>
-			<p>{booking.date}</p>
-		</div>
-	{/each}
+<section class="flex min-h-full flex-col gap-2 rounded bg-country-geek-white p-2">
+	<table>
+		<thead>
+			<tr class="border-b-2 font-semibold">
+				<th class="px-6 py-3">Booking No</th>
+				<th class="px-6 py-3">Category Name</th>
+				<th class="px-6 py-3">Service Name</th>
+				<th class="px-6 py-3">Date</th>
+				<th class="px-6 py-3">Status</th>
+			</tr>
+		</thead>
+
+		{#each userBookings as booking}
+			<tbody>
+				<tr>
+					<td class="px-6 py-3 text-center">{booking.id}</td>
+					<td class="px-6 py-3 text-center">{booking.categoryName}</td>
+					<td class="px-6 py-3 text-center">{booking.serviceName}</td>
+					<td class="px-6 py-3 text-center">{booking.date}</td>
+					<td class="px-6 py-3 text-center">{booking.status}</td>
+				</tr>
+			</tbody>
+		{/each}
+	</table>
 </section>

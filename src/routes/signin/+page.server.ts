@@ -1,4 +1,3 @@
-import { backend_api } from '$lib/api';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from '../$types';
 import { AuthApiError } from '@supabase/supabase-js';

@@ -21,7 +21,7 @@
 		</div>
 		<div class="mr-4 flex flex-col items-center">
 			<div
-				class="flex h-8 w-8 items-center justify-center rounded-full bg-country-geek-test-accent  font-semibold text-country-geek-white opacity-100 {currentStep >=
+				class="flex h-8 w-8 items-center justify-center rounded-full bg-country-geek-test-accent font-semibold text-country-geek-white opacity-100 {currentStep >=
 				2
 					? 'opacity-100'
 					: 'opacity-50'}"
@@ -36,7 +36,7 @@
 		</div>
 		<div class="flex flex-col items-center">
 			<div
-				class="flex h-8 w-8 items-center justify-center rounded-full bg-country-geek-test-accent  font-semibold text-country-geek-white opacity-100 {currentStep >=
+				class="flex h-8 w-8 items-center justify-center rounded-full bg-country-geek-test-accent font-semibold text-country-geek-white opacity-100 {currentStep >=
 				3
 					? 'opacity-100'
 					: 'opacity-50'}"
@@ -51,7 +51,7 @@
 		</div>
 		<div class="flex flex-col items-center">
 			<div
-				class="flex h-8 w-8 items-center justify-center rounded-full bg-country-geek-test-accent  font-semibold text-country-geek-white opacity-100 {currentStep >=
+				class="flex h-8 w-8 items-center justify-center rounded-full bg-country-geek-test-accent font-semibold text-country-geek-white opacity-100 {currentStep >=
 				4
 					? 'opacity-100'
 					: 'opacity-50'}"

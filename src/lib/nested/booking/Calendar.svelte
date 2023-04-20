@@ -141,14 +141,14 @@
 </script>
 
 <div class="flex flex-col gap-2">
-	<div class="flex justify-evenly p-4 mt-3 text-white">
+	<div class="mt-3 flex justify-evenly p-4 text-white">
 		<button
 			type="button"
 			disabled={disable_back}
 			class="disabled:opacity-10"
 			on:click={() => change_month(selected_month - 1)}>Back</button
 		>
-		<h2 class="text-white text-4xl">{month_names[selected_month]}</h2>
+		<h2 class="text-4xl text-white">{month_names[selected_month]}</h2>
 		<button
 			type="button"
 			disabled={disable_next}
@@ -157,7 +157,7 @@
 		>
 	</div>
 	<div
-		class="grid grid-cols-7 p-2 items-center justify-evenly text-center text-white bg-neutral-900 divide-y-2"
+		class="grid grid-cols-7 items-center justify-evenly divide-y-2 bg-neutral-900 p-2 text-center text-white"
 	>
 		{#each day_names as day}
 			<h2 class=" text-2xl">{day}</h2>
@@ -169,10 +169,10 @@
 					type="radio"
 					bind:group={date_selected}
 					value={day}
-					class="hidden rounded-none peer"
+					class="peer hidden rounded-none"
 				/>
 				<div
-					class="flex items-center justify-center bg-country-geek-background text-4xl m-auto w-full h-32 text-center peer-disabled:opacity-30 hover:bg-country-geek-light-blue/40 peer-checked:bg-country-geek-light-blue/40"
+					class="bg-country-geek-background hover:bg-country-geek-light-blue/40 peer-checked:bg-country-geek-light-blue/40 m-auto flex h-32 w-full items-center justify-center text-center text-4xl peer-disabled:opacity-30"
 				>
 					{day.date}
 				</div>
@@ -183,7 +183,7 @@
 	<button
 		type="button"
 		value=""
-		class="rounded-md bg-country-geek-test-purple shadow shadow-black/80 p-2 text-white"
+		class="rounded-md bg-country-geek-test-purple p-2 text-white shadow shadow-black/80"
 		on:click={() => (input_selection = 0)}>Done</button
 	>
 </div>

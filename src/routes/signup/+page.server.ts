@@ -1,4 +1,3 @@
-import { backend_api } from '$lib/api';
 import type { UserSignUp, NewUser } from '$lib/interfaces/user';
 import { AuthApiError } from '@supabase/supabase-js';
 import { fail, type ActionFailure } from '@sveltejs/kit';
