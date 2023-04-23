@@ -1,6 +1,6 @@
 <div class="m-auto flex w-3/4 gap-5">
 	<div
-		class="ml-10 flex flex-col items-center rounded bg-country-geek-white p-2 text-2xl text-gray-900"
+		class="bg-country-geek-white ml-10 flex flex-col items-center rounded p-2 text-2xl text-gray-900"
 	>
 		<h2 class="border-b-2 border-gray-500 text-3xl text-gray-900">Account</h2>
 		<a

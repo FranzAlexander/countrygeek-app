@@ -32,7 +32,7 @@
 	<form
 		method="POST"
 		use:enhance={handleSubmit}
-		class="m-auto mt-6 flex w-1/5 flex-col gap-4 rounded-xl border-2 border-gray-300 bg-country-geek-white p-4 shadow-md"
+		class="bg-country-geek-white m-auto mt-6 flex w-1/5 flex-col gap-4 rounded-xl border-2 border-gray-300 p-4 shadow-md"
 	>
 		<h1 class="mb-4 text-3xl font-bold">Sign Up</h1>
 
@@ -49,7 +49,7 @@
 			<input
 				type="text"
 				name="fullname"
-				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
+				class="focus:border-country-geek-test-accent rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:outline-none"
 				required
 				placeholder="Enter Name"
 				pattern=""
@@ -60,7 +60,7 @@
 			<input
 				type="email"
 				name="email"
-				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
+				class="focus:border-country-geek-test-accent rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
 				required
 				placeholder="Enter Email"
 			/>
@@ -72,7 +72,7 @@
 				type="password"
 				name="password"
 				id=""
-				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
+				class="focus:border-country-geek-test-accent rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:outline-none invalid:focus:border-pink-500 invalid:focus:text-pink-500"
 				required
 				placeholder="Enter Password"
 			/>
@@ -83,12 +83,12 @@
 		<button
 			type="submit"
 			disabled={loading}
-			class="m-auto w-1/2 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear hover:bg-country-geek-test-accent"
+			class="bg-country-geek-test hover:bg-country-geek-test-accent text-country-geek-white m-auto w-1/2 rounded-md p-2 text-2xl shadow-md shadow-black transition-all duration-200 ease-linear"
 		>
 			Sign Up
 		</button>
 	</form>
-	<div class="text-center text-country-geek-test-text">
+	<div class="text-country-geek-test-text text-center">
 		<p>
 			Already have an account? <a href="/account/signin" class="text-purple-500 underline"
 				>Sign In</a

@@ -18,6 +18,12 @@ export const actions: Actions = {
 			password: userPassword
 		});
 
+		const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+		if (!emailRegex.test(userEmail)) {
+			return fail(400, { error: 'Please enter valid email!' });
+		}
+
 		// Handle any errors that occurred during sign-up
 		if (error) {
 			if (error instanceof AuthApiError && error.status === 400) {
@@ -34,33 +40,5 @@ export const actions: Actions = {
 		}
 
 		throw redirect(302, `${url.origin}/logging-in`);
-		// const userSignIn: UserSignIn = formValues.reduce((acc, [key, value]) => {
-		// 	acc[key] = value;
-		// 	return acc;
-		// }, {} as UserSignIn);
-
-		// const headers = { 'Content-Type': 'application/json' };
-
-		// const res = await fetch(`${backend_api}/login`, {
-		// 	method: 'POST',
-		// 	headers,
-		// 	body: JSON.stringify(userSignIn)
-		// });
-
-		// if (res.ok) {
-		// 	const result: UserLoginResponse = await res.json();
-		// 	event.cookies.set(
-		// 		'AuthorizationToken',
-		// 		`${result.auth_body.token_type} ${result.auth_body.access_token}`,
-		// 		{
-		// 			httpOnly: true,
-		// 			path: '/'
-		// 		}
-		// 	);
-		// } else {
-		// 	const errorResponse = { status: res.status, body: 'Sign In Failed' };
-		// 	return errorResponse;
-		// }
-		// throw redirect(302, '/');
 	}
 };

@@ -12,9 +12,9 @@ export const load = (async ({ locals: { supabase, getSession } }) => {
 	const { data: booking } = await supabase
 		.from('booking')
 		.select('*,booking_status(status)')
-		.eq('profile_id', session?.user.id);
+		.eq('profile_id', session.user.id);
 
-	let userBookings: Booking[] = [];
+	const userBookings: Booking[] = [];
 
 	if (booking) {
 		for (let i = 0; i < booking.length; i += 1) {

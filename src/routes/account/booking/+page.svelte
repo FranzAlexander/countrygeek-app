@@ -11,7 +11,7 @@
 	}
 </script>
 
-<section class="flex min-h-full flex-col gap-2 rounded bg-country-geek-white p-2">
+<section class="bg-country-geek-white flex min-h-full flex-col gap-2 rounded p-2">
 	<table>
 		<thead>
 			<tr class="border-b-2 font-semibold">

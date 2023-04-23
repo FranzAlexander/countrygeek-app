@@ -65,7 +65,7 @@
 	<form
 		method="POST"
 		use:enhance={handleSubmit}
-		class="m-auto flex w-1/3 flex-col rounded-lg border-2 border-gray-300 bg-country-geek-white p-4 shadow-md shadow-black"
+		class="bg-country-geek-white m-auto flex w-1/3 flex-col rounded-lg border-2 border-gray-300 p-4 shadow-md shadow-black"
 	>
 		<fieldset class="mb-2 flex flex-col p-2 {currentStep === 1 ? '' : 'hidden'}">
 			<input type="text" hidden bind:value={serviceCategory} name="serviceCategory" />
@@ -79,13 +79,13 @@
 				placeholder="Please provide a brief description of your booking."
 				cols="30"
 				rows="10"
-				class="mb-2 resize-none rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none"
+				class="focus:border-country-geek-test-accent mb-2 resize-none rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:outline-none"
 				bind:value={description}
 				on:input={check}
 			/>
 			<button
 				type="button"
-				class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
+				class="bg-country-geek-test enabled:hover:bg-country-geek-test-accent text-country-geek-white m-auto w-1/4 rounded-md p-2 text-2xl shadow-md shadow-black transition-all duration-200 ease-linear disabled:opacity-50 disabled:shadow-none"
 				disabled={descDisable}
 				on:click={nextStep}>Next</button
 			>
@@ -100,7 +100,7 @@
 					name="fullname"
 					id="fullname"
 					placeholder="Please enter your fullname."
-					class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none"
+					class="focus:border-country-geek-test-accent rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:outline-none"
 					required
 					bind:value={fullname}
 					on:input={checkPersonalDetails}
@@ -115,7 +115,7 @@
 					name="email"
 					id="email"
 					placeholder="Please enter your email."
-					class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none"
+					class="focus:border-country-geek-test-accent rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:outline-none"
 					required
 					on:input={checkPersonalDetails}
 				/>
@@ -129,7 +129,7 @@
 					name="phone"
 					id="phone"
 					placeholder="Please enter your phone number."
-					class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none"
+					class="focus:border-country-geek-test-accent rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:outline-none"
 					bind:value={phone}
 					on:input={checkPersonalDetails}
 				/>
@@ -137,13 +137,13 @@
 			<div class="flex w-full justify-between">
 				<button
 					type="button"
-					class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
+					class="bg-country-geek-test enabled:hover:bg-country-geek-test-accent text-country-geek-white m-auto w-1/4 rounded-md p-2 text-2xl shadow-md shadow-black transition-all duration-200 ease-linear disabled:opacity-50 disabled:shadow-none"
 					on:click={prevStep}>Back</button
 				>
 				<button
 					type="button"
 					disabled={personalDetailsDisabled}
-					class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
+					class="bg-country-geek-test enabled:hover:bg-country-geek-test-accent text-country-geek-white m-auto w-1/4 rounded-md p-2 text-2xl shadow-md shadow-black transition-all duration-200 ease-linear disabled:opacity-50 disabled:shadow-none"
 					on:click={nextStep}>Next</button
 				>
 			</div>
@@ -158,7 +158,7 @@
 					name="address"
 					id="address"
 					placeholder="Enter your street address."
-					class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none"
+					class="focus:border-country-geek-test-accent rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:outline-none"
 				/>
 			</div>
 			<div class="flex justify-evenly">
@@ -171,7 +171,7 @@
 						name="city"
 						id="city"
 						placeholder="Enter your city."
-						class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none"
+						class="focus:border-country-geek-test-accent rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:outline-none"
 					/>
 				</div>
 				<div class="flex flex-col">
@@ -183,19 +183,19 @@
 						name="postcode"
 						id="postcode"
 						placeholder="Enter your postcode."
-						class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:border-country-geek-test-accent focus:outline-none"
+						class="focus:border-country-geek-test-accent rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-800 focus:outline-none"
 					/>
 				</div>
 			</div>
 			<div class="flex w-full justify-between">
 				<button
 					type="button"
-					class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
+					class="bg-country-geek-test enabled:hover:bg-country-geek-test-accent text-country-geek-white m-auto w-1/4 rounded-md p-2 text-2xl shadow-md shadow-black transition-all duration-200 ease-linear disabled:opacity-50 disabled:shadow-none"
 					on:click={prevStep}>Back</button
 				>
 				<button
 					type="button"
-					class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
+					class="bg-country-geek-test enabled:hover:bg-country-geek-test-accent text-country-geek-white m-auto w-1/4 rounded-md p-2 text-2xl shadow-md shadow-black transition-all duration-200 ease-linear disabled:opacity-50 disabled:shadow-none"
 					on:click={nextStep}>Next</button
 				>
 			</div>
@@ -206,12 +206,12 @@
 			<div class="flex w-full justify-between">
 				<button
 					type="button"
-					class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
+					class="bg-country-geek-test enabled:hover:bg-country-geek-test-accent text-country-geek-white m-auto w-1/4 rounded-md p-2 text-2xl shadow-md shadow-black transition-all duration-200 ease-linear disabled:opacity-50 disabled:shadow-none"
 					on:click={prevStep}>Back</button
 				>
 				<button
 					type="submit"
-					class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
+					class="bg-country-geek-test enabled:hover:bg-country-geek-test-accent text-country-geek-white m-auto w-1/4 rounded-md p-2 text-2xl shadow-md shadow-black transition-all duration-200 ease-linear disabled:opacity-50 disabled:shadow-none"
 					>Confirm</button
 				>
 			</div>

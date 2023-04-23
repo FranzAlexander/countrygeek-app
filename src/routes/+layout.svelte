@@ -1,12 +1,11 @@
 <script lang="ts">
-	import logo from '$lib/images/countrygeeklogo.png';
+	import '../app.css';
+
 	import { invalidate } from '$app/navigation';
-	import Header from '$lib/components/Header.svelte';
-	import Footer from '$lib/nested/Footer.svelte';
-	import Nav from '$lib/nested/Nav.svelte';
+	import Header from '$lib/nested/Header.svelte';
+
 	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
-	import { redirect } from '@sveltejs/kit';
 
 	export let data: LayoutData;
 
@@ -22,19 +21,22 @@
 		return () => data.subscription.unsubscribe();
 	});
 
-	async function signOut() {
-		await supabase.auth.signOut();
-		throw redirect(303, '/');
-	}
+	// async function signOut() {
+	// 	await supabase.auth.signOut();
+	// 	throw redirect(303, '/');
+	// }
 </script>
 
-<div class="flex flex-col bg-country-geek-test">
+<div class="">
+	<Header {session} />
+
+	<slot />
 	<!-- <Header session={data.session} /> -->
 	<!-- <Nav /> -->
-	<nav
+	<!-- <nav
 		class="z-30 box-border flex w-full justify-between p-2 font-light text-country-geek-test-text"
 	>
-		<a href="/" class="ml-10 h-32 w-32">
+		<a href="/" class="ml-10 h-[5%] w-[5%]">
 			<img src={logo} alt="Country Geek logo" class="box-border object-fill" /></a
 		>
 		<ul class="flex items-center justify-center">
@@ -80,5 +82,5 @@
 	</nav>
 
 	<slot />
-	<Footer />
+	<Footer /> -->
 </div>
