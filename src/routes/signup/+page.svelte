@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
-	import SignInMailIcon from '$lib/icons/SignInMailIcon.svelte';
-	import SignInPasswordIcon from '$lib/icons/SignInPasswordIcon.svelte';
-	import SignUpPersonIcon from '$lib/icons/SignUpPersonIcon.svelte';
+
 	import type { ActionData } from './$types';
 
 	export let form: ActionData;

@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions } from '../$types';
+import type { Actions } from './$types';
 import { AuthApiError } from '@supabase/supabase-js';
 
 /** @type {import('./$types').Actions} */

@@ -8,8 +8,8 @@
 
 <fieldset class="mt-2 flex w-full flex-col {currentStep === 1 ? '' : 'hidden'}">
 	<legend class="mb-4 text-lg font-medium leading-none text-gray-900">Problem Details</legend>
-	<input type="text" hidden value={categoryName} />
-	<input type="text" hidden value={serviceName} />
+	<input type="text" name="categoryName" hidden value={categoryName} />
+	<input type="text" name="serviceName" hidden value={serviceName} />
 
 	<div class="mb-6">
 		<label

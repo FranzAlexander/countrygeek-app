@@ -8,6 +8,7 @@
 	import PersonalStep from './PersonalStep.svelte';
 	import ProblemStep from './ProblemStep.svelte';
 	import StepIndicator from './StepIndicator.svelte';
+	import ConfirmStep from './ConfirmStep.svelte';
 
 	// Declaring the page data
 	export let data: PageData;
@@ -15,39 +16,23 @@
 
 	const { session, selectedService, userDetails } = data;
 
+	console.log(selectedService);
+
 	// Declaring variables for user information
 	let user: User | null = userDetails ?? null;
 
 	// Setting up variables for form
 	let currentStep = 1; // The current step of the form
-	let nextStepDisabled = [true, true, true]; // The array of whether the next button is disabled for each step
 
 	// let formElements: Element[] = [];
 
 	// Setting up variables for user input
-	$: description = '';
 	$: fullname = user?.fullname ?? '';
 	$: email = session?.user.email ?? '';
 	$: phone = user?.phone ?? '';
 	$: streetAddress = user?.userAddress?.[0]?.streetAddress ?? '';
 	$: city = user?.userAddress?.[0]?.city ?? '';
 	$: postcode = user?.userAddress?.[0]?.postcode ?? '';
-
-	// Function to check if the inputs are valid
-	function checkInputs() {
-		// Checking the inputs for the current step
-		switch (currentStep) {
-			case 1:
-				nextStepDisabled[0] = description === '';
-				break;
-			case 2:
-				nextStepDisabled[1] = fullname === '' || email === '' || phone === '';
-				break;
-			case 3:
-				nextStepDisabled[2] = streetAddress === '' || city === '' || postcode === '';
-				break;
-		}
-	}
 
 	// Function to go to the next step
 	function nextStep() {
@@ -75,8 +60,7 @@
 				if (result.type === 'failure') {
 					if (result.data) {
 						const data = result.data;
-						console.log('hi');
-						console.log(data);
+
 						currentStep = data.stepError;
 					}
 
@@ -87,7 +71,7 @@
 	};
 </script>
 
-<section class="w-full bg-primary p-1">
+<section class="min-h-full w-full bg-primary p-1 pt-10">
 	<form
 		method="POST"
 		class="flex w-full max-w-sm flex-col items-center rounded-lg border-2 border-gray-300 bg-secondary p-2 text-gray-900 shadow-md shadow-black md:mx-auto md:max-w-md md:p-4 xl:max-w-xl"
@@ -118,7 +102,12 @@
 			streetAddress={streetAddress ?? form?.data?.streetAddress}
 			postcode={postcode ?? form?.data?.postcode}
 			suburb={city ?? form?.data?.city}
+			streetError={form?.errors?.streetAddress ?? ''}
+			postcodeError={form?.errors?.postcode ?? ''}
+			suburbError={form?.errors?.suburb ?? ''}
 		/>
+
+		<ConfirmStep {currentStep} error={form?.errors?.server ?? ''} />
 
 		<div class="flex w-full justify-end gap-10">
 			<button

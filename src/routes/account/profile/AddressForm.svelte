@@ -86,19 +86,6 @@
 			/>
 		</div>
 	</div>
-	<!-- <div class="mb-4 w-full pb-2">
-		<label for="profileName" class="mb-2 block font-medium">Phone Number</label>
-		<input
-			type="tel"
-			name="profilePhone"
-			id="profilePhone"
-			class="block w-full rounded-lg border focus:border-accent focus:ring-primary-20"
-			value={phone}
-            autocomplete="mobile"
-			{disabled}
-		/>
-	</div> -->
-
 	{#if !disabled}
 		<div class="flex w-full justify-end gap-10 border-t-2 border-gray-300 py-2">
 			<button

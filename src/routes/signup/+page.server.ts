@@ -1,7 +1,7 @@
 import type { UserSignUp, NewUser } from '$lib/interfaces/user';
 import { AuthApiError } from '@supabase/supabase-js';
 import { fail, type ActionFailure } from '@sveltejs/kit';
-import type { Actions } from '../$types';
+import type { Actions } from './$types';
 
 /**
  * An object containing a set of actions for handling user sign-up.

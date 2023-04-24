@@ -41,3 +41,27 @@ export const validatePersonalDetails = async (
 	}
 	return stepError;
 };
+
+export const validateAddressDetails = async (
+	streetAddress: string,
+	postcode: string,
+	suburb: string,
+	errors: Record<string, unknown>
+) => {
+	let stepError = 0;
+
+	if (streetAddress === '') {
+		errors.streetAddress = 'This field is required!';
+		stepError = 3;
+	}
+	if (postcode === '') {
+		errors.postcode = 'This field is required!';
+		stepError = 3;
+	}
+	if (suburb === '') {
+		errors.suburb = 'This field is required!';
+		stepError = 3;
+	}
+
+	return stepError;
+};

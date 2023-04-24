@@ -100,60 +100,25 @@
 						on:click={toggleMenu}>Services</a
 					>
 				</li>
-				<li>
-					<a
-						href="/signin"
-						class="block rounded bg-primary py-2 pl-3 pr-4 text-secondary dark:text-secondary md:border md:border-secondary md:text-xl"
-						aria-current="page"
-						on:click={toggleMenu}>Sign In</a
-					>
-				</li>
-				<li>
-					<a
-						href="/signup"
-						class="block rounded bg-primary py-2 pl-3 pr-4 text-secondary dark:text-secondary md:text-xl"
-						aria-current="page"
-						on:click={toggleMenu}>Sign up</a
-					>
-				</li>
+				{#if !session}
+					<li>
+						<a
+							href="/signin"
+							class="block rounded bg-primary py-2 pl-3 pr-4 text-secondary dark:text-secondary md:border md:border-secondary md:text-xl"
+							aria-current="page"
+							on:click={toggleMenu}>Sign In</a
+						>
+					</li>
+					<li>
+						<a
+							href="/signup"
+							class="block rounded bg-primary py-2 pl-3 pr-4 text-secondary dark:text-secondary md:text-xl"
+							aria-current="page"
+							on:click={toggleMenu}>Sign up</a
+						>
+					</li>
+				{/if}
 			</ul>
 		</div>
 	</div>
 </nav>
-
-<!-- <AppBar background="bg-primary" gridColumns="1">
-	<nav class="flex w-full flex-col justify-between lg:flex-row">
-		<div class="flex justify-between">
-			<a href="/" class="h-auto w-[20%] lg:w-[8%]"
-				><img src={logo} alt="Country Geek logo" class="object-fill" /></a
-			>
-			<button class="lg:hidden" on:click={toggleMenu}>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					height="40"
-					viewBox="0 96 960 960"
-					width="40"
-					class="fill-secondary-500"
-					><path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" /></svg
-				>
-			</button>
-		</div>
-		<ul
-			class="text-country-geek-white mt-2 w-full flex-col items-start md:w-1/5 lg:flex-row {showMenu
-				? 'flex'
-				: 'hidden lg:flex'}"
-		>
-			<li class="w-full bg-gray-900/80 text-center md:my-auto md:bg-transparent">
-				<a href="/services" class=" box-border block p-1 md:p-2" on:click={toggleMenu}>Services</a>
-			</li>
-			{#if !session}
-				<li class="w-full text-center md:my-auto md:rounded-lg md:border-2">
-					<a href="/signin" class="box-border block p-1">Sign In</a>
-				</li>
-				<li class="w-full bg-gray-900/80 text-center md:my-auto md:bg-transparent">
-					<a href="/signup" class="box-border block p-1 md:p-2">Sign up</a>
-				</li>
-			{/if}
-		</ul>
-	</nav>
-</AppBar> -->

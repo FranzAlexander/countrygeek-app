@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
-	import SigninMailIcon from '$lib/icons/SignInMailIcon.svelte';
-	import SignInPasswordIcon from '$lib/icons/SignInPasswordIcon.svelte';
 	import type { ActionData } from './$types';
 
 	export let form: ActionData;
@@ -98,13 +96,9 @@
 		>
 			<span class="px-1">or</span>
 		</div>
-		<!-- {#if form?.error}
+		{#if form?.error}
 			<div class="mb-4 font-bold text-red-500">{form.error}</div>
 		{/if}
-
-		{#if form?.message}
-			<div class="mb-4 font-bold text-red-500">{form.message}</div>
-		{/if} -->
 
 		<div class="mb-6">
 			<label for="email" class="mb-2 block font-medium text-gray-900">Email</label>

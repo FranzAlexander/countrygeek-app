@@ -8,7 +8,8 @@ module.exports = {
 			primary: '#203583',
 			'primary-20': '#1A2A69',
 			secondary: '#f8f8f8',
-			accent: '#2086d5'
+			accent: '#2086d5',
+			logo: '#F9CC0B'
 		}
 	},
 	plugins: [require('flowbite/plugin')]

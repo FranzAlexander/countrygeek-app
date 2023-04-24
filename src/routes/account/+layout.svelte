@@ -5,7 +5,7 @@
 	}
 </script>
 
-<div class="flex h-full flex-wrap bg-primary">
+<div class="flex h-screen flex-wrap bg-primary">
 	<div>
 		<button
 			aria-controls="default-sidebar"
@@ -27,7 +27,7 @@
 			</svg>
 		</button>
 		<aside
-			class="fixed z-40 h-screen w-64 transition-transform sm:translate-x-0 {showSideBar
+			class="absolute z-40 h-screen w-64 transition-transform sm:translate-x-0 {showSideBar
 				? 'translate-x-0'
 				: '-translate-x-full'}"
 			aria-label="Sidebar"
