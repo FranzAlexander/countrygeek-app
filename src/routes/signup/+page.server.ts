@@ -49,13 +49,20 @@ export const actions: Actions = {
 			password: formData.get('password') as string
 		};
 
+		if (!userSignUp.fullname) {
+			return fail(400, { error: 'Please enter your name' });
+		}
+
 		// Validate the form data
 		if (!userSignUp.email) {
 			return fail(400, { error: 'Please enter your email' });
 		}
 
 		if (!userSignUp.password) {
-			return fail(400, { error: 'Please enter a password', values: { email: userSignUp.email } });
+			return fail(400, {
+				error: 'Please enter a password',
+				values: { fullname: userSignUp.fullname, email: userSignUp.email }
+			});
 		}
 
 		// Attempt to sign up the user with Supabase
@@ -69,8 +76,6 @@ export const actions: Actions = {
 				}
 			}
 		});
-
-		console.log(error);
 
 		// Handle any errors that occurred during sign-up
 		if (error) {

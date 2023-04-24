@@ -87,8 +87,6 @@
 	};
 </script>
 
-<!-- class="flex max-w-sm flex-col gap-4 bg-primary pt-4 md:max-w-md md:items-center md:justify-center xl:max-w-xl" -->
-
 <section class="w-full bg-primary p-1">
 	<form
 		method="POST"

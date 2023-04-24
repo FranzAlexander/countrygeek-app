@@ -23,7 +23,8 @@
 			class=" block w-full rounded-lg border focus:border-accent focus:ring-primary-20 {fullnameError
 				? 'border-red-500 bg-red-50 text-red-900'
 				: 'border-gray-300 bg-gray-50  text-gray-900'}"
-			placeholder="John Doe"
+			placeholder="e.g. John Doe"
+			autocomplete="name"
 			value={fullname}
 		/>
 		{#if fullnameError}
@@ -39,10 +40,11 @@
 			type="email"
 			name="email"
 			id="email"
+			autocomplete="email"
 			class="block w-full rounded-lg border {emailError
 				? 'border-red-500 bg-red-50 text-red-900'
 				: 'border-gray-300 bg-gray-50  text-gray-900'} focus:border-accent focus:ring-primary-20"
-			placeholder="john.doe@gmail.com"
+			placeholder="e.g. john.doe@gmail.com"
 			value={email}
 		/>
 		{#if emailError}
@@ -58,10 +60,11 @@
 			type="tel"
 			name="phone"
 			id="phone"
+			autocomplete="mobile"
 			class="w-ful block rounded-lg border {phoneError
 				? 'border-red-500 bg-red-50 text-red-900'
 				: 'border-gray-300 bg-gray-50  text-gray-900'} focus:border-accent focus:ring-primary-20"
-			placeholder="0434-578-586"
+			placeholder="e.g. 0434-578-586"
 			value={phone}
 		/>
 		{#if phoneError}

@@ -1,6 +1,10 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import type { User, UserAddress } from '$lib/interfaces/user';
 	import type { PageData } from './$types';
+	import AddressForm from './AddressForm.svelte';
+	import ChangePassword from './ChangePassword.svelte';
+	import PersonalForm from './PersonalForm.svelte';
 
 	export let data: PageData;
 
@@ -10,75 +14,77 @@
 		profile = data.userProfile;
 	}
 
-	let inputDisabled: boolean[] = [true, true];
+	$: inputDisabled = [true, true];
 
-	function makeEditable(index: number) {
-		if (inputDisabled[index] === true) {
-			inputDisabled[index] = false;
-		} else {
-			inputDisabled[index] = true;
-		}
-	}
+	// function makeEditable(index:any) {
+	// 	console.log(index.detail.index);
+	// 	if (inputDisabled[index] === true) {
+	// 		inputDisabled[index] = false;
+	// 	} else {
+	// 		inputDisabled[index] = true;
+	// 	}
+	// }
 
 	let profileForm: any;
-	let fullName: string = profile?.fullname || '';
+	let fullname = profile?.fullname || '';
 	let phone: string = profile?.phone || '';
 	let userAddress: UserAddress[];
 	if (profile?.userAddress) {
 		userAddress = profile?.userAddress;
 	}
-	let streetAddress: string | null;
-	let city: string | null;
-	let postcode: string | null;
 
 	// let userAddress = profile?.userAddress?.streetAddress;
 	//Form current height 537.422px;
 </script>
 
-<section class="ml-40 flex w-2/4 flex-col gap-10">
+<section class="w-full p-1">
+	<form method="POST" use:enhance>
+		<ChangePassword />
+		<PersonalForm {fullname} {phone} />
+		<AddressForm {userAddress} />
+	</form>
 	<!-- Need to finish and add ChangeEmail.svelte -->
 	<!-- Need to finish and add ChangePassword.svelte -->
 
 	<!-- Personal Details form. -->
-	<form
+	<!-- <form
 		action="?/updatePersonalDetails"
 		method="POST"
-		class="bg-country-geek-white flex w-full flex-col rounded text-gray-900"
+		class="mb-10 flex w-full max-w-sm flex-col items-center rounded-lg border-2 border-gray-300 bg-secondary  text-gray-900 shadow-md shadow-black md:mx-auto md:max-w-md md:p-4 xl:max-w-xl"
 	>
-		<div class="flex justify-between border-b-2 border-gray-400 p-2">
-			<h2 class="self-center text-2xl">Personal Details</h2>
+		<div class="flex w-full items-center justify-between border-b-2 border-gray-400 p-2 mb-4">
+			<h2 class=" text-lg font-medium leading-none text-gray-900">Personal Details</h2>
 			<button
 				type="button"
-				class="bg-country-geek-blue text-country-geek-white mr-4 h-min rounded-lg p-2 text-xl"
+				class="foucs:ring-primary-20 mb-2 mr-2 rounded-lg bg-primary p-2 px-5 py-2.5 text-sm font-medium text-secondary hover:bg-accent focus:ring-4"
 				on:click={() => {
 					makeEditable(0);
 				}}>Edit</button
 			>
 		</div>
-		<div class="flex flex-col p-2">
-			<div class="flex items-center justify-between border-b-2 border-gray-300 py-4">
-				<label for="profileName" class="text-xl">Fullname:</label>
-				<input
-					type="text"
-					name="profileName"
-					id="profileName"
-					class="rounded-md border-2 border-gray-300 p-2"
-					value={fullName}
-					disabled={inputDisabled[0]}
-				/>
-			</div>
-			<div class="flex items-center justify-between py-2 pt-4">
-				<label for="profilePhone" class="text-xl">Phone Number:</label>
-				<input
-					type="tel"
-					name="profilePhone"
-					id="profilePhone"
-					class="rounded-md border-2 border-gray-300 p-2"
-					value={phone}
-					disabled={inputDisabled[0]}
-				/>
-			</div>
+		<div class="w-full border-b-2 border-gray-300 pb-2 mb-4">
+			<label for="profileName" class="mb-2 block font-medium">Fullname:</label>
+			<input
+				type="text"
+				name="profileName"
+				id="profileName"
+				class="block w-full rounded-lg border focus:border-accent focus:ring-primary-20"
+				value={fullName}
+				disabled={inputDisabled[0]}
+			/>
 		</div>
+		<div class="w-full">
+			<label for="profilePhone" class="text-xl">Phone Number:</label>
+			<input
+				type="tel"
+				name="profilePhone"
+				id="profilePhone"
+				class="rounded-md border-2 border-gray-300 p-2"
+				value={phone}
+				disabled={inputDisabled[0]}
+			/>
+		</div>
+
 		{#if !inputDisabled[0]}
 			<div class="flex justify-evenly border-t-2 border-gray-300 py-2">
 				<button
@@ -94,10 +100,13 @@
 				>
 			</div>
 		{/if}
-	</form>
+	</form> -->
 
 	<!-- Address Details form. -->
-	<form action="" class="bg-country-geek-white flex w-full flex-col rounded text-gray-900">
+	<!-- <form
+		action=""
+		class="flex w-full max-w-sm flex-col items-center rounded-lg border-2 border-gray-300 bg-secondary p-2 text-gray-900 shadow-md shadow-black md:mx-auto md:max-w-md md:p-4 xl:max-w-xl"
+	>
 		<div class="flex justify-between border-b-2 border-gray-400 p-2">
 			<h2 class="self-center text-2xl">Address Details</h2>
 			<button
@@ -146,5 +155,5 @@
 			</div>
 		{/each}
 		<div />
-	</form>
+	</form> -->
 </section>

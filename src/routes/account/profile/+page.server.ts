@@ -50,5 +50,6 @@ export const actions: Actions = {
 
 		console.log(formData);
 		// supabase.from('user_profile').update();
-	}
+	},
+	updateAddressDetails: async ({ request, locals: { supabase } }) => {}
 };

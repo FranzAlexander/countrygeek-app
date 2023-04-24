@@ -134,15 +134,13 @@
 		<button
 			type="submit"
 			disabled={loading}
-			class="hover:bg-country-geek-test-accent m-auto mb-4 w-1/2 rounded-md bg-primary p-2 text-secondary shadow-md shadow-black transition-all duration-200 ease-linear"
+			class="m-auto mb-4 w-1/2 rounded-md bg-primary p-2 text-xl text-secondary shadow-md shadow-black transition-all duration-200 ease-linear hover:bg-accent"
 			>Sign In</button
 		>
 
-		<div class="text-country-geek-test-text text-center">
+		<div class="text-center text-gray-900">
 			<p>
-				Don't have an account? Sign Up <a href="/signup" class="text-purple-500 underline"
-					>Sign Up</a
-				>
+				Don't have an account?<a href="/signup" class="ml-2 text-primary underline">Sign Up</a>
 			</p>
 		</div>
 	</form>

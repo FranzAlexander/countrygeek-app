@@ -113,6 +113,7 @@
 				name="fullname"
 				class="border-border-gray-300 block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900 shadow-md focus:border-accent focus:ring-primary-20"
 				required
+				autocomplete="name"
 				placeholder="Enter Name"
 			/>
 		</div>
@@ -123,6 +124,7 @@
 				name="email"
 				class="border-border-gray-300 block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900 shadow-md focus:border-accent focus:ring-primary-20"
 				required
+				autocomplete="email"
 				placeholder="Enter Email"
 			/>
 		</div>
@@ -135,22 +137,28 @@
 				id=""
 				class="border-border-gray-300 block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900 shadow-md focus:border-accent focus:ring-primary-20"
 				required
+				autocomplete="new-password"
 				placeholder="Enter Password"
 			/>
 		</div>
 
-		<p>By clicking sign up you are agreeing to the <a href="/privacy">Privacy Policy</a></p>
+		<p class="text-gray-900">
+			By clicking sign up you are agreeing to the <a
+				href="/legal/privacy"
+				class="text-primary underline">Privacy Policy</a
+			>
+		</p>
 
 		<button
 			type="submit"
 			disabled={loading}
-			class="hover:bg-country-geek-test-accent m-auto w-1/2 rounded-md bg-primary p-2 text-2xl text-secondary shadow-md shadow-black transition-all duration-200 ease-linear"
+			class="m-auto my-4 w-1/2 rounded-md bg-primary p-2 text-xl text-secondary shadow-md shadow-black transition-all duration-200 ease-linear hover:bg-accent"
 		>
 			Sign Up
 		</button>
-		<div class="text-country-geek-test-text text-center">
+		<div class="text-center text-gray-900">
 			<p>
-				Already have an account? <a href="/signin" class="text-purple-500 underline">Sign In</a>
+				Already have an account? <a href="/signin" class="text-primary underline">Sign In</a>
 			</p>
 		</div>
 	</form>
