@@ -1,5 +1,8 @@
 <script lang="ts">
 	export let currentStep: number;
+	export let streetAddress: string;
+	export let postcode: string;
+	export let suburb: string;
 </script>
 
 <fieldset class="mt-2 flex w-full flex-col {currentStep === 3 ? '' : 'hidden'}">
@@ -24,6 +27,7 @@
 			id="streetAddress"
 			class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:border-accent focus:ring-primary-20"
 			placeholder="4 Steer Street"
+			value={streetAddress}
 		/>
 	</div>
 
@@ -38,6 +42,7 @@
 				pattern="[0-9]{5}"
 				max="5"
 				placeholder="e.g. 6255"
+				value={postcode}
 			/>
 		</div>
 		<div>
@@ -58,6 +63,7 @@
 				id="suburb"
 				class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:border-accent focus:ring-primary-20"
 				placeholder="e.g. Bridgetown"
+				value={suburb}
 			/>
 		</div>
 	</div>

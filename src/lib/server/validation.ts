@@ -6,55 +6,38 @@ async function validateDescription(description: string) {
 	}
 }
 
-async function validatePersonalDetails(
+export const validatePersonalDetails = async (
 	fullname: string,
 	email: string,
 	phone: string,
-	errors: Record<string, unknown> | null
-) {
+	errors: Record<string, unknown>
+) => {
 	const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-	const phoneRegex = /^[0-9]{10}/;
+	const phoneRegex = /^[0-9]{10}$/;
 
-	let pErrors: Record<string, unknown> = {};
+	let stepError = 0;
+
 	if (fullname === '') {
-		if (!errors) {
-			pErrors.fullname = 'This is required!';
-		} else {
-			errors.fullname = 'This is required!';
-		}
+		errors.fullname = 'This field is required!';
+		stepError = 2;
 	}
 	if (email === '') {
-		if (!errors) {
-			pErrors.email = 'This is required!';
-		} else {
-			errors.email = 'This is required!';
-		}
+		errors.email = 'This field is required!';
+		stepError = 2;
 	}
 	if (phone === '') {
-		if (!errors) {
-			pErrors.phone = 'This is required!';
-		} else {
-			errors.phone = 'This is required!';
-		}
+		errors.phone = 'This field is required!';
+		stepError = 2;
 	}
 
-	if (!emailRegex.test(email)) {
-		if (!errors) {
-			pErrors.email = 'Please enter a vaild email!';
-		} else {
-			errors.email = 'Please enter a vaild email!';
-		}
+	if (!emailRegex.test(email) && errors.email === '') {
+		errors.email = 'Please enter a vaild email!';
+		stepError = 2;
 	}
 
-	if (!phoneRegex.test(phone)) {
-		if (!errors) {
-			pErrors.phone = 'Please enter a vaild phone number!';
-		} else {
-			errors.phone = 'Please enter a vaild phone number!';
-		}
+	if (!phoneRegex.test(phone) && errors.phone === '') {
+		errors.phone = 'Please enter a vaild phone number!';
+		stepError = 2;
 	}
-
-	if (Object.entries(pErrors).length > 0) {
-		return pErrors;
-	}
-}
+	return stepError;
+};

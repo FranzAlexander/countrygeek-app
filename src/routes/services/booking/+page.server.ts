@@ -2,6 +2,7 @@ import type { SelectedService } from '$lib/interfaces/service';
 import type { User, UserAddress } from '$lib/interfaces/user';
 import { error, fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
+import { validatePersonalDetails } from '$lib/server/validation';
 
 export const load = (async ({ locals: { supabase, getSession }, url }) => {
 	const session = await getSession();
@@ -56,8 +57,8 @@ export const actions: Actions = {
 		const serviceName = formData.get('serviceName') as string;
 		const bookingDescription = formData.get('bookingDescription') as string;
 		const fullname = formData.get('fullname') as string;
-		// const email = formData.get('email') as string;
-		// const phone = formData.get('phone') as string;
+		const email = formData.get('email') as string;
+		const phone = formData.get('phone') as string;
 		// const streetAddress = formData.get('streetAddress') as string;
 		// const city = formData.get('city') as string;
 		// const postcode = formData.get('postcode') as string;
@@ -65,11 +66,11 @@ export const actions: Actions = {
 		const errors: Record<string, unknown> = {};
 		if (bookingDescription === '') {
 			stepError = 1;
-			errors.description = 'required';
+			errors.description = 'This field is required!';
 		}
-		if (fullname === '') {
+		let personalStep = await validatePersonalDetails(fullname, email, phone, errors);
+		if (personalStep === 2) {
 			stepError = stepError !== 1 ? 2 : stepError;
-			errors.fullname = 'required';
 		}
 		// if (email === '') {
 		// 	stepError = stepError !== 1 ? 2 : stepError;

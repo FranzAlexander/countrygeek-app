@@ -25,13 +25,13 @@
 	// let formElements: Element[] = [];
 
 	// Setting up variables for user input
-	let description = '';
-	let fullname = user?.fullname ?? '';
-	let email = session?.user.email ?? '';
-	let phone = user?.phone ?? '';
-	let streetAddress = user?.userAddress?.[0]?.streetAddress ?? '';
-	let city = user?.userAddress?.[0]?.city ?? '';
-	let postcode = user?.userAddress?.[0]?.postcode ?? '';
+	$: description = '';
+	$: fullname = user?.fullname ?? '';
+	$: email = session?.user.email ?? '';
+	$: phone = user?.phone ?? '';
+	$: streetAddress = user?.userAddress?.[0]?.streetAddress ?? '';
+	$: city = user?.userAddress?.[0]?.city ?? '';
+	$: postcode = user?.userAddress?.[0]?.postcode ?? '';
 
 	// Function to check if the inputs are valid
 	function checkInputs() {
@@ -76,6 +76,7 @@
 					if (result.data) {
 						const data = result.data;
 						console.log('hi');
+						console.log(data);
 						currentStep = data.stepError;
 					}
 
@@ -90,7 +91,6 @@
 
 <section class="w-full bg-primary p-1">
 	<form
-		action=""
 		method="POST"
 		class="flex w-full max-w-sm flex-col items-center rounded-lg border-2 border-gray-300 bg-secondary p-2 text-gray-900 shadow-md shadow-black md:mx-auto md:max-w-md md:p-4 xl:max-w-xl"
 		use:enhance={handleSubmit}
@@ -101,13 +101,26 @@
 			categoryName={selectedService.categoryName ?? form?.data?.categoryName}
 			serviceName={selectedService.serviceName ?? form?.data?.serviceName}
 			description={form?.data?.bookingDescription ?? ''}
-			error={form?.errors?.bookingDescription ?? ''}
+			error={form?.errors?.description ?? ''}
 			{currentStep}
 		/>
 
-		<PersonalStep {currentStep} {fullname} {email} {phone} />
+		<PersonalStep
+			{currentStep}
+			fullname={fullname ?? form?.data?.fullname}
+			email={email ?? form?.data?.email}
+			phone={phone ?? form?.data?.phone}
+			fullnameError={form?.errors?.fullname ?? ''}
+			emailError={form?.errors?.email ?? ''}
+			phoneError={form?.errors?.phone ?? ''}
+		/>
 
-		<AddressStep {currentStep} />
+		<AddressStep
+			{currentStep}
+			streetAddress={streetAddress ?? form?.data?.streetAddress}
+			postcode={postcode ?? form?.data?.postcode}
+			suburb={city ?? form?.data?.city}
+		/>
 
 		<div class="flex w-full justify-end gap-10">
 			<button

@@ -35,7 +35,7 @@
 		>
 		<div class=" w-full md:block md:w-auto {showMenu ? '' : 'hidden'}">
 			<ul
-				class="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-primary md:p-0 md:dark:bg-gray-900"
+				class="mt-4 flex flex-col gap-2 rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-primary md:p-0 md:dark:bg-gray-900"
 			>
 				<li>
 					<a
@@ -49,14 +49,16 @@
 					<a
 						href="/signin"
 						class="block rounded bg-primary py-2 pl-3 pr-4 text-secondary dark:text-secondary md:border md:border-secondary md:text-xl"
-						aria-current="page">Sign In</a
+						aria-current="page"
+						on:click={toggleMenu}>Sign In</a
 					>
 				</li>
 				<li>
 					<a
 						href="/signup"
 						class="block rounded bg-primary py-2 pl-3 pr-4 text-secondary dark:text-secondary md:text-xl"
-						aria-current="page">Sign up</a
+						aria-current="page"
+						on:click={toggleMenu}>Sign up</a
 					>
 				</li>
 			</ul>
