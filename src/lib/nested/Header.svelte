@@ -29,7 +29,7 @@
 	}
 </script>
 
-<nav class="border-gray-200 bg-primary">
+<nav class=" bg-primary border-b border-primary-20">
 	<div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
 		<a href="/" class="flex items-center">
 			<img src={logo} alt="" class="mr-3 h-14 lg:h-20" />
