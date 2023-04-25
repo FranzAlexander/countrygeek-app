@@ -24,7 +24,5 @@
 </script>
 
 <Header {session} />
-
 <slot />
-
 <Footer />

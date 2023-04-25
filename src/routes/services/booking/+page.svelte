@@ -71,7 +71,7 @@
 	};
 </script>
 
-<section class="min-h-full w-full bg-primary p-1 pt-10">
+<section class="my-auto h-screen min-h-full w-full bg-primary p-1 py-12">
 	<form
 		method="POST"
 		class="flex w-full max-w-sm flex-col items-center rounded-lg border-2 border-gray-300 bg-secondary p-2 text-gray-900 shadow-md shadow-black md:mx-auto md:max-w-md md:p-4 xl:max-w-xl"

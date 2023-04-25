@@ -135,9 +135,35 @@ export const actions: Actions = {
 			return fail(400, data);
 		}
 
+		const { data: countryData } = await supabase
+			.from('country')
+			.select('id')
+			.eq('code', country)
+			.single();
+
+		const { data: stateData } = await supabase
+			.from('state')
+			.select('id')
+			.eq('code', state)
+			.single();
+
 		const { error } = await supabase
 			.from('user_address')
-			.upsert({})
+			.upsert({
+				street_address: streetAddress,
+				postcode: postcode,
+				city: suburb,
+				profile_id: session?.user.id,
+				country_id: countryData?.id,
+				state_id: stateData?.id
+			})
 			.eq('profile_id', session?.user.id);
+
+		if (error) {
+			errors.server = 'Server error! Please try again later!';
+			return fail(400, { data: Object.fromEntries(formData), errors });
+		}
+
+		return;
 	}
 };

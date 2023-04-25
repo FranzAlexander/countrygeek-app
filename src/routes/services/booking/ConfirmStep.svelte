@@ -11,6 +11,11 @@
 		After booking the service we will get back to you within 2 business days to set a time and date.
 	</p>
 	<p class="block font-medium text-gray-900">
-		By clicking Confirm you are agreeing the Terms &amp; Conditions.
+		By clicking Confirm you are agreeing the <a
+			href="/legal/terms-and-conditions"
+			class="text-primary underline"
+		>
+			Terms &amp; Conditions.</a
+		>
 	</p>
 </div>

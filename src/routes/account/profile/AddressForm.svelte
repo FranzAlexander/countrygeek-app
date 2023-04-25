@@ -2,7 +2,9 @@
 	import type { UserAddress } from '$lib/interfaces/user';
 
 	export let userAddress: UserAddress[];
-
+	export let streetError: {};
+	export let postcodeError: {};
+	export let suburbError: {};
 	let disabled = true;
 
 	function toggleEdit() {
@@ -35,17 +37,26 @@
 		</select>
 	</div>
 	<div class="mb-4 w-full border-b-2 border-gray-300 p-1 pb-6">
-		<label for="streetAddress" class="mb-2 block font-medium">Street address</label>
+		<label
+			for="streetAddress"
+			class="mb-2 block font-medium {streetError ? 'text-red-700' : 'text-gray-900'}"
+			>Street address</label
+		>
 		<input
 			type="text"
 			name="streetAddress"
 			id="streetAddress"
-			class="block w-full rounded-lg border focus:border-accent focus:ring-primary-20"
+			class="block w-full rounded-lg border {streetError
+				? 'border-red-500 bg-red-50 text-red-900'
+				: 'border-gray-300 bg-gray-50  text-gray-900'} focus:border-accent focus:ring-primary-20"
 			autocomplete="street-address"
 			placeholder="e.g. 4 Steer Street"
 			value={userAddress[0].streetAddress}
 			{disabled}
 		/>
+		{#if streetError}
+			<p class="block font-medium text-red-600">{streetError}</p>
+		{/if}
 	</div>
 	<div class="mb-6 flex w-full flex-wrap justify-between p-1">
 		<div>

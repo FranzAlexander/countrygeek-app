@@ -5,7 +5,7 @@
 	}
 </script>
 
-<div class="flex h-screen flex-wrap bg-primary">
+<div class="flex h-screen flex-wrap overflow-y-auto bg-primary">
 	<div>
 		<button
 			aria-controls="default-sidebar"

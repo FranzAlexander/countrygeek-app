@@ -20,7 +20,7 @@
 	<title>Services - Country Geek</title>
 </svelte:head>
 
-<section class="flex w-full flex-col gap-5 overflow-scroll bg-primary p-2 text-gray-900 md:gap-10">
+<section class="flex w-full flex-col gap-5 bg-primary p-2 text-gray-900 md:gap-10">
 	{#each loadedServices as service}
 		<div class="mb-8 flex w-full flex-col md:p-5">
 			<div class="rounded-lg border border-gray-300 bg-secondary py-2 md:text-left">
