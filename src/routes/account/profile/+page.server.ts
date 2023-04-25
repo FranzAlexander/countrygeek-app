@@ -65,11 +65,79 @@ export const actions: Actions = {
 
 		return;
 	},
-	updatePersonalDetails: async ({ request, locals: { supabase } }) => {
+	updatePersonalDetails: async ({ request, locals: { getSession, supabase } }) => {
+		const session = await getSession();
+		const errors: Record<string, unknown> = {};
+
 		const formData = await request.formData();
 
-		console.log(formData);
-		// supabase.from('user_profile').update();
+		const fullname = formData.get('fullname') as string;
+		const phone = formData.get('phone') as string;
+
+		if (fullname === '') {
+			errors.fullname = 'Please enter your fullname';
+		}
+
+		if (phone === '') {
+			errors.phone = 'Please enter your phone';
+		}
+
+		if (Object.entries(errors).length > 0) {
+			const data = {
+				data: Object.fromEntries(formData),
+				errors
+			};
+			return fail(400, data);
+		}
+
+		const { error } = await supabase
+			.from('user_profile')
+			.update({ fullname, phone })
+			.eq('id', session?.user.id);
+
+		if (error) {
+			errors.server = 'Server error! Please try again later!';
+			return fail(400, { data: Object.fromEntries(formData), errors });
+		}
+
+		return;
 	},
-	updateAddressDetails: async ({ request, locals: { supabase } }) => {}
+	updateAddressDetails: async ({ request, locals: { getSession, supabase } }) => {
+		const session = await getSession();
+
+		const errors: Record<string, unknown> = {};
+
+		const formData = await request.formData();
+
+		const country = formData.get('countries') as string;
+		const streetAddress = formData.get('streetAddress') as string;
+		const postcode = formData.get('postcode') as string;
+		const state = formData.get('state') as string;
+		const suburb = formData.get('suburb') as string;
+
+		if (streetAddress === '') {
+			errors.streetAddress = 'Please enter your address';
+		}
+
+		if (postcode === '') {
+			errors.postcode = 'Please enter your postcode';
+		}
+
+		if (suburb === '') {
+			errors.suburb = 'Please enter your suburb';
+		}
+
+		if (Object.entries(errors).length > 0) {
+			const data = {
+				data: Object.fromEntries(formData),
+				errors
+			};
+			return fail(400, data);
+		}
+
+		const { error } = await supabase
+			.from('user_address')
+			.upsert({})
+			.eq('profile_id', session?.user.id);
+	}
 };

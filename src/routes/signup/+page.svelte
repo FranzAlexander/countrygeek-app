@@ -136,7 +136,6 @@
 				class="border-border-gray-300 block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900 shadow-md focus:border-accent focus:ring-primary-20"
 				required
 				autocomplete="new-password"
-				placeholder="Enter Password"
 			/>
 		</div>
 

@@ -35,11 +35,11 @@
 		</select>
 	</div>
 	<div class="mb-4 w-full border-b-2 border-gray-300 p-1 pb-6">
-		<label for="profileName" class="mb-2 block font-medium">Street address</label>
+		<label for="streetAddress" class="mb-2 block font-medium">Street address</label>
 		<input
 			type="text"
-			name="profileName"
-			id="profileName"
+			name="streetAddress"
+			id="streetAddress"
 			class="block w-full rounded-lg border focus:border-accent focus:ring-primary-20"
 			autocomplete="street-address"
 			placeholder="e.g. 4 Steer Street"
@@ -55,8 +55,6 @@
 				name="postcode"
 				id="postcode"
 				class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:border-accent focus:ring-primary-20"
-				pattern="[0-9]{5}"
-				max="5"
 				placeholder="e.g. 6255"
 				value={userAddress[0].postcode}
 				{disabled}
