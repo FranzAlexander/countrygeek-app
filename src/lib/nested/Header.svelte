@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invalidate, invalidateAll } from '$app/navigation';
 	import logo from '$lib/images/countrygeeklogo.png';
 	import type { Session } from '@supabase/supabase-js';
 
@@ -16,6 +17,16 @@
 	function toggleDropDown() {
 		showDropDown = showDropDown === false ? true : false;
 	}
+
+	async function signout() {
+		await fetch('/api/', {
+			method: 'POST',
+			body: JSON.stringify(''),
+			headers: { 'content-type': 'application/json' }
+		});
+
+		invalidateAll();
+	}
 </script>
 
 <nav class="border-gray-200 bg-primary">
@@ -24,6 +35,7 @@
 			<img src={logo} alt="" class="mr-3 h-14 lg:h-20" />
 		</a>
 		<div class="flex items-center md:order-2">
+			{#if session}
 			<button
 				type="button"
 				class="mr-3 flex rounded-full bg-primary-20 text-sm focus:ring-4 focus:ring-gray-300 md:mr-0"
@@ -63,8 +75,16 @@
 							class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-500">Profile</a
 						>
 					</li>
+					<li>
+						<button
+							on:click={signout}
+							class="block w-full px-4 py-2 text-left text-sm text-gray-900 hover:bg-gray-500"
+							>Sign Out</button
+						>
+					</li>
 				</ul>
 			</div>
+			{/if}
 			<button
 				type="button"
 				class="ml-1 inline-flex items-center rounded-lg p-2 text-sm text-secondary hover:bg-accent focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden"

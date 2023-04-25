@@ -32,7 +32,7 @@
 				: '-translate-x-full'}"
 			aria-label="Sidebar"
 		>
-			<div class="h-full overflow-y-auto bg-secondary px-3 py-4">
+			<div class="h-full overflow-y-auto bg-secondary/70 px-3 py-4 ">
 				<ul class="space-y-2 font-medium">
 					<li><a href="/account/profile">Profile</a></li>
 				</ul>

@@ -22,7 +22,7 @@
 	<title>Sign Up - Country Geek</title>
 </svelte:head>
 
-<section class="w-full bg-primary p-1">
+<section class="w-full bg-primary p-1 h-full">
 	<form
 		method="POST"
 		use:enhance={handleSubmit}
