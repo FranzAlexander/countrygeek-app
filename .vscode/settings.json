@@ -1,0 +1,5 @@
+{
+	"vue.features.codeActions.enable": false,
+	"prettier.requireConfig": false,
+	"editor.formatOnSave": true
+}

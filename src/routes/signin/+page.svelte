@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
-	import SigninMailIcon from '$lib/icons/SignInMailIcon.svelte';
-	import SignInPasswordIcon from '$lib/icons/SignInPasswordIcon.svelte';
+	import { invalidateAll } from '$app/navigation';
+	import type { ActionData } from './$types';
 
+	export let form: ActionData;
 	let loading = false;
 
 	const handleSubmit: SubmitFunction = () => {
@@ -16,95 +17,105 @@
 </script>
 
 <svelte:head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="description" content="Sign in to an account at Country Geek" />
 	<meta name="keywords" content="Country Geek, sign in, login, account" />
 	<title>Sign In - Country Geek</title>
 </svelte:head>
 
-<section class="w-full">
+<section class="w-full bg-primary p-1 h-full">
 	<form
 		method="POST"
 		use:enhance={handleSubmit}
-		class="m-auto mt-6 flex w-1/5 flex-col gap-4 rounded-xl border-2 border-gray-300 bg-country-geek-white p-4 shadow-md"
+		class="flex w-full max-w-sm flex-col rounded-lg border-2 border-gray-300 bg-secondary p-2 text-gray-900 shadow-black md:mx-auto md:p-4 xl:max-w-xl"
 	>
-		<h1 class="mb-4 text-3xl font-bold">Sign In</h1>
-		<div class="flex flex-col">
-			<label for="email" class="mb-2 block text-2xl text-gray-900">Email:</label>
+		<h1 class="mb-6 text-3xl font-bold">Sign In</h1>
+		<div class="flex w-full flex-col">
+			<button
+				type="button"
+				class="dark:focus:ring-[#3b5998]/55 mb-2 mr-2 inline-flex items-center rounded-lg bg-[#3b5998] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#3b5998]/90 focus:outline-none focus:ring-4 focus:ring-[#3b5998]/50 md:justify-center"
+			>
+				<svg
+					class="-ml-1 mr-2 h-4 w-4"
+					aria-hidden="true"
+					focusable="false"
+					data-prefix="fab"
+					data-icon="facebook-f"
+					role="img"
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 320 512"
+					><path
+						fill="currentColor"
+						d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"
+					/></svg
+				>
+				Sign in with Facebook</button
+			>
+			<button
+				type="button"
+				class="dark:focus:ring-[#4285F4]/55 mb-2 mr-2 inline-flex items-center rounded-lg bg-[#4285F4] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#4285F4]/90 focus:outline-none focus:ring-4 focus:ring-[#4285F4]/50 md:justify-center"
+			>
+				<svg
+					class="-ml-1 mr-2 h-4 w-4"
+					aria-hidden="true"
+					focusable="false"
+					data-prefix="fab"
+					data-icon="google"
+					role="img"
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 488 512"
+					><path
+						fill="currentColor"
+						d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
+					/></svg
+				>
+				Sign in with Google
+			</button>
+		</div>
+		<div
+			class="whitesapce-nowrap box-border flex items-center before:relative before:inline-block before:w-1/2 before:border before:border-b before:border-gray-500 before:content-[''] after:relative after:inline-block after:w-1/2 after:border after:border-b after:border-gray-500 after:content-['']"
+		>
+			<span class="px-1">or</span>
+		</div>
+		{#if form?.error}
+			<div class="mb-4 font-bold text-red-500">{form.error}</div>
+		{/if}
+
+		<div class="mb-6">
+			<label for="email" class="mb-2 block font-medium text-gray-900">Email</label>
 			<input
 				type="email"
 				name="email"
-				id="email"
-				placeholder="Enter email here"
+				class="border-border-gray-300 block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900 shadow-md focus:border-accent focus:ring-primary-20"
 				required
-				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
+				autocomplete="email"
+				placeholder="Enter Email"
 			/>
 		</div>
-		<div class="mb-4 flex flex-col">
-			<label for="password" class="mb-2 block text-2xl text-gray-900">Password:</label>
+
+		<div class="mb-6">
+			<label for="password" class="mb-2 block font-medium text-gray-900">Password:</label>
 			<input
 				type="password"
 				name="password"
-				id="password"
-				placeholder="Enter password here"
+				id=""
+				class="border-border-gray-300 block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900 shadow-md focus:border-accent focus:ring-primary-20"
 				required
-				class="rounded-md border-2 border-gray-300 bg-transparent p-1 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
+				autocomplete="current-password"
+				placeholder="Enter Password"
 			/>
 		</div>
 
 		<button
 			type="submit"
 			disabled={loading}
-			class="m-auto w-1/2 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear hover:bg-country-geek-test-accent"
+			class="m-auto mb-4 w-1/2 rounded-md bg-primary p-2 text-xl text-secondary shadow-md shadow-black transition-all duration-200 ease-linear hover:bg-accent"
 			>Sign In</button
 		>
 
-		<a href="/account/signup" class="m-auto text-base text-country-geek-test-accent underline">
-			Don't have an account? Sign Up</a
-		>
+		<div class="text-center text-gray-900">
+			<p>
+				Don't have an account?<a href="/signup" class="ml-2 text-primary underline">Sign Up</a>
+			</p>
+		</div>
 	</form>
-	<!-- <div
-		class="p-1 bg-gradient-to-br from-cyan-500 to-country-geek-light-purple shadow-black shadow-md w-1/4 rounded-xl m-auto"
-	>
-		<form
-			method="POST"
-			use:enhance
-			class="flex flex-col items-center bg-neutral-800 rounded-xl p-2 gap-2 w-full"
-		>
-			<h2 class="text-4xl text-center p-5">Sign In</h2>
-			<div class="flex flex-col rounded-md p-2 w-4/5">
-				<label for="user_email" class="text-2xl">Email:</label>
-				<div class="flex bg-neutral-700 rounded-xl border-2 border-cyan-500/80 p-1 gap-4 w-full">
-					<SigninMailIcon />
-					<input
-						type="email"
-						name="email"
-						id=""
-						class="bg-neutral-700  caret-cyan-500  focus:outline-none  outline-cyan-500  rounded-md text-xl w-full"
-						placeholder="Enter Email Here!"
-					/>
-				</div>
-			</div>
-			<div class="flex flex-col rounded-md p-2">
-				<label for="user_password" class="text-2xl">Password:</label>
-				<div class="flex bg-neutral-700 rounded-xl border-2 border-cyan-500/80 p-1 gap-4 w-full">
-					<SignInPasswordIcon />
-					<input
-						type="password"
-						name="password"
-						class="bg-neutral-700  caret-cyan-500  focus:outline-none  outline-cyan-500  rounded-md text-xl w-full"
-						placeholder="Enter Password Here!"
-					/>
-				</div>
-			</div>
-			<div>
-				<input type="checkbox" name="" id="remember_me_checkbox" />
-				<label for="remember_me_checkbox">Remember Me?</label>
-			</div>
-			<button type="submit" class="text-2xl bg-country-geek-light-purple p-2 rounded-md"
-				>Continue</button
-			>
-		</form>
-	</div> -->
 </section>

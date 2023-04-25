@@ -1,259 +1,173 @@
 <script lang="ts">
-	import type { User, UserAddress } from '$lib/interfaces/user';
-	import { onMount } from 'svelte';
-	import type { PageData } from './$types';
+	import { applyAction, enhance } from '$app/forms';
 
+	// Importing necessary interfaces
+	import type { User } from '$lib/interfaces/user';
+	import type { ActionData, PageData, SubmitFunction } from './$types';
+	import AddressStep from './AddressStep.svelte';
+	import PersonalStep from './PersonalStep.svelte';
+	import ProblemStep from './ProblemStep.svelte';
+	import StepIndicator from './StepIndicator.svelte';
+	import ConfirmStep from './ConfirmStep.svelte';
+
+	// Declaring the page data
 	export let data: PageData;
+	export let form: ActionData;
 
-	let session = data.session;
-	let user: User | null = null;
+	const { session, selectedService, userDetails } = data;
 
-	if (data.userDetails) {
-		user = data.userDetails;
-	}
-	const selectedService = data.selectedService;
+	console.log(selectedService);
 
-	let currentStep: number = 1;
+	// Declaring variables for user information
+	let user: User | null = userDetails ?? null;
 
-	let userAddress: UserAddress | null;
+	// Setting up variables for form
+	let currentStep = 1; // The current step of the form
 
-	let saveAddress: boolean = false;
+	// let formElements: Element[] = [];
 
-	// Booking.
-	let description: string = '';
-	let descDisable: boolean = true;
+	// Setting up variables for user input
+	$: fullname = user?.fullname ?? '';
+	$: email = session?.user.email ?? '';
+	$: phone = user?.phone ?? '';
+	$: streetAddress = user?.userAddress?.[0]?.streetAddress ?? '';
+	$: city = user?.userAddress?.[0]?.city ?? '';
+	$: postcode = user?.userAddress?.[0]?.postcode ?? '';
 
-	// User Details.
-	$: fullname = user?.fullname || '';
-	$: email = session?.user.email || '';
-	$: emailError = '';
-	$: phone = user?.phone || '';
-	let personalDetailsDisabled: boolean = true;
-	let userValid: boolean = false;
-
-	function checkDescription() {
-		if (description !== '') {
-			descDisable = false;
-		} else {
-			descDisable = true;
-		}
-	}
-
-	function checkUserDetails() {
-		const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-		if (email === '') {
-			emailError = 'Email is required!';
-			userValid = false;
-		} else if (!emailRegex.test(email)) {
-			emailError = 'Please enter valid email!';
-			userValid = false;
-		} else {
-			userValid = true;
-		}
-
-		if (fullname !== '' && email !== '' && phone !== '' && userValid) {
-			emailError = '';
-			personalDetailsDisabled = false;
-		} else {
-			personalDetailsDisabled = true;
-		}
-	}
-
-	function checkUserDetailsValid() {
-		const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-		if (!emailRegex.test(email)) {
-			emailError = 'Please enter a valid email!';
-		}
-	}
-
-	if (user?.userAddress) {
-		userAddress = user.userAddress[0];
-	} else {
-		userAddress = null;
-		saveAddress = true;
-	}
-
+	// Function to go to the next step
 	function nextStep() {
 		if (currentStep < 4) {
-			currentStep += 1;
+			// If not at the last step
+			currentStep += 1; // Move to the next step
+			// formElements[currentStep - 1].scrollIntoView({ behavior: 'smooth' });
 		}
 	}
 
+	// Function to go to the previous step
 	function prevStep() {
 		if (currentStep > 1) {
-			currentStep -= 1;
+			// If not at the first step
+			currentStep -= 1; // Move to the previous step
+			// formElements[currentStep - 1].scrollIntoView({ behavior: 'smooth' });
 		}
 	}
+
+	const handleSubmit: SubmitFunction = ({}) => {
+		return async ({ result }) => {
+			if (result.type === 'redirect') {
+				await applyAction(result);
+			} else {
+				if (result.type === 'failure') {
+					if (result.data) {
+						const data = result.data;
+
+						currentStep = data.stepError;
+					}
+
+					await applyAction(result);
+				}
+			}
+		};
+	};
 </script>
 
-<section class="bg-country-geek-blu">
-	<div
-		class="m-auto flex w-1/3 max-w-xl flex-col rounded-lg border-2 border-gray-300 bg-country-geek-white p-4 shadow-md shadow-black"
+<section class="my-auto h-screen min-h-full w-full bg-primary p-1 py-12">
+	<form
+		method="POST"
+		class="flex w-full max-w-sm flex-col items-center rounded-lg border-2 border-gray-300 bg-secondary p-2 text-gray-900 shadow-md shadow-black md:mx-auto md:max-w-md md:p-4 xl:max-w-xl"
+		use:enhance={handleSubmit}
 	>
-		<form action="" class="w-full">
-			<div class="mb-2 flex flex-col p-2 {currentStep === 1 ? '' : 'hidden'}">
-				<input type="text" hidden bind:value={selectedService.categoryName} name="categoryName" />
-				<input type="text" hidden bind:value={selectedService.serviceName} name="serviceName" />
-				<label for="bookingDescription" class="mb-2 block text-2xl font-semibold text-gray-900"
-					>Tell us about your problem:</label
-				>
-				<textarea
-					name="bookingDescription"
-					id="bookingDescription"
-					cols="30"
-					rows="10"
-					class="tedxt-xl mb-2 resize-none rounded-md border-2 border-gray-300 p-2 text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
-					bind:value={description}
-					on:input={checkDescription}
-				/>
+		<StepIndicator {currentStep} />
 
+		<ProblemStep
+			categoryName={selectedService.categoryName ?? form?.data?.categoryName}
+			serviceName={selectedService.serviceName ?? form?.data?.serviceName}
+			description={form?.data?.bookingDescription ?? ''}
+			error={form?.errors?.description ?? ''}
+			{currentStep}
+		/>
+
+		<PersonalStep
+			{currentStep}
+			fullname={fullname ?? form?.data?.fullname}
+			email={email ?? form?.data?.email}
+			phone={phone ?? form?.data?.phone}
+			fullnameError={form?.errors?.fullname ?? ''}
+			emailError={form?.errors?.email ?? ''}
+			phoneError={form?.errors?.phone ?? ''}
+		/>
+
+		<AddressStep
+			{currentStep}
+			streetAddress={streetAddress ?? form?.data?.streetAddress}
+			postcode={postcode ?? form?.data?.postcode}
+			suburb={city ?? form?.data?.city}
+			streetError={form?.errors?.streetAddress ?? ''}
+			postcodeError={form?.errors?.postcode ?? ''}
+			suburbError={form?.errors?.suburb ?? ''}
+		/>
+
+		<ConfirmStep {currentStep} error={form?.errors?.server ?? ''} />
+
+		<div class="flex w-full justify-end gap-10">
+			<button
+				type="button"
+				class="inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-secondary hover:bg-accent focus:outline-none focus:ring-4 focus:ring-primary-20"
+				on:click={prevStep}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					height="48"
+					viewBox="0 96 960 960"
+					width="48"
+					class="mr-2 h-5 w-5 fill-secondary"
+					><path d="M480 896 160 576l320-320 42 42-248 248h526v60H274l248 248-42 42Z" /></svg
+				>Back</button
+			>
+			{#if currentStep < 4}
 				<button
 					type="button"
-					class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
-					disabled={descDisable}
-					on:click={nextStep}>Next</button
+					class="inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-secondary hover:bg-accent focus:outline-none focus:ring-4 focus:ring-primary-20"
+					on:click={nextStep}
+					>Next
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="48"
+						viewBox="0 96 960 960"
+						width="48"
+						class="ml-2 h-5 w-5 fill-secondary"
+						><path d="m480 896-42-43 247-247H160v-60h525L438 299l42-43 320 320-320 320Z" /></svg
+					></button
 				>
-			</div>
-			<div class="mb-2 flex flex-col gap-3 p-2 {currentStep === 2 ? '' : 'hidden'}">
-				<div class="flex flex-col">
-					<label for="fullname" class="mb-2 block text-2xl font-semibold text-gray-900"
-						>Fullname:</label
+			{:else}
+				<button
+					type="submit"
+					class="inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-secondary hover:bg-accent focus:outline-none focus:ring-4 focus:ring-primary-20"
+					>Confirm
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="48"
+						viewBox="0 96 960 960"
+						width="48"
+						class="ml-2 h-5 w-5 fill-secondary"
+						><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z" /></svg
 					>
-					<input
-						type="text"
-						name="fullname"
-						id="fullname"
-						class="rounded-md border-2 border-gray-300 p-2 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
-						required
-						bind:value={fullname}
-						on:input={checkUserDetails}
-					/>
-				</div>
-				<div class="flex flex-col">
-					<label for="email" class="mb-2 block text-2xl font-semibold text-gray-900">Email:</label>
-					<input
-						type="email"
-						name="email"
-						id="email"
-						class="rounded-md border-2 border-gray-300 p-2 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
-						required
-						bind:value={email}
-						on:input={checkUserDetails}
-					/>
-					<p class="p-1 text-xl text-red-500">{emailError}</p>
-				</div>
-				<div class="flex flex-col">
-					<label for="phone" class="mb-2 block text-2xl font-semibold text-gray-900"
-						>Phone Number:</label
-					>
-					<input
-						type="tel"
-						name="phone"
-						id="phone"
-						required
-						class="rounded-md border-2 border-gray-300 p-2 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
-						pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}"
-						bind:value={phone}
-						on:input={checkUserDetails}
-					/>
-				</div>
+				</button>
+			{/if}
+		</div>
 
-				<div class="flex w-full justify-between">
-					<button
-						type="button"
-						class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
-						on:click={prevStep}>Back</button
-					>
-					<button
-						type="button"
-						class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
-						disabled={personalDetailsDisabled}
-						on:click={nextStep}>Next</button
-					>
-				</div>
-			</div>
-
-			<div class="mb-2 flex flex-col p-2 {currentStep === 3 ? '' : 'hidden'}">
-				<div class="flex flex-col">
-					<label for="streetAddress" class="mb-2 block text-2xl font-semibold text-gray-900"
-						>Street Address:</label
-					>
-					<input
-						type="text"
-						name="streetAddress"
-						id="streetAddress"
-						class="rounded-md border-2 border-gray-300 p-2 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
-						required
-						value={userAddress?.streetAddress || ''}
-					/>
-				</div>
-				<div class="flex">
-					<div class="flex flex-col">
-						<label for="city" class="mb-2 block text-2xl font-semibold text-gray-900"
-							>City/Suburb:</label
-						>
-						<input
-							type="text"
-							name="city"
-							id="city"
-							class="rounded-md border-2 border-gray-300 p-2 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
-							required
-							value={userAddress?.city || ''}
-						/>
-					</div>
-					<div class="flex flex-col">
-						<label for="postcode" class="mb-2 block text-2xl font-semibold text-gray-900"
-							>Postcode:</label
-						>
-						<input
-							type="number"
-							name="postcode"
-							id="postcode"
-							class="rounded-md border-2 border-gray-300 p-2 text-xl text-gray-900 focus:border-country-geek-test-accent focus:outline-none"
-							required
-							value={userAddress?.postcode || ''}
-						/>
-					</div>
-				</div>
-				{#if saveAddress}
-					<div class="mb-2 flex">
-						<input type="checkbox" id="saveAddress" name="saveAddress" />
-						<label for="saveAddress">Would you like to save your address?</label>
-					</div>
-				{/if}
-				<div class="flex w-full justify-between">
-					<button
-						type="button"
-						class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
-						on:click={prevStep}>Back</button
-					>
-					<button
-						type="button"
-						class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
-						on:click={nextStep}>Next</button
-					>
-				</div>
-			</div>
-			<div class="mb-2 flex flex-col p-2 {currentStep === 4 ? '' : 'hidden'}">
-				<div class="flex flex-col">
-					<p>We will contact you within 2 buisness days to set a date</p>
-					<p>By confirming the booking you are agreeing to the Terms & Conditions</p>
-					<div class="flex w-full justify-between">
-						<button
-							type="button"
-							class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
-							on:click={prevStep}>Back</button
-						>
-						<button
-							type="submit"
-							class="m-auto w-1/4 rounded-md bg-country-geek-test p-2 text-2xl text-country-geek-white shadow-md shadow-black transition-all duration-200 ease-linear enabled:hover:bg-country-geek-test-accent disabled:opacity-50 disabled:shadow-none"
-							>Confirm</button
-						>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
+		<!-- <div class="mt-10 flex w-full flex-col justify-evenly gap-5">
+			<button
+				class="bg-country-geek-blue text-country-geek-white rounded-lg p-2 disabled:opacity-50"
+				type="button"
+				disabled={currentStep === 1}
+				on:click={prevStep}>Back</button
+			>
+			<button
+				class="bg-country-geek-blue text-country-geek-white rounded-lg p-2"
+				type="button"
+				on:click={nextStep}>Next</button
+			>
+		</div> -->
+	</form>
 </section>

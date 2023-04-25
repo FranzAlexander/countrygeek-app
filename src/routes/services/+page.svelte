@@ -1,8 +1,6 @@
 <script lang="ts">
 	import type { Services } from '$lib/interfaces/service';
 	import type { PageData } from './$types';
-	import { writable } from 'svelte/store';
-	import { setContext } from 'svelte';
 
 	export let data: PageData;
 	let { session, response } = data;
@@ -17,36 +15,36 @@
 </script>
 
 <svelte:head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="description" content="Sign in to an account at Country Geek" />
 	<meta name="keywords" content="Country Geek, sign in, login, account" />
 	<title>Services - Country Geek</title>
 </svelte:head>
 
-<section class="mt-12 flex flex-col gap-10 bg-country-geek-test">
+<section class="flex w-full flex-col gap-5 bg-primary p-2 text-gray-900 md:gap-10">
 	{#each loadedServices as service}
-		<div class="mb-8 flex flex-col gap-8 p-5">
-			<div class="flex rounded-xl bg-country-geek-white p-4">
-				<!-- <img src={service?.category_image_url} alt="" class="h-16 w-20" /> -->
-				<h1 class="text-3xl">{service?.category_name}</h1>
+		<div class="mb-8 flex w-full flex-col md:p-5">
+			<div class="rounded-lg border border-gray-300 bg-secondary py-2 md:text-left">
+				<h1 class="text-center text-2xl font-bold text-gray-900 md:ml-10 md:text-left md:text-3xl">
+					{service?.category_name}
+				</h1>
 			</div>
-			<div class="grid grid-cols-4 gap-8">
+
+			<div class="mt-8 flex flex-col gap-8 md:grid md:grid-cols-3 lg:grid-cols-4">
 				{#each service?.sub_service as sub}
 					<div
-						class="flex flex-col justify-between gap-4 rounded-xl bg-country-geek-white p-4 shadow-md shadow-black transition-all duration-200 ease-in-out hover:shadow-xl hover:shadow-black"
+						class="mx-auto flex max-w-sm flex-col rounded-lg border border-gray-200 bg-secondary p-6 shadow md:justify-between"
 					>
-						<div class="flex flex-col gap-4">
-							<h2 class="text-2xl text-country-geek-test">{sub?.sub_service_name}</h2>
-							<p class="text-gray-900">
-								{sub?.service_description}
-							</p>
+						<div class="flex flex-col md:justify-between">
+							<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+								{sub.sub_service_name}
+							</h5>
+							<p class="md: mb-3 font-normal text-gray-800">{sub.service_description}</p>
 						</div>
 						<a
-							class="rounded-xl bg-country-geek-test p-4 text-center font-bold text-country-geek-white transition-all duration-200 ease-linear hover:bg-country-geek-test-accent"
+							class="inline-flex w-max items-center rounded-lg bg-primary px-3 py-2 text-center text-sm font-medium text-secondary hover:bg-accent focus:outline-none focus:ring-4 focus:ring-primary"
 							href="/services/booking/?c={encodeURIComponent(
 								service?.category_name ?? ''
-							)}&s={encodeURIComponent(sub?.sub_service_name ?? '')}">Book!</a
+							)}&s={encodeURIComponent(sub?.sub_service_name ?? '')}">Book Now!</a
 						>
 					</div>
 				{/each}

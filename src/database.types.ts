@@ -8,6 +8,7 @@ export interface Database {
 					booking_status: number;
 					category_name: string;
 					city: string;
+					country: string;
 					created_at: string | null;
 					date: string | null;
 					description: string;
@@ -18,12 +19,14 @@ export interface Database {
 					postcode: string;
 					profile_id: string | null;
 					service_name: string;
+					state: string;
 					street_address: string;
 				};
 				Insert: {
 					booking_status: number;
 					category_name: string;
 					city: string;
+					country: string;
 					created_at?: string | null;
 					date?: string | null;
 					description: string;
@@ -34,12 +37,14 @@ export interface Database {
 					postcode: string;
 					profile_id?: string | null;
 					service_name: string;
+					state: string;
 					street_address: string;
 				};
 				Update: {
 					booking_status?: number;
 					category_name?: string;
 					city?: string;
+					country?: string;
 					created_at?: string | null;
 					date?: string | null;
 					description?: string;
@@ -50,6 +55,7 @@ export interface Database {
 					postcode?: string;
 					profile_id?: string | null;
 					service_name?: string;
+					state?: string;
 					street_address?: string;
 				};
 			};
@@ -65,6 +71,23 @@ export interface Database {
 				Update: {
 					id?: number;
 					status?: string | null;
+				};
+			};
+			country: {
+				Row: {
+					code: string | null;
+					id: number;
+					name: string | null;
+				};
+				Insert: {
+					code?: string | null;
+					id?: number;
+					name?: string | null;
+				};
+				Update: {
+					code?: string | null;
+					id?: number;
+					name?: string | null;
 				};
 			};
 			payment_status: {
@@ -104,6 +127,23 @@ export interface Database {
 					list_order?: number | null;
 				};
 			};
+			state: {
+				Row: {
+					code: string | null;
+					id: number;
+					name: string | null;
+				};
+				Insert: {
+					code?: string | null;
+					id?: number;
+					name?: string | null;
+				};
+				Update: {
+					code?: string | null;
+					id?: number;
+					name?: string | null;
+				};
+			};
 			sub_service: {
 				Row: {
 					category_id: number | null;
@@ -136,23 +176,29 @@ export interface Database {
 			user_address: {
 				Row: {
 					city: string | null;
+					country_id: number | null;
 					id: number;
 					postcode: string | null;
 					profile_id: string | null;
+					state_id: number | null;
 					street_address: string | null;
 				};
 				Insert: {
 					city?: string | null;
+					country_id?: number | null;
 					id?: number;
 					postcode?: string | null;
 					profile_id?: string | null;
+					state_id?: number | null;
 					street_address?: string | null;
 				};
 				Update: {
 					city?: string | null;
+					country_id?: number | null;
 					id?: number;
 					postcode?: string | null;
 					profile_id?: string | null;
+					state_id?: number | null;
 					street_address?: string | null;
 				};
 			};
