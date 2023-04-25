@@ -1,11 +1,10 @@
 <script lang="ts">
-	import background from '$lib/images/homebackground.jpg';
+	import background from '$lib/images/background.webp';
 </script>
 
-<section class="h-full w-full">
+<section class="h-full w-full " style="background-image: url({background}); ">
 	<div
-		class="w-full lg:min-h-[500px] lg:pl-10 lg:pt-10"
-		style="background-image: url({background});"
+		class="w-full lg:pl-10 lg:pt-10"
 	>
 		<div class="p-2 lg:w-2/3">
 			<h1 class="lg:text-3xl">
