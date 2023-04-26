@@ -205,27 +205,44 @@ export interface Database {
 			user_profile: {
 				Row: {
 					created_at: string | null;
-					email: string | null;
 					fullname: string | null;
 					id: string;
 					phone: string | null;
+					role_id: number;
 					updated_at: string | null;
 				};
 				Insert: {
 					created_at?: string | null;
-					email?: string | null;
 					fullname?: string | null;
 					id: string;
 					phone?: string | null;
+					role_id?: number;
 					updated_at?: string | null;
 				};
 				Update: {
 					created_at?: string | null;
-					email?: string | null;
 					fullname?: string | null;
 					id?: string;
 					phone?: string | null;
+					role_id?: number;
 					updated_at?: string | null;
+				};
+			};
+			user_role: {
+				Row: {
+					id: number;
+					is_admin: boolean | null;
+					role: string | null;
+				};
+				Insert: {
+					id?: number;
+					is_admin?: boolean | null;
+					role?: string | null;
+				};
+				Update: {
+					id?: number;
+					is_admin?: boolean | null;
+					role?: string | null;
 				};
 			};
 		};
