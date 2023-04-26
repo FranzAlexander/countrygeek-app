@@ -35,10 +35,12 @@
 						class="mx-auto flex max-w-sm flex-col rounded-lg border border-gray-200 bg-secondary p-6 shadow md:justify-between"
 					>
 						<div class="flex flex-col md:justify-between">
-							<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+							<h5
+								class="mb-2 border-b border-gray-600 py-2 text-2xl font-bold tracking-tight text-gray-900"
+							>
 								{sub.sub_service_name}
 							</h5>
-							<p class="md: mb-3 font-normal text-gray-800">{sub.service_description}</p>
+							<p class="py-4 font-normal text-gray-800 md:mb-3">{sub.service_description}</p>
 						</div>
 						<a
 							class="inline-flex w-max items-center rounded-lg bg-primary px-3 py-2 text-center text-sm font-medium text-secondary hover:bg-accent focus:outline-none focus:ring-4 focus:ring-primary"

@@ -9,14 +9,13 @@
 	export let form: ActionData;
 	export let data: PageData;
 
-	let session = data.session;
 	let profile: User | null = null;
 	if (data.userProfile) {
 		profile = data.userProfile;
 	}
 
-	let fullname = profile?.fullname || '';
-	let phone: string = profile?.phone || '';
+	$: fullname = profile?.fullname || '';
+	$: phone = profile?.phone || '';
 	let userAddress: UserAddress[];
 	if (profile?.userAddress) {
 		userAddress = profile?.userAddress;

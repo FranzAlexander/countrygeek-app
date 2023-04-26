@@ -22,16 +22,18 @@
 	<title>Sign In - Country Geek</title>
 </svelte:head>
 
-<section class="w-full bg-primary p-1 h-full">
+<section class="h-full w-full bg-primary p-1 pt-10">
 	<form
 		method="POST"
+		action="?/defaultSignIn"
 		use:enhance={handleSubmit}
 		class="flex w-full max-w-sm flex-col rounded-lg border-2 border-gray-300 bg-secondary p-2 text-gray-900 shadow-black md:mx-auto md:p-4 xl:max-w-xl"
 	>
 		<h1 class="mb-6 text-3xl font-bold">Sign In</h1>
 		<div class="flex w-full flex-col">
 			<button
-				type="button"
+				type="submit"
+				formaction="?/facebookSignIn"
 				class="dark:focus:ring-[#3b5998]/55 mb-2 mr-2 inline-flex items-center rounded-lg bg-[#3b5998] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#3b5998]/90 focus:outline-none focus:ring-4 focus:ring-[#3b5998]/50 md:justify-center"
 			>
 				<svg
@@ -51,7 +53,8 @@
 				Sign in with Facebook</button
 			>
 			<button
-				type="button"
+				type="submit"
+				formaction="?/googleSignIn"
 				class="dark:focus:ring-[#4285F4]/55 mb-2 mr-2 inline-flex items-center rounded-lg bg-[#4285F4] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#4285F4]/90 focus:outline-none focus:ring-4 focus:ring-[#4285F4]/50 md:justify-center"
 			>
 				<svg
@@ -86,7 +89,6 @@
 				type="email"
 				name="email"
 				class="border-border-gray-300 block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900 shadow-md focus:border-accent focus:ring-primary-20"
-				required
 				autocomplete="email"
 				placeholder="Enter Email"
 			/>
@@ -99,7 +101,6 @@
 				name="password"
 				id=""
 				class="border-border-gray-300 block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900 shadow-md focus:border-accent focus:ring-primary-20"
-				required
 				autocomplete="current-password"
 				placeholder="Enter Password"
 			/>

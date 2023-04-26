@@ -1,11 +1,3 @@
-async function validateDescription(description: string) {
-	if (description === '') {
-		return { error: 'Description required', next: false };
-	} else {
-		return { error: '', next: true };
-	}
-}
-
 export const validatePersonalDetails = async (
 	fullname: string,
 	email: string,

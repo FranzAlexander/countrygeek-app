@@ -1,6 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import type { User, UserAddress } from '$lib/interfaces/user';
+import type { User } from '$lib/interfaces/user';
 
 export const load = (async ({ locals: { supabase, getSession } }) => {
 	const session = await getSession();

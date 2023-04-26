@@ -71,12 +71,12 @@ export const actions: Actions = {
 			stepError = 1;
 			errors.description = 'This field is required!';
 		}
-		let personalStep = await validatePersonalDetails(fullname, email, phone, errors);
+		const personalStep = await validatePersonalDetails(fullname, email, phone, errors);
 		if (personalStep === 2) {
 			stepError = stepError !== 1 ? 2 : stepError;
 		}
 
-		let addressStep = await validateAddressDetails(streetAddress, postcode, suburb, errors);
+		const addressStep = await validateAddressDetails(streetAddress, postcode, suburb, errors);
 		if (addressStep === 3) {
 			stepError = stepError !== (1 || 2) ? 3 : stepError;
 		}
