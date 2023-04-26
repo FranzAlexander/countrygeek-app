@@ -11,7 +11,7 @@ export const load: PageServerLoad = (async ({ locals: { getSession } }) => {
 
 /** @type {import('./$types').Actions} */
 export const actions: Actions = {
-	default: async ({ request, url, locals: { supabase } }) => {
+	defaultSignIn: async ({ request, url, locals: { supabase } }) => {
 		// Get form data.
 		const formData: FormData = await request.formData();
 
@@ -47,5 +47,35 @@ export const actions: Actions = {
 		}
 
 		throw redirect(302, `${url.origin}/logging-in`);
+	},
+	facebookSignIn: async ({ locals: { supabase } }) => {
+		const { error } = await supabase.auth.signInWithOAuth({ provider: 'facebook' });
+
+		if (error) {
+			if (error instanceof AuthApiError && error.status === 400) {
+				return fail(400, {
+					error: 'User already signed up.'
+				});
+			}
+
+			return fail(500, {
+				error: 'Server error. Try again later.'
+			});
+		}
+	},
+	googleSignIn: async ({ locals: { supabase } }) => {
+		const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+
+		if (error) {
+			if (error instanceof AuthApiError && error.status === 400) {
+				return fail(400, {
+					error: 'User already signed up.'
+				});
+			}
+
+			return fail(500, {
+				error: 'Server error. Try again later.'
+			});
+		}
 	}
 };

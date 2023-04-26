@@ -13,6 +13,42 @@
 					>
 				</a>
 			</div>
+			<div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
+				<!-- Site Map -->
+				<div>
+					<h2 class="mb-6 text-sm font-semibold uppercase text-secondary">Site Map</h2>
+					<ul class="font-medium text-secondary/70">
+						<li class="mb-4">
+							<a href="/services" class="hover:underline">Services</a>
+						</li>
+						<li class="mb-4">
+							<span>Shop (coming soon)</span>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<h2 class="mb-6 text-sm font-semibold uppercase text-secondary">Follow us</h2>
+					<ul class="font-medium text-secondary/70">
+						<li class="mb-4">
+							<a
+								href="https://www.facebook.com/profile.php?id=100088191256907"
+								class="hover:underline">Facebook</a
+							>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<h2 class="mb-6 text-sm font-semibold uppercase text-secondary">Legal</h2>
+					<ul class="font-medium text-secondary/70">
+						<li class="mb-4">
+							<a href="/legal/privacy" class="hover:underline">Privacy Policy</a>
+						</li>
+						<li class="mb-4">
+							<a href="/legal/terms-and-conditions">Terms &amp; Conditions</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </footer>

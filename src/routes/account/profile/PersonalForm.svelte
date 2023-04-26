@@ -21,11 +21,11 @@
 		>
 	</div>
 	<div class="mb-4 w-full border-b-2 border-gray-300 p-1 pb-6">
-		<label for="profileName" class="mb-2 block font-medium">Fullname</label>
+		<label for="fullname" class="mb-2 block font-medium">Fullname</label>
 		<input
 			type="text"
-			name="profileName"
-			id="profileName"
+			name="fullname"
+			id="fullname"
 			class="block w-full rounded-lg border focus:border-accent focus:ring-primary-20"
 			autocomplete="name"
 			placeholder="e.g. John Doe"
@@ -34,11 +34,11 @@
 		/>
 	</div>
 	<div class="mb-4 w-full p-1 pb-2">
-		<label for="profileName" class="mb-2 block font-medium">Phone Number</label>
+		<label for="phone" class="mb-2 block font-medium">Phone Number</label>
 		<input
 			type="tel"
-			name="profilePhone"
-			id="profilePhone"
+			name="phone"
+			id="phone"
 			class="block w-full rounded-lg border focus:border-accent focus:ring-primary-20"
 			value={phone}
 			autocomplete="mobile"
