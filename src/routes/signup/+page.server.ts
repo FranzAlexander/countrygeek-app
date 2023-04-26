@@ -1,6 +1,6 @@
 import type { UserSignUp, NewUser } from '$lib/interfaces/user';
 import { AuthApiError } from '@supabase/supabase-js';
-import { fail, type ActionFailure } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 /**
@@ -38,7 +38,7 @@ export const actions: Actions = {
 	 *
 	 * @public
 	 */
-	async default({ request, url, locals: { supabase } }) {
+	defaultSignUp: async ({ request, url, locals: { supabase } }) => {
 		// Parse the form data
 		const formData: FormData = await request.formData();
 
@@ -96,5 +96,40 @@ export const actions: Actions = {
 		return {
 			message: 'Please check your email for a magic link to log into the website.'
 		};
+	},
+
+	facebookSignUp: async ({ locals: { supabase } }) => {
+		const { error } = await supabase.auth.signInWithOAuth({ provider: 'facebook' });
+		// Handle any errors that occurred during sign-up
+		if (error) {
+			if (error instanceof AuthApiError && error.status === 400) {
+				return fail(400, {
+					error: 'User already signed up.'
+				});
+			}
+
+			return fail(500, {
+				error: 'Server error. Try again later.'
+			});
+		}
+	},
+	googleSignUp: async ({ locals: { supabase } }) => {
+		console.log('Sign Up Google');
+
+		const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+		console.log(error);
+
+		// Handle any errors that occurred during sign-up
+		if (error) {
+			if (error instanceof AuthApiError && error.status === 400) {
+				return fail(400, {
+					error: 'User already signed up.'
+				});
+			}
+
+			return fail(500, {
+				error: 'Server error. Try again later.'
+			});
+		}
 	}
 };
