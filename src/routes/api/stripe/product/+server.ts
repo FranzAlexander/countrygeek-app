@@ -19,7 +19,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZseW5nZWl1ZmxsaGtzdm1pcmxlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY3OTYzNjI2NiwiZXhwIjoxOTk1MjEyMjY2fQ.jkNm6Dy5KxsMC9B447aHiG7lvwFlu4Jm0jWrvgqXzbk'
 	);
 
-	const endpointSecret = 'whsec_WhNzKCBqkxQRrcvISMIKFRUlAuq6vObU';
+	const endpointSecret = 'whsec_G8QrClrh45qVsHK9pwOSroL30iIXhAOk';
 		const body = await request.text();
 
 		if (endpointSecret) {
