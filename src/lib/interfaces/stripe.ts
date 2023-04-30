@@ -24,3 +24,29 @@ export interface StripeProduct {
 	updated: number;
 	url: string | null;
 }
+
+export interface StripePrice {
+	id: string;
+	object: string;
+	active: boolean;
+	automatic_currency_conversion_eligible: boolean;
+	billing_scheme: string;
+	created: number;
+	currency: string;
+	custom_unit_amount: number | null;
+	livemode: boolean;
+	lookup_key: string | null;
+	metadata: Record<string, any> | null;
+	never_used: boolean;
+	nickname: string | null;
+	owning_merchant: string;
+	owning_merchant_info: string;
+	product: string;
+	recurring: Record<string, unknown> | null;
+	tax_behavior: string;
+	tiers_mode: string | null;
+	transform_quantity: Record<string, unknown> | null;
+	type: 'one_time' | 'recurring' | null | undefined;
+	unit_amount: number;
+	unit_amount_decimal: string;
+}
