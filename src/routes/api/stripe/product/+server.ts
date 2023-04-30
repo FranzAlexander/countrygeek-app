@@ -3,6 +3,12 @@ import type { RequestHandler } from './$types';
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from '../../../../database.types';
 import { PUBLIC_SUPABASE_URL } from '$env/static/public';
+import Stripe from 'stripe';
+
+const stripe = new Stripe(
+	'sk_test_51N13N6Bl6RuBTaaaDXMmsEmBsF5OfOlcfg1xYkc4ndTsisZTLU2fJnzG0EogBR2Q0s7ibftgww3dZqZ6dK4fIo8b00WQ8c20pr',
+	{ apiVersion: '2022-11-15' }
+);
 
 const endpointSecret = 'whsec_WhNzKCBqkxQRrcvISMIKFRUlAuq6vObU';
 
@@ -33,8 +39,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		switch (receviedEvent.type) {
 			case 'product.created':
 				const newProduct = receviedEvent.data.object;
-				// supabaseAdmin.from('products');
-				console.log('HI');
+				supabaseAdmin.from('products').insert({ id: newProduct.id });
 				return json(200);
 		}
 	}
