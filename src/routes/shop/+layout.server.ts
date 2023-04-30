@@ -1,15 +1,18 @@
 import type { shopCategories } from '$lib/interfaces/shop';
-import { loadStripe } from '@stripe/stripe-js';
-// const stripe = require('stripe')(
-// 	'sk_test_51N13N6Bl6RuBTaaaDXMmsEmBsF5OfOlcfg1xYkc4ndTsisZTLU2fJnzG0EogBR2Q0s7ibftgww3dZqZ6dK4fIo8b00WQ8c20pr'
-// );
-
 import type { LayoutServerLoad } from '../$types';
+import { createClient } from '@supabase/supabase-js';
+import type { Database } from '../../database.types';
+import { PUBLIC_SUPABASE_URL } from '$env/static/public';
 
 export const load: LayoutServerLoad = async ({ locals: { supabase } }) => {
-	const stripe = await loadStripe(
-		'sk_test_51N13N6Bl6RuBTaaaDXMmsEmBsF5OfOlcfg1xYkc4ndTsisZTLU2fJnzG0EogBR2Q0s7ibftgww3dZqZ6dK4fIo8b00WQ8c20pr'
+	const supabaseAdmin = createClient<Database>(
+		PUBLIC_SUPABASE_URL,
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZseW5nZWl1ZmxsaGtzdm1pcmxlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY3OTYzNjI2NiwiZXhwIjoxOTk1MjEyMjY2fQ.jkNm6Dy5KxsMC9B447aHiG7lvwFlu4Jm0jWrvgqXzbk'
 	);
+
+	const { data } = await supabaseAdmin.from('shop_categories').select('*');
+
+	console.log(data);
 
 	// const product = await stripe.products.retrieve('prod_NnkL02Sh2URiRr');
 	// console.log(product);
