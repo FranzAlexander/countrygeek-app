@@ -40,7 +40,17 @@ export const POST: RequestHandler = async ({ request }) => {
 		switch (receviedEvent.type) {
 			case 'product.created':
 				const newProduct = receviedEvent.data.object as StripeProduct;
-				supabaseAdmin.from('products').insert({ id: newProduct.id });
+				 const { data, error } = await supabaseAdmin
+						.from('products')
+						.insert([
+							{
+								id: newProduct.id,
+								active: newProduct.active,
+								name: newProduct.name,
+								description: newProduct.description,
+								metadata: newProduct.metadata
+							}
+						]);
 				return json(200);
 		}
 	}
