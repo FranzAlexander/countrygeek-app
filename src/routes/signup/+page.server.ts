@@ -1,6 +1,6 @@
 import type { UserSignUp, NewUser } from '$lib/interfaces/user';
 import { AuthApiError } from '@supabase/supabase-js';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 /**
@@ -101,7 +101,13 @@ export const actions: Actions = {
 	},
 
 	facebookSignUp: async ({ locals: { supabase } }) => {
-		const { error } = await supabase.auth.signInWithOAuth({ provider: 'facebook' });
+		const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'facebook' });
+
+		if (data.provider) {
+			if (data.url) {
+				throw redirect(303, data.url);
+			}
+		}
 		// Handle any errors that occurred during sign-up
 		if (error) {
 			if (error instanceof AuthApiError && error.status === 400) {
