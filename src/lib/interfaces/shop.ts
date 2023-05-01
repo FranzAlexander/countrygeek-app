@@ -1,7 +1,7 @@
 import type Stripe from 'stripe';
 
 export interface shopCategories {
-	id: string;
+	id: number;
 	name: string | null;
 	list_order: number | null;
 }
@@ -9,7 +9,8 @@ export interface shopCategories {
 export interface displayItem {
 	name: string | null;
 	description: string | null;
-	amount: string | null;
+	unit_amount: string | null;
+	images: string | null;
 }
 
 export interface Product {

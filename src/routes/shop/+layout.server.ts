@@ -19,6 +19,9 @@ export const load: LayoutServerLoad = async ({ locals: { supabase } }) => {
 	// const response = await supabase.from('shop_categories').select('*');
 
 	let categories: shopCategories[] = [];
+	if (data) {
+		categories = data;
+	}
 
 	// if (response.data) {
 	// 	for (let i = 0; i < response.data.length; i += 1) {
