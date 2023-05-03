@@ -1,9 +1,15 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
-import { AuthApiError } from '@supabase/supabase-js';
+import { AuthApiError, type Provider } from '@supabase/supabase-js';
 import type { PageServerLoad } from './$types';
 
+const AUTH_PROVIDERS = ['google', 'facebook'];
+
 export const load: PageServerLoad = (async ({ locals: { getSession } }) => {
+	const session = await getSession();
+	if (session) {
+		throw redirect(300, '/');
+	}
 	return {
 		session: getSession()
 	};
@@ -11,7 +17,22 @@ export const load: PageServerLoad = (async ({ locals: { getSession } }) => {
 
 /** @type {import('./$types').Actions} */
 export const actions: Actions = {
-	defaultSignIn: async ({ request, url, locals: { supabase } }) => {
+	signin: async ({ request, url, locals: { supabase } }) => {
+		const provider = url.searchParams.get('provider') as Provider;
+
+		if (provider) {
+			if (!AUTH_PROVIDERS.includes(provider)) {
+				return fail(400, { error: 'Provider not supported!' });
+			}
+			const { data, error } = await supabase.auth.signInWithOAuth({ provider: provider });
+
+			if (error) {
+				return fail(400, { error: 'Something went wrong!' });
+			}
+
+			throw redirect(303, data.url);
+		}
+
 		// Get form data.
 		const formData: FormData = await request.formData();
 
@@ -47,35 +68,5 @@ export const actions: Actions = {
 		}
 
 		throw redirect(302, `${url.origin}/logging-in`);
-	},
-	facebookSignIn: async ({ locals: { supabase } }) => {
-		const { error } = await supabase.auth.signInWithOAuth({ provider: 'facebook' });
-
-		if (error) {
-			if (error instanceof AuthApiError && error.status === 400) {
-				return fail(400, {
-					error: 'User already signed up.'
-				});
-			}
-
-			return fail(500, {
-				error: 'Server error. Try again later.'
-			});
-		}
-	},
-	googleSignIn: async ({ locals: { supabase } }) => {
-		const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
-
-		if (error) {
-			if (error instanceof AuthApiError && error.status === 400) {
-				return fail(400, {
-					error: 'User already signed up.'
-				});
-			}
-
-			return fail(500, {
-				error: 'Server error. Try again later.'
-			});
-		}
 	}
 };

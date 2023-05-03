@@ -1,50 +1,46 @@
-import type { displayItem } from '$lib/interfaces/shop';
+import type { DisplayItem } from '$lib/interfaces/shop';
+import { fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url, locals: { supabase } }) => {
-	const name = url.pathname.split('/').at(-1)?.replaceAll('-', ' ');
-	const { data: item } = await supabase
-		.from('products')
-		.select('name, description, images, prices(unit_amount)')
-		.eq('metadata->>Category', name)
-		.as<itemDisplay>();
-	console.log(item);
+	const category = url.pathname.split('/').at(-1)?.replaceAll('-', ' ');
 
-	let displayItem: displayItem;
-
-	if (item) {
-		let image = '';
-		if (item?.images[0]) {
-			image = item[0].images[0];
-		}
-		displayItem = {
-			name: item[0].name,
-			description: item[0].description,
-			images: image,
-			unit_amount: item[0].prices.unit_amount
-		};
+	if (!category) {
+		return fail(404);
 	}
 
-	// const { data: items } = await supabase
-	// 	.from('shop_categories')
-	// 	.select('shop_items(name, description, amount)')
-	// 	.eq('name', name)
-	// 	.range(0, 9);
+	const { data: products, error } = await supabase
+		.from('products')
+		.select('name, description, images, prices(unit_amount)')
+		.eq('metadata->>Category', category);
 
-	// let displayItems: displayItem[] = [];
+	if (error) {
+		return fail(404);
+	}
 
-	// if (items) {
-	// 	for (let i = 0; i < items.length; i += 1) {
-	// 		console.log(items[i]);
-	// 	}
-	// }
+	const displayItems: DisplayItem[] =
+		products?.map((product) => {
+			const image = product.images?.[0] ?? '';
+
+			let unit_amount: number | null = null;
+			if (Array.isArray(product.prices)) {
+				const [price] = product.prices;
+				if (price?.unit_amount) {
+					unit_amount = price.unit_amount;
+				}
+			} else if (product.prices?.unit_amount) {
+				unit_amount = product.prices.unit_amount;
+			}
+
+			return {
+				name: product.name ?? null,
+				description: product.description ?? null,
+				image: image ?? '',
+				unit_amount: unit_amount! / 100 ?? null
+			};
+		}) ?? [];
+
+	console.log(displayItems);
+
+	return { displayItems };
 };
-
-
-
-
-
-
-
-
-

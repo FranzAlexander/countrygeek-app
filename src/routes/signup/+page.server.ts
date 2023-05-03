@@ -1,7 +1,8 @@
 import type { UserSignUp, NewUser } from '$lib/interfaces/user';
-import { AuthApiError } from '@supabase/supabase-js';
+import { AuthApiError, type Provider } from '@supabase/supabase-js';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
+const AUTH_PROVIDERS = ['google', 'facebook'];
 
 /**
  * An object containing a set of actions for handling user sign-up.
@@ -38,7 +39,21 @@ export const actions: Actions = {
 	 *
 	 * @public
 	 */
-	defaultSignUp: async ({ request, url, locals: { supabase } }) => {
+	signup: async ({ request, url, locals: { supabase } }) => {
+		const provider = url.searchParams.get('provider') as Provider;
+
+		if (provider) {
+			if (!AUTH_PROVIDERS.includes(provider)) {
+				return fail(400, { error: 'Provider not supported!' });
+			}
+			const { data, error } = await supabase.auth.signInWithOAuth({ provider: provider });
+
+			if (error) {
+				return fail(400, { error: 'Something went wrong!' });
+			}
+
+			throw redirect(303, data.url);
+		}
 		// Parse the form data
 		const formData: FormData = await request.formData();
 
@@ -77,8 +92,6 @@ export const actions: Actions = {
 			}
 		});
 
-		console.log(error);
-
 		// Handle any errors that occurred during sign-up
 		if (error) {
 			if (error instanceof AuthApiError && error.status === 400) {
@@ -98,46 +111,5 @@ export const actions: Actions = {
 		return {
 			message: 'Please check your email for a magic link to log into the website.'
 		};
-	},
-
-	facebookSignUp: async ({ locals: { supabase } }) => {
-		const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'facebook' });
-
-		if (data.provider) {
-			if (data.url) {
-				throw redirect(303, data.url);
-			}
-		}
-		// Handle any errors that occurred during sign-up
-		if (error) {
-			if (error instanceof AuthApiError && error.status === 400) {
-				return fail(400, {
-					error: 'User already signed up.'
-				});
-			}
-
-			return fail(500, {
-				error: 'Server error. Try again later.'
-			});
-		}
-	},
-	googleSignUp: async ({ locals: { supabase } }) => {
-		console.log('Sign Up Google');
-
-		const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
-		console.log(error);
-
-		// Handle any errors that occurred during sign-up
-		if (error) {
-			if (error instanceof AuthApiError && error.status === 400) {
-				return fail(400, {
-					error: 'User already signed up.'
-				});
-			}
-
-			return fail(500, {
-				error: 'Server error. Try again later.'
-			});
-		}
 	}
 };

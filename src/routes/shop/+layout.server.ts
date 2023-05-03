@@ -12,42 +12,10 @@ export const load: LayoutServerLoad = async ({ locals: { supabase } }) => {
 
 	const { data } = await supabaseAdmin.from('shop_categories').select('*');
 
-	console.log(data);
-
-	// const product = await stripe.products.retrieve('prod_NnkL02Sh2URiRr');
-	// console.log(product);
-	// const response = await supabase.from('shop_categories').select('*');
-
 	let categories: shopCategories[] = [];
 	if (data) {
 		categories = data;
 	}
 
-	// if (response.data) {
-	// 	for (let i = 0; i < response.data.length; i += 1) {
-	// 		categories[i] = {
-	// 			id: response.data[i].id,
-	// 			name: response.data[i].name,
-	// 			list_order: response.data[0].list_order
-	// 		};
-	// 	}
-	// }
-	// try {
-	// 	const response = await client.catalogApi.searchCatalogItems({});
-	// 	if (response.result.items) {
-	// 		console.log(response.result.items[0]?.itemData?.variations);
-	// 	}
-	// } catch (error) {
-	// 	console.log(error);
-	// }
-
 	return { categories: categories };
-	// try {
-	// 	const response = await client.catalogApi.listCatalog('', 'category');
-	// 	if (response.result.objects) {
-	// 		console.log(response.result.objects);
-	// 	}
-	// } catch (error) {
-	// 	console.log(error);
-	// }
 };

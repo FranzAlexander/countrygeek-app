@@ -6,11 +6,11 @@ export interface shopCategories {
 	list_order: number | null;
 }
 
-export interface displayItem {
+export interface DisplayItem {
 	name: string | null;
 	description: string | null;
-	unit_amount: string | null;
-	images: string | null;
+	unit_amount: number | null;
+	image: string | null;
 }
 
 export interface Product {

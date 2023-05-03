@@ -16,7 +16,7 @@
 	}
 </script>
 
-<nav class="w-full bg-secondary">
+<nav class="w-full bg-secondary border-b border-gray-300">
 	<div class="mx-auto max-w-screen-2xl px-4">
 		<ul class="mr-6 mt-0 flex flex-row space-x-8 font-medium">
 			<li class="relative">
