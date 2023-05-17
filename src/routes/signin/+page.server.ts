@@ -1,7 +1,9 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
-import { AuthApiError } from '@supabase/supabase-js';
+import { AuthApiError, type Provider } from '@supabase/supabase-js';
 import type { PageServerLoad } from './$types';
+
+const OAUTH_PROVIDERS = ['google', 'facebook'];
 
 export const load: PageServerLoad = (async ({ locals: { getSession } }) => {
 	return {
@@ -11,7 +13,23 @@ export const load: PageServerLoad = (async ({ locals: { getSession } }) => {
 
 /** @type {import('./$types').Actions} */
 export const actions: Actions = {
-	defaultSignIn: async ({ request, url, locals: { supabase } }) => {
+	login: async ({ request, url, locals: { supabase } }) => {
+		const provider = url.searchParams.get('provider') as Provider;
+
+		if (provider) {
+			if (!OAUTH_PROVIDERS.includes(provider)) {
+				return fail(400, { message: 'Provider not supported!' });
+			}
+			const { data, error } = await supabase.auth.signInWithOAuth({
+				provider: provider
+			});
+
+			if (error) {
+				return fail(400, { message: 'Something went wrong' });
+			}
+			throw redirect(303, data.url);
+		}
+
 		// Get form data.
 		const formData: FormData = await request.formData();
 

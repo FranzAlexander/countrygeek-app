@@ -1,14 +1,11 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from '../../database.types';
 import { PUBLIC_SUPABASE_URL } from '$env/static/public';
+import { PRIVATE_SUPABASE_KEY } from '$env/static/private';
 import type Stripe from 'stripe';
 import type { Price, Product } from '$lib/interfaces/shop';
 
-const supabaseAdmin = createClient<Database>(
-	PUBLIC_SUPABASE_URL || '',
-	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZseW5nZWl1ZmxsaGtzdm1pcmxlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY3OTYzNjI2NiwiZXhwIjoxOTk1MjEyMjY2fQ.jkNm6Dy5KxsMC9B447aHiG7lvwFlu4Jm0jWrvgqXzbk' ||
-		''
-);
+const supabaseAdmin = createClient<Database>(PUBLIC_SUPABASE_URL || '', PRIVATE_SUPABASE_KEY || '');
 
 export const upsertProduct = async (product: Stripe.Product) => {
 	const data: Product = {

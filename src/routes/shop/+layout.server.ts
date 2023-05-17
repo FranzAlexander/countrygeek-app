@@ -39,12 +39,4 @@ export const load: LayoutServerLoad = async ({ locals: { supabase } }) => {
 	// }
 
 	return { categories: categories };
-	// try {
-	// 	const response = await client.catalogApi.listCatalog('', 'category');
-	// 	if (response.result.objects) {
-	// 		console.log(response.result.objects);
-	// 	}
-	// } catch (error) {
-	// 	console.log(error);
-	// }
 };

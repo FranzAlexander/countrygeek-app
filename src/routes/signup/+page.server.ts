@@ -38,7 +38,7 @@ export const actions: Actions = {
 	 *
 	 * @public
 	 */
-	defaultSignUp: async ({ request, url, locals: { supabase } }) => {
+	login: async ({ request, url, locals: { supabase } }) => {
 		// Parse the form data
 		const formData: FormData = await request.formData();
 
@@ -76,8 +76,6 @@ export const actions: Actions = {
 				}
 			}
 		});
-
-		console.log(error);
 
 		// Handle any errors that occurred during sign-up
 		if (error) {
