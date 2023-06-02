@@ -1,36 +1,15 @@
-import type Stripe from 'stripe';
-
-export interface shopCategories {
-	id: string;
-	name: string | null;
-	list_order: number | null;
+export interface ShopCategory {
+	id: number;
+	name: string;
+	icon: string | null;
 }
 
-export interface displayItem {
-	name: string | null;
-	description: string | null;
-	amount: string | null;
+export interface SubCategory {
+	id: number;
+	name: string;
+	icon: string | null;
 }
 
-export interface Product {
-	id: string;
-	active?: boolean;
-	name?: string;
-	description?: string;
-	images?: string[];
-	metadata?: Stripe.Metadata;
-}
-
-export interface Price {
-	id: string;
-	product_id: string;
-	active?: boolean;
-	description?: string;
-	unit_amount?: number;
-	currency?: string;
-	type?: Stripe.Price.Type;
-	interval?: Stripe.Price.Recurring.Interval;
-	interval_count?: number;
-	trial_period_days?: number | null;
-	metadata: Stripe.Metadata;
+export interface ShopCategoryWithSub extends ShopCategory {
+	subCategories: SubCategory[];
 }
