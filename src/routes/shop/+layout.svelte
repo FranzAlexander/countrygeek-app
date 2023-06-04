@@ -82,13 +82,13 @@
 						</div>
 					</div>
 				</li>
-				<li>
+				<!-- <li>
 					<h2
 						class="flex w-full items-center justify-between border-b border-gray-100 py-2 pl-3 pr-4 font-medium text-gray-900 hover:bg-gray-50 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-blue-500 md:w-auto md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-600 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
 					>
 						Custom Builds
 					</h2>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 	</div>

@@ -1,6 +1,7 @@
+import type { ShopCategoryWithSub } from '$lib/interfaces/shop';
 import type { PageLoad } from './$types';
 
-export const load = (async ({ fetch, params }) => {
+export const load = (async ({ parent, fetch, params }) => {
 	const categoryName = decodeURIComponent(params.slug.replaceAll(/-/g, ' '));
 
 	const response = await fetch('/api/product', {
@@ -13,5 +14,15 @@ export const load = (async ({ fetch, params }) => {
 
 	const products = await response.json();
 
-	return { products: products };
+	const subCategories: ShopCategoryWithSub[] = (await parent()).categories.filter(function (
+		el: ShopCategoryWithSub
+	) {
+		return categoryName.indexOf(el.name) >= 0;
+	});
+
+	return {
+		products: products,
+		categoryName: categoryName,
+		subCategories: subCategories[0].subCategories
+	};
 }) satisfies PageLoad;

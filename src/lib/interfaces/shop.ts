@@ -27,3 +27,11 @@ export interface Product {
 	thumbnail: string;
 	sku: string;
 }
+
+export interface ProductDisplay {
+	name: string;
+	price: string;
+	thumbnail: string;
+	rating: string;
+	model: string;
+}
