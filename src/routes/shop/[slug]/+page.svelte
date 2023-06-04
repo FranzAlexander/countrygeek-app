@@ -1,18 +1,13 @@
 <script lang="ts">
-	import ProductCard from '$lib/components/shop/ProductCard.svelte';
+	import ProductCard from '../../../lib/components/shop/ProductCard.svelte';
+	import type { PageData } from './$types';
 
-	export let data;
+	export let data: PageData;
+	const products = data.products;
 </script>
 
-<section>
-	<h2 class="mb-4 mt-2 text-xl font-bold dark:text-white sm:text-3xl">
-		{data.categoryName}
-	</h2>
-
-	<div class="w-full border-b border-t border-gray-200 p-2">s</div>
-	<!-- <div>
-		{#each data.products as product}
-			<ProductCard name={product.name} image={product.image[0]} price={100} />
-		{/each}
-	</div> -->
-</section>
+<div class="grid grid-cols-4">
+	{#each products as product}
+		<ProductCard name={product.name} image={product.thumbnail} price={product.price / 100} />
+	{/each}
+</div>

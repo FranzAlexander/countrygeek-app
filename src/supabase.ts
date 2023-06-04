@@ -17,23 +17,22 @@ export interface Database {
 					name?: string;
 				};
 			};
-			category_sub_category: {
+			'category_subcategory ': {
 				Row: {
 					category_id: number;
-					sub_category_id: number;
+					product_id: number;
 				};
 				Insert: {
 					category_id?: number;
-					sub_category_id: number;
+					product_id: number;
 				};
 				Update: {
 					category_id?: number;
-					sub_category_id?: number;
+					product_id?: number;
 				};
 			};
 			product: {
 				Row: {
-					amount: number | null;
 					brand: string | null;
 					category_id: number | null;
 					description: string | null;
@@ -43,14 +42,14 @@ export interface Database {
 					model: string | null;
 					name: string;
 					price: number;
-					sku: string;
+					sku: string | null;
 					status: string | null;
 					stripe_product_id: string | null;
 					sub_category_id: number | null;
+					thumbnail: string | null;
 					updated_at: string;
 				};
 				Insert: {
-					amount?: number | null;
 					brand?: string | null;
 					category_id?: number | null;
 					description?: string | null;
@@ -60,14 +59,14 @@ export interface Database {
 					model?: string | null;
 					name: string;
 					price: number;
-					sku: string;
+					sku?: string | null;
 					status?: string | null;
 					stripe_product_id?: string | null;
 					sub_category_id?: number | null;
+					thumbnail?: string | null;
 					updated_at?: string;
 				};
 				Update: {
-					amount?: number | null;
 					brand?: string | null;
 					category_id?: number | null;
 					description?: string | null;
@@ -77,10 +76,11 @@ export interface Database {
 					model?: string | null;
 					name?: string;
 					price?: number;
-					sku?: string;
+					sku?: string | null;
 					status?: string | null;
 					stripe_product_id?: string | null;
 					sub_category_id?: number | null;
+					thumbnail?: string | null;
 					updated_at?: string;
 				};
 			};
@@ -132,6 +132,7 @@ export interface Database {
 			};
 			product_supplier: {
 				Row: {
+					amount: number | null;
 					id: number;
 					lead_time: number | null;
 					product_code: string | null;
@@ -140,6 +141,7 @@ export interface Database {
 					supplier_id: number | null;
 				};
 				Insert: {
+					amount?: number | null;
 					id?: number;
 					lead_time?: number | null;
 					product_code?: string | null;
@@ -148,6 +150,7 @@ export interface Database {
 					supplier_id?: number | null;
 				};
 				Update: {
+					amount?: number | null;
 					id?: number;
 					lead_time?: number | null;
 					product_code?: string | null;
@@ -156,19 +159,39 @@ export interface Database {
 					supplier_id?: number | null;
 				};
 			};
+			promotion: {
+				Row: {
+					discount: number | null;
+					end_date: string | null;
+					id: number;
+					name: string | null;
+					start_date: string | null;
+				};
+				Insert: {
+					discount?: number | null;
+					end_date?: string | null;
+					id?: number;
+					name?: string | null;
+					start_date?: string | null;
+				};
+				Update: {
+					discount?: number | null;
+					end_date?: string | null;
+					id?: number;
+					name?: string | null;
+					start_date?: string | null;
+				};
+			};
 			sub_category: {
 				Row: {
-					category_id: number | null;
 					id: number;
 					name: string;
 				};
 				Insert: {
-					category_id?: number | null;
 					id?: number;
 					name: string;
 				};
 				Update: {
-					category_id?: number | null;
 					id?: number;
 					name?: string;
 				};

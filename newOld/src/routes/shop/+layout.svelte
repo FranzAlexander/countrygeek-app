@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { ShopCategoryWithSub } from '../../lib/interfaces/shop';
-	import type { LayoutData } from './$types';
+	import type { ShopCategory, ShopCategoryWithSub } from '$lib/interfaces/shop';
+	import type { LayoutServerData } from './$types';
 
-	export let data: LayoutData;
+	export let data: LayoutServerData;
 
 	const categories: ShopCategoryWithSub[] = data?.categories ?? [];
 

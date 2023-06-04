@@ -10,7 +10,7 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 		supabaseUrl: PUBLIC_SUPABASE_URL,
 		supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
 		event: { fetch },
-		serverSession: data.session
+		serverSession: data?.session
 	});
 
 	const {
