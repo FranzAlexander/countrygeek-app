@@ -1,27 +1,35 @@
-<script lang="ts">
-	export let name: string;
-	export let image: string;
-	export let price: string;
+<!-- <script lang="ts">
+	import type { ProductDisplay } from '$lib/interfaces/shop';
+
+	export let productDisplay: ProductDisplay;
 	export let categoryName: string;
 </script>
 
+
 <div
-	class="relative max-w-sm overflow-hidden rounded-lg border border-gray-300 bg-gray-200 shadow-lg hover:shadow-blue-400"
+ class="relative max-w-sm overflow-hidden rounded-lg border border-gray-300 bg-gray-200 shadow-lg hover:shadow-blue-400"
 >
 	<a
 		href="/shop/{encodeURIComponent(categoryName.replace(/\s+/g, '-'))}/{encodeURIComponent(
-			name.replace(/\s+/g, '-')
+			productDisplay.name.replace(/\s+/g, '-').concat('-').concat(productDisplay.sku)
 		)}"
 		class="overflow-hidden"
 	>
-		<img src={image} alt={name} class="relative h-64 w-full object-contain" />
+		<img
+			src={productDisplay.thumbnail}
+			alt={productDisplay.name}
+			class="relative h-64 w-full object-contain"
+		/>
 	</a>
 	<div class="rounded-lg bg-gray-400 px-6 py-4">
-		<h2 class="mb-4 text-lg font-bold text-gray-900">{name}</h2>
+		<h2 class="mb-4 text-lg font-bold text-gray-900">{productDisplay.name}</h2>
+		<p class="mb-2 w-min rounded-full bg-gray-600 p-1 text-xs text-gray-900">
+			{productDisplay.model}
+		</p>
 		<div class="flex justify-between">
 			<span
 				class="mb-2 mr-2 inline-block rounded-full bg-green-200 px-3 py-1 text-sm font-semibold text-gray-700"
-				>${price}</span
+				>${productDisplay.price}</span
 			>
 			<button
 				type="button"
@@ -30,4 +38,30 @@
 			>
 		</div>
 	</div>
+</div>  -->
+
+<script lang="ts">
+    import type { ProductDisplay } from '$lib/interfaces/shop';
+
+    export let productDisplay: ProductDisplay;
+    export let categoryName: string;
+</script>
+
+<div class="relative max-w-sm overflow-hidden rounded-lg shadow-lg">
+    <a href="/shop/{encodeURIComponent(categoryName.replace(/\s+/g, '-'))}/{encodeURIComponent(
+        productDisplay.name.replace(/\s+/g, '-').concat('-').concat(productDisplay.sku)
+    )}" class="overflow-hidden">
+        <img src={productDisplay.thumbnail} alt={productDisplay.name} class="h-64 w-full object-cover rounded-t-lg" />
+    </a>
+    <div class="bg-gradient-to-b from-gray-300 to-gray-400 p-6 rounded-b-lg mt-2">
+        <h2 class="text-xl font-semibold text-gray-900">{productDisplay.name}</h2>
+        <p class="text-sm text-gray-700">{productDisplay.model}</p>
+        <div class="flex justify-between items-center mt-4">
+            <span class="text-lg font-medium text-green-600">${productDisplay.price}</span>
+            <button type="button" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors">Add to Cart</button>
+        </div>
+    </div>
 </div>
+
+
+

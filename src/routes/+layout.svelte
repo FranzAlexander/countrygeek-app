@@ -2,7 +2,7 @@
 	import '../app.css';
 </script>
 
-<header>
+<!-- <header>
 	<nav class="flex w-full justify-between border-gray-200 px-4 py-2.5 dark:bg-gray-800 lg:px-6">
 		<a href="/" class="flex items-center">
 			<img src="/images/countrygeeklogo.png" class="mr-3 h-12" alt="Country Geek logo" />
@@ -28,6 +28,6 @@
 			</ul>
 		</div>
 	</nav>
-</header>
+</header> -->
 
 <slot />

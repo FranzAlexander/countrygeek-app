@@ -20,75 +20,75 @@ export interface Database {
 			'category_subcategory ': {
 				Row: {
 					category_id: number;
-					product_id: number;
+					sub_category_id: number;
 				};
 				Insert: {
 					category_id?: number;
-					product_id: number;
+					sub_category_id: number;
 				};
 				Update: {
 					category_id?: number;
-					product_id?: number;
+					sub_category_id?: number;
 				};
 			};
 			product: {
 				Row: {
 					brand: string | null;
 					category_id: number | null;
+					created_at: string | null;
 					description: string | null;
-					id: number;
 					images: string[] | null;
-					inserted_at: string;
 					model: string | null;
-					name: string;
-					price: number;
-					sku: string | null;
+					name: string | null;
+					price: number | null;
+					sku: string;
 					status: string | null;
 					stripe_product_id: string | null;
 					sub_category_id: number | null;
 					thumbnail: string | null;
-					updated_at: string;
+					updated_at: string | null;
+					warranty: string | null;
 				};
 				Insert: {
 					brand?: string | null;
 					category_id?: number | null;
+					created_at?: string | null;
 					description?: string | null;
-					id?: number;
 					images?: string[] | null;
-					inserted_at?: string;
 					model?: string | null;
-					name: string;
-					price: number;
-					sku?: string | null;
+					name?: string | null;
+					price?: number | null;
+					sku: string;
 					status?: string | null;
 					stripe_product_id?: string | null;
 					sub_category_id?: number | null;
 					thumbnail?: string | null;
-					updated_at?: string;
+					updated_at?: string | null;
+					warranty?: string | null;
 				};
 				Update: {
 					brand?: string | null;
 					category_id?: number | null;
+					created_at?: string | null;
 					description?: string | null;
-					id?: number;
 					images?: string[] | null;
-					inserted_at?: string;
 					model?: string | null;
-					name?: string;
-					price?: number;
-					sku?: string | null;
+					name?: string | null;
+					price?: number | null;
+					sku?: string;
 					status?: string | null;
 					stripe_product_id?: string | null;
 					sub_category_id?: number | null;
 					thumbnail?: string | null;
-					updated_at?: string;
+					updated_at?: string | null;
+					warranty?: string | null;
 				};
 			};
 			product_analytics: {
 				Row: {
 					analytics_date: string;
 					id: number;
-					product_id: number | null;
+					product_id: string;
 					purchases: number | null;
 					rating: number | null;
 					total_clicks: number | null;
@@ -97,7 +97,7 @@ export interface Database {
 				Insert: {
 					analytics_date?: string;
 					id?: number;
-					product_id?: number | null;
+					product_id: string;
 					purchases?: number | null;
 					rating?: number | null;
 					total_clicks?: number | null;
@@ -106,7 +106,7 @@ export interface Database {
 				Update: {
 					analytics_date?: string;
 					id?: number;
-					product_id?: number | null;
+					product_id?: string;
 					purchases?: number | null;
 					rating?: number | null;
 					total_clicks?: number | null;
@@ -116,17 +116,17 @@ export interface Database {
 			product_spec: {
 				Row: {
 					id: number;
-					product_id: number | null;
+					product_id: string;
 					specs: Json | null;
 				};
 				Insert: {
 					id?: number;
-					product_id?: number | null;
+					product_id: string;
 					specs?: Json | null;
 				};
 				Update: {
 					id?: number;
-					product_id?: number | null;
+					product_id?: string;
 					specs?: Json | null;
 				};
 			};
@@ -135,28 +135,28 @@ export interface Database {
 					amount: number | null;
 					id: number;
 					lead_time: number | null;
-					product_code: string | null;
-					product_id: number | null;
+					product_code: string;
+					product_id: string | null;
 					purchase_price: number | null;
-					supplier_id: number | null;
+					supplier_id: number;
 				};
 				Insert: {
 					amount?: number | null;
 					id?: number;
 					lead_time?: number | null;
-					product_code?: string | null;
-					product_id?: number | null;
+					product_code: string;
+					product_id?: string | null;
 					purchase_price?: number | null;
-					supplier_id?: number | null;
+					supplier_id: number;
 				};
 				Update: {
 					amount?: number | null;
 					id?: number;
 					lead_time?: number | null;
-					product_code?: string | null;
-					product_id?: number | null;
+					product_code?: string;
+					product_id?: string | null;
 					purchase_price?: number | null;
-					supplier_id?: number | null;
+					supplier_id?: number;
 				};
 			};
 			promotion: {
@@ -165,6 +165,7 @@ export interface Database {
 					end_date: string | null;
 					id: number;
 					name: string | null;
+					product_id: string;
 					start_date: string | null;
 				};
 				Insert: {
@@ -172,6 +173,7 @@ export interface Database {
 					end_date?: string | null;
 					id?: number;
 					name?: string | null;
+					product_id: string;
 					start_date?: string | null;
 				};
 				Update: {
@@ -179,6 +181,7 @@ export interface Database {
 					end_date?: string | null;
 					id?: number;
 					name?: string | null;
+					product_id?: string;
 					start_date?: string | null;
 				};
 			};

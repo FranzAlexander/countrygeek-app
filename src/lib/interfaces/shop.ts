@@ -29,6 +29,7 @@ export interface Product {
 }
 
 export interface ProductDisplay {
+	sku: string;
 	name: string;
 	price: string;
 	thumbnail: string;

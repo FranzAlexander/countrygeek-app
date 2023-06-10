@@ -2,7 +2,7 @@ import type { ShopCategoryWithSub } from '$lib/interfaces/shop';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ parent, fetch, params }) => {
-	const categoryName = decodeURIComponent(params.slug.replaceAll(/-/g, ' '));
+	const categoryName = decodeURIComponent(params.category.replaceAll(/-/g, ' '));
 
 	const response = await fetch('/api/product', {
 		method: 'POST',

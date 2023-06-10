@@ -50,7 +50,7 @@
 								{#each categories as category (category.id)}
 									<li>
 										<a
-											href="/shop/{encodeURIComponent(category.name.replace(/\s+/g, '-'))}"
+											href="/shop/{encodeURIComponent(category.name.replace(/\s+/g, '-'))}/all"
 											class="group flex items-center text-base text-gray-700 transition-colors duration-200 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
 											on:click={showProductsMenu}
 										>
@@ -64,7 +64,9 @@
 											{#each category.subCategories as sub (sub.id)}
 												<li>
 													<a
-														href="#"
+														href="/shop/{encodeURIComponent(
+															category.name.replace(/\s+/g, '-')
+														)}/{encodeURIComponent(sub.name).replace(/\s+/g, '-')}"
 														class="group flex items-center text-sm text-gray-700 transition-colors duration-200 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
 													>
 														<span class="sr-only">{sub.name}</span>

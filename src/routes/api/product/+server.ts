@@ -1,6 +1,7 @@
-import { error, type RequestHandler } from '@sveltejs/kit';
-import { supabaseClient } from '../../../lib/server/db';
-import type { Product } from '../../../lib/interfaces/shop';
+import { supabaseClient } from '$lib/server/db';
+import { error } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
+import type { ProductDisplay } from '$lib/interfaces/shop';
 
 export const POST = (async ({ request }) => {
 	const { categoryName } = await request.json();
@@ -12,7 +13,7 @@ export const POST = (async ({ request }) => {
 		.single();
 
 	if (!categoryId) {
-		throw error(400, 'Category Not Found');
+		throw error(400, 'Category Not Found!');
 	}
 
 	const { data: productResult } = await supabaseClient
@@ -24,20 +25,15 @@ export const POST = (async ({ request }) => {
 		throw error(400, 'No Products Found');
 	}
 
-	const productData: Product[] = productResult?.map((product) => ({
-		id: product.id,
+	const productData: ProductDisplay[] = productResult?.map((product) => ({
+		sku: product.sku,
 		name: product.name,
-		description: product.description,
-		price: product.price,
-		categoryId: product.category_id,
-		subCategoryId: product.sub_category_id,
-		stripeProductId: product.stripe_product_id,
-		brand: product.brand,
-		model: product.model,
-		status: product.status,
-		images: product.images,
+		price: (product.price / 100).toFixed(2),
 		thumbnail: product.thumbnail,
-		sku: product.sku
+		model: product.model,
+		rating: Array.isArray(product.product_analytics)
+			? String(product.product_analytics[0]?.rating)
+			: String(product.product_analytics?.rating)
 	}));
 
 	return new Response(JSON.stringify(productData));
