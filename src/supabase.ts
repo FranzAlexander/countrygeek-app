@@ -3,6 +3,21 @@ export type Json = string | number | boolean | null | { [key: string]: Json } | 
 export interface Database {
 	public: {
 		Tables: {
+			brand: {
+				Row: {
+					id: number;
+					name: string;
+				};
+				Insert: {
+					id?: number;
+					name: string;
+				};
+				Update: {
+					id?: number;
+					name?: string;
+				};
+				Relationships: [];
+			};
 			category: {
 				Row: {
 					id: number;
@@ -16,6 +31,7 @@ export interface Database {
 					id?: number;
 					name?: string;
 				};
+				Relationships: [];
 			};
 			'category_subcategory ': {
 				Row: {
@@ -30,10 +46,88 @@ export interface Database {
 					category_id?: number;
 					sub_category_id?: number;
 				};
+				Relationships: [
+					{
+						foreignKeyName: 'category_subcategory _category_id_fkey';
+						columns: ['category_id'];
+						referencedRelation: 'category';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'category_subcategory _sub_category_id_fkey';
+						columns: ['sub_category_id'];
+						referencedRelation: 'sub_category';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			order: {
+				Row: {
+					customer_address: string;
+					customer_name: string;
+					date: string;
+					id: number;
+				};
+				Insert: {
+					customer_address: string;
+					customer_name: string;
+					date?: string;
+					id?: number;
+				};
+				Update: {
+					customer_address?: string;
+					customer_name?: string;
+					date?: string;
+					id?: number;
+				};
+				Relationships: [];
+			};
+			order_item: {
+				Row: {
+					id: number;
+					order_id: number | null;
+					product_id: string | null;
+					quantity: number | null;
+					supplier_id: number | null;
+				};
+				Insert: {
+					id?: number;
+					order_id?: number | null;
+					product_id?: string | null;
+					quantity?: number | null;
+					supplier_id?: number | null;
+				};
+				Update: {
+					id?: number;
+					order_id?: number | null;
+					product_id?: string | null;
+					quantity?: number | null;
+					supplier_id?: number | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'order_item_order_id_fkey';
+						columns: ['order_id'];
+						referencedRelation: 'order';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'order_item_product_id_fkey';
+						columns: ['product_id'];
+						referencedRelation: 'product';
+						referencedColumns: ['sku'];
+					},
+					{
+						foreignKeyName: 'order_item_supplier_id_fkey';
+						columns: ['supplier_id'];
+						referencedRelation: 'supplier';
+						referencedColumns: ['id'];
+					}
+				];
 			};
 			product: {
 				Row: {
-					brand: string | null;
+					brand_id: number | null;
 					category_id: number | null;
 					created_at: string | null;
 					description: string | null;
@@ -50,7 +144,7 @@ export interface Database {
 					warranty: string | null;
 				};
 				Insert: {
-					brand?: string | null;
+					brand_id?: number | null;
 					category_id?: number | null;
 					created_at?: string | null;
 					description?: string | null;
@@ -67,7 +161,7 @@ export interface Database {
 					warranty?: string | null;
 				};
 				Update: {
-					brand?: string | null;
+					brand_id?: number | null;
 					category_id?: number | null;
 					created_at?: string | null;
 					description?: string | null;
@@ -83,6 +177,26 @@ export interface Database {
 					updated_at?: string | null;
 					warranty?: string | null;
 				};
+				Relationships: [
+					{
+						foreignKeyName: 'product_brand_id_fkey';
+						columns: ['brand_id'];
+						referencedRelation: 'brand';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'product_category_id_fkey';
+						columns: ['category_id'];
+						referencedRelation: 'category';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'product_sub_category_id_fkey';
+						columns: ['sub_category_id'];
+						referencedRelation: 'sub_category';
+						referencedColumns: ['id'];
+					}
+				];
 			};
 			product_analytics: {
 				Row: {
@@ -112,23 +226,51 @@ export interface Database {
 					total_clicks?: number | null;
 					unique_clicks?: number | null;
 				};
+				Relationships: [
+					{
+						foreignKeyName: 'product_analytics_product_id_fkey';
+						columns: ['product_id'];
+						referencedRelation: 'product';
+						referencedColumns: ['sku'];
+					}
+				];
 			};
 			product_spec: {
 				Row: {
 					id: number;
 					product_id: string;
-					specs: Json | null;
+					spec_id: number;
+					spec_value: string | null;
+					value: string;
 				};
 				Insert: {
 					id?: number;
 					product_id: string;
-					specs?: Json | null;
+					spec_id: number;
+					spec_value?: string | null;
+					value: string;
 				};
 				Update: {
 					id?: number;
 					product_id?: string;
-					specs?: Json | null;
+					spec_id?: number;
+					spec_value?: string | null;
+					value?: string;
 				};
+				Relationships: [
+					{
+						foreignKeyName: 'product_spec_product_id_fkey';
+						columns: ['product_id'];
+						referencedRelation: 'product';
+						referencedColumns: ['sku'];
+					},
+					{
+						foreignKeyName: 'product_spec_spec_id_fkey';
+						columns: ['spec_id'];
+						referencedRelation: 'spec';
+						referencedColumns: ['id'];
+					}
+				];
 			};
 			product_supplier: {
 				Row: {
@@ -158,6 +300,20 @@ export interface Database {
 					purchase_price?: number | null;
 					supplier_id?: number;
 				};
+				Relationships: [
+					{
+						foreignKeyName: 'product_supplier_product_id_fkey';
+						columns: ['product_id'];
+						referencedRelation: 'product';
+						referencedColumns: ['sku'];
+					},
+					{
+						foreignKeyName: 'product_supplier_supplier_id_fkey';
+						columns: ['supplier_id'];
+						referencedRelation: 'supplier';
+						referencedColumns: ['id'];
+					}
+				];
 			};
 			promotion: {
 				Row: {
@@ -184,6 +340,29 @@ export interface Database {
 					product_id?: string;
 					start_date?: string | null;
 				};
+				Relationships: [
+					{
+						foreignKeyName: 'promotion_product_id_fkey';
+						columns: ['product_id'];
+						referencedRelation: 'product';
+						referencedColumns: ['sku'];
+					}
+				];
+			};
+			spec: {
+				Row: {
+					id: number;
+					name: string | null;
+				};
+				Insert: {
+					id?: number;
+					name?: string | null;
+				};
+				Update: {
+					id?: number;
+					name?: string | null;
+				};
+				Relationships: [];
 			};
 			sub_category: {
 				Row: {
@@ -198,6 +377,7 @@ export interface Database {
 					id?: number;
 					name?: string;
 				};
+				Relationships: [];
 			};
 			supplier: {
 				Row: {
@@ -227,13 +407,23 @@ export interface Database {
 					name?: string;
 					phone?: string | null;
 				};
+				Relationships: [];
 			};
 		};
 		Views: {
 			[_ in never]: never;
 		};
 		Functions: {
-			[_ in never]: never;
+			get_product_filters_by_subcategory: {
+				Args: {
+					sub_category_id_in: number;
+				};
+				Returns: {
+					spec_name: string;
+					spec_value: string;
+					count: number;
+				}[];
+			};
 		};
 		Enums: {
 			pricing_plan_interval: 'day' | 'week' | 'month' | 'year';

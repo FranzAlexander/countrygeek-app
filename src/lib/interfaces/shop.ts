@@ -50,3 +50,13 @@ export interface ProductDisplay {
 	rating: string;
 	model: string;
 }
+
+export interface SpecFilter {
+	specName: string;
+	specOption: SpecFilterOption[];
+}
+
+export interface SpecFilterOption {
+	specValue: string;
+	specCount: number;
+}

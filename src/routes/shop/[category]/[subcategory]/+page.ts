@@ -20,9 +20,22 @@ export const load = (async ({ parent, fetch, params }) => {
 		return categoryName.indexOf(el.name) >= 0;
 	});
 
+	const specFiltersResponse = await fetch('/api/spec', {
+		method: 'POST',
+		body: JSON.stringify({ subCategoryId: 1 }),
+		headers: {
+			'content-type': 'application/json'
+		}
+	});
+
+	const specFilters = await specFiltersResponse.json();
+
+	console.log(specFilters);
+
 	return {
 		products: products,
 		categoryName: categoryName,
-		subCategories: subCategories[0].subCategories
+		subCategories: subCategories[0].subCategories,
+		specFilters: specFilters
 	};
 }) satisfies PageLoad;

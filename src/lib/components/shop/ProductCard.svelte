@@ -1,13 +1,12 @@
-<!-- <script lang="ts">
+<script lang="ts">
 	import type { ProductDisplay } from '$lib/interfaces/shop';
 
 	export let productDisplay: ProductDisplay;
 	export let categoryName: string;
 </script>
 
-
 <div
- class="relative max-w-sm overflow-hidden rounded-lg border border-gray-300 bg-gray-200 shadow-lg hover:shadow-blue-400"
+	class="relative max-w-sm overflow-hidden rounded-lg bg-gray-50 shadow-md shadow-gray-300 hover:shadow-blue-400"
 >
 	<a
 		href="/shop/{encodeURIComponent(categoryName.replace(/\s+/g, '-'))}/{encodeURIComponent(
@@ -21,9 +20,9 @@
 			class="relative h-64 w-full object-contain"
 		/>
 	</a>
-	<div class="rounded-lg bg-gray-400 px-6 py-4">
+	<div class="px-6 py-4">
 		<h2 class="mb-4 text-lg font-bold text-gray-900">{productDisplay.name}</h2>
-		<p class="mb-2 w-min rounded-full bg-gray-600 p-1 text-xs text-gray-900">
+		<p class="mb-2 w-min rounded-full bg-gray-400 p-1 text-xs text-gray-900">
 			{productDisplay.model}
 		</p>
 		<div class="flex justify-between">
@@ -38,8 +37,8 @@
 			>
 		</div>
 	</div>
-</div>  -->
-
+</div>
+<!-- 
 <script lang="ts">
     import type { ProductDisplay } from '$lib/interfaces/shop';
 
@@ -61,7 +60,4 @@
             <button type="button" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors">Add to Cart</button>
         </div>
     </div>
-</div>
-
-
-
+</div> -->

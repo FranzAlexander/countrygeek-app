@@ -36,7 +36,7 @@
 	href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"
 />
 
-<nav class="flex items-center justify-between bg-gray-300 px-6 py-4 dark:bg-gray-700">
+<nav class="flex items-center justify-between bg-[#a0d8f1] px-6 py-4 dark:bg-gray-900">
 	<div class="flex items-center">
 		<div class="text-xl font-bold text-gray-900 dark:text-white">
 			<ul class="md:flow-row mt-4 flex flex-col font-medium md:mt-0 md:space-x-8">
