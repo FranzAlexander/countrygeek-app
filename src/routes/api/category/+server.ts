@@ -1,4 +1,4 @@
-import { error, json } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import { supabaseClient } from '../../../lib/server/db';
 import type { RequestHandler } from './$types';
 import type { ShopCategoryWithSub, SubCategory } from '../../../lib/interfaces/shop';
@@ -22,5 +22,8 @@ export const GET = (async () => {
 			})
 		)
 	}));
+
+	console.log(categories);
+
 	return new Response(JSON.stringify(categories));
 }) satisfies RequestHandler;

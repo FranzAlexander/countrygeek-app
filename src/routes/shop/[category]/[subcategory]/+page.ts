@@ -14,6 +14,8 @@ export const load = (async ({ parent, fetch, params }) => {
 
 	const products = await response.json();
 
+	console.log(products);
+
 	const subCategories: ShopCategoryWithSub[] = (await parent()).categories.filter(function (
 		el: ShopCategoryWithSub
 	) {

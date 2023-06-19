@@ -17,6 +17,24 @@ export const handle: Handle = async ({ event, resolve }) => {
 		return session;
 	};
 
+	let session = await event.locals.getSession();
+
+	if (!session) {
+		const { data, error } = await event.locals.supabase.auth.signUp({
+			email: `guest_${Date.now()}@guest.com`,
+			password: `guest_${Math.random().toString(36).slice(-8)}`
+		});
+
+		console.log(data);
+
+		if (error) {
+			console.error('Error creating guest user', error);
+		} else {
+			session = data.session;
+			event.cookies.set('session', session?.access_token as string);
+		}
+	}
+
 	return resolve(event, {
 		filterSerializedResponseHeaders(name) {
 			return name === 'content-range';

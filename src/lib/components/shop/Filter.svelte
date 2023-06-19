@@ -18,12 +18,12 @@
 </script>
 
 <button
-	class="inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-4 py-2.5 text-center text-sm font-medium hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+	class="border-gray-300 bg-gray-50 hover:bg-gray-100 focus:ring-blue-500 inline-flex items-center rounded-lg border px-4 py-2.5 text-center text-sm font-medium focus:outline-none focus:ring-2"
 	on:click={toggleFilters}
 >
 	Filter
 	<svg
-		class="ml-2 h-4 w-4 stroke-gray-500"
+		class="stroke-gray-500 ml-2 h-4 w-4"
 		aria-hidden="true"
 		fill="none"
 		stroke="currentColor"
@@ -39,20 +39,20 @@
 </button>
 
 <div
-	class="fixed z-10 w-32 max-w-sm rounded-lg border border-gray-400 bg-gray-300 py-1 {showFilters ===
+	class="border-gray-400 bg-gray-300 fixed z-10 w-32 max-w-sm rounded-lg border py-1 {showFilters ===
 	false
 		? 'hidden'
 		: ''}"
 >
 	{#each filters as specFilter}
-		<ul class="text-sm text-gray-700 dark:text-gray-200">
+		<ul class="text-gray-700 dark:text-gray-200 text-sm">
 			<li class="flex flex-col first:rounded-t-lg last:rounded-none">
-				<span class="bg-gray-300 px-4 py-1 text-gray-900">{specFilter.specName}</span>
+				<span class="bg-gray-300 text-gray-900 px-4 py-1">{specFilter.specName}</span>
 				<ul class="">
 					{#each specFilter.specOption as specOption}
 						<li>
 							<button
-								class="flex w-full justify-between bg-white px-4 py-1 text-left text-sm hover:bg-gray-200"
+								class="bg-white hover:bg-gray-200 flex w-full justify-between px-4 py-1 text-left text-sm"
 								on:click={() => addFilter(specOption.specValue)}
 							>
 								<span>{specOption.specValue}</span>({specOption.specCount})</button

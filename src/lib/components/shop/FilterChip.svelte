@@ -1,14 +1,23 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+
 	export let chipName: string;
+
+	const dispatch = createEventDispatcher();
+
+	function removeFilter(chipName: string) {
+		dispatch('removeFilter', chipName);
+	}
 </script>
 
 <span
-	class="dark:bg-pruple-900 mr-2 inline-flex items-center rounded bg-purple-100 px-2 py-1 text-sm font-medium text-purple-800 dark:text-purple-300"
+	class="dark:bg-pruple-900 bg-blue-100 text-blue-800 dark:text-blue-300 mr-2 inline-flex items-center rounded px-2 py-1 text-sm font-medium"
 >
 	{chipName}
 	<button
 		aria-hidden="true"
-		class="ml-2 inline-flex items-center rounded-sm bg-transparent p-0.5 text-sm text-purple-400 hover:bg-purple-200 hover:text-purple-900 dark:hover:bg-purple-800 dark:hover:text-purple-300"
+		class="bg-transparent text-blue-400 hover:bg-blue-200 hover:text-blue-900 dark:hover:bg-blue-800 dark:hover:text-blue-300 ml-2 inline-flex items-center rounded-sm p-0.5 text-sm"
+		on:click={() => removeFilter(chipName)}
 	>
 		<svg
 			aria-hidden="true"

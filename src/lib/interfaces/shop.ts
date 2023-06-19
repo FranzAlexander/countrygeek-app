@@ -27,19 +27,19 @@ export interface ShopCategoryWithSub extends ShopCategory {
 }
 
 export interface Product {
-	id: number;
+	sku: string;
 	name: string;
 	description: string;
-	price: number;
-	categoryId: number;
-	subCategoryId: number;
-	stripeProductId: string;
-	brand: string;
+	price: string | number;
+	stripe_product_id: string;
+	brand_name: string;
 	model: string;
 	status: string;
 	images: string[];
 	thumbnail: string;
-	sku: string;
+	warranty: string;
+	specs: ProductSpec[];
+	suppliers: ProductSupplier[];
 }
 
 export interface ProductDisplay {
@@ -59,4 +59,22 @@ export interface SpecFilter {
 export interface SpecFilterOption {
 	specValue: string;
 	specCount: number;
+}
+
+export interface CartItem {
+	productName: string;
+	productImage: string;
+	productPrice: number;
+	productQuantity: number;
+}
+
+export interface ProductSupplier {
+	supplier_id: number;
+	amount: number;
+}
+
+export interface ProductSpec {
+	spec_name: string;
+	spec_value: string;
+	spec_icon: string;
 }
