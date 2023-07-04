@@ -1,29 +1,35 @@
 import { error } from '@sveltejs/kit';
-import { supabaseClient } from '../../../lib/server/db';
 import type { RequestHandler } from './$types';
-import type { ShopCategoryWithSub, SubCategory } from '../../../lib/interfaces/shop';
+import type {
+	DatabaseCategory,
+	DatabaseCategoryWithSub,
+	DatabaseSubCategory,
+	ShopCategoryWithSub
+} from '$lib/interfaces/category';
 
-export const GET = (async () => {
-	const { data: categoryRequest } = await supabaseClient
-		.from('category')
-		.select('*, sub_category(*)');
+export const GET = (async ({ locals: { supabase } }) => {
+	const { data, error: categoryError } = await supabase.rpc(
+		'get_categories_with_subcategories',
+		{}
+	);
 
-	if (!categoryRequest) {
-		throw error(400, 'Error getting categories');
+	if (categoryError) {
+		console.log(categoryError);
 	}
 
-	const categories: ShopCategoryWithSub[] = categoryRequest.map((category) => ({
-		id: category.id,
-		name: category.name,
-		subCategories: category.sub_category.map(
-			(subCategory: SubCategory): SubCategory => ({
-				id: subCategory.id,
-				name: subCategory.name
-			})
-		)
-	}));
+	const categoryResult = data as DatabaseCategoryWithSub[];
 
-	console.log(categories);
+	const categories: ShopCategoryWithSub[] = categoryResult.map(
+		(category: DatabaseCategoryWithSub) => ({
+			id: category.category_id,
+			name: category.category_name,
+			image: category.category_image,
+			subCategories: category.sub_categories.map((subCategory: DatabaseSubCategory) => ({
+				id: subCategory.subcategory_id,
+				name: subCategory.subcategory_name
+			}))
+		})
+	);
 
 	return new Response(JSON.stringify(categories));
 }) satisfies RequestHandler;

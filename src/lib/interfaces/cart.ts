@@ -4,6 +4,7 @@ export interface AddCartItem {
 }
 
 export interface CartItem {
+	itemId: number;
 	imageUrl: string;
 	productName: string;
 	unitPrice: number;

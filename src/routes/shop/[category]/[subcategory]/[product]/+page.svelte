@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Product, ProductSpec } from '$lib/interfaces/shop.js';
+	import type { Product } from '$lib/interfaces/product.js';
 
 	export let data;
 	let product: Product = {
@@ -7,8 +7,8 @@
 		name: '',
 		description: '',
 		price: '',
-		stripe_product_id: '',
-		brand_name: '',
+		stripeProductId: '',
+		brandName: '',
 		model: '',
 		status: '',
 		images: [],
@@ -60,7 +60,7 @@
 			>
 			<span>Please allow for 1-2 days for product to be shipped.</span>
 			<div class="flex flex-col rounded-lg px-4 py-2">
-				<span class="mb-2 font-sans text-2xl">${product.price}</span>
+				<span class="mb-2 font-sans text-2xl">${(Number(product.price) / 100).toFixed(2)}</span>
 				<span class="mb-2 font-sans text-lg">In Stock: {stockAmount}</span>
 				<div class="w-fit">
 					<label for="quantity" class="sr-only">Quantity</label>

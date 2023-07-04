@@ -1,12 +1,11 @@
-import { supabaseClient } from '$lib/server/db';
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import type { SpecFilter, SpecFilterOption } from '$lib/interfaces/shop';
+import type { SpecFilter } from '$lib/interfaces/spec';
 
-export const POST = (async ({ request }) => {
+export const POST = (async ({ request, locals: { supabase } }) => {
 	const { subCategoryId } = await request.json();
 
-	const { data: specData } = await supabaseClient.rpc('get_product_filters_by_subcategory', {
+	const { data: specData } = await supabase.rpc('get_product_filters_by_subcategory', {
 		sub_category_id_in: subCategoryId
 	});
 

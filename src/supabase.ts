@@ -3,7 +3,7 @@ export type Json =
   | number
   | boolean
   | null
-  | { [key: string]: Json }
+  | { [key: string]: Json | undefined }
   | Json[]
 
 export interface Database {
@@ -26,68 +26,71 @@ export interface Database {
       }
       cart_item: {
         Row: {
-          cart_id: string | null
           created_at: string | null
           id: number
-          product_id: string | null
+          product_sku: string | null
           quantity: number | null
+          shopping_cart_id: string | null
         }
         Insert: {
-          cart_id?: string | null
           created_at?: string | null
           id?: number
-          product_id?: string | null
+          product_sku?: string | null
           quantity?: number | null
+          shopping_cart_id?: string | null
         }
         Update: {
-          cart_id?: string | null
           created_at?: string | null
           id?: number
-          product_id?: string | null
+          product_sku?: string | null
           quantity?: number | null
+          shopping_cart_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "cart_item_cart_id_fkey"
-            columns: ["cart_id"]
-            referencedRelation: "shopping_cart"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "cart_item_product_id_fkey"
-            columns: ["product_id"]
+            foreignKeyName: "cart_item_product_sku_fkey"
+            columns: ["product_sku"]
             referencedRelation: "product"
             referencedColumns: ["sku"]
+          },
+          {
+            foreignKeyName: "cart_item_shopping_cart_id_fkey"
+            columns: ["shopping_cart_id"]
+            referencedRelation: "shopping_cart"
+            referencedColumns: ["id"]
           }
         ]
       }
       category: {
         Row: {
           id: number
-          name: string | null
+          image: string | null
+          name: string
         }
         Insert: {
           id?: number
-          name?: string | null
+          image?: string | null
+          name: string
         }
         Update: {
           id?: number
-          name?: string | null
+          image?: string | null
+          name?: string
         }
         Relationships: []
       }
       category_subcategory: {
         Row: {
           category_id: number
-          sub_category_id: number
+          subcategory_id: number
         }
         Insert: {
           category_id?: number
-          sub_category_id: number
+          subcategory_id: number
         }
         Update: {
           category_id?: number
-          sub_category_id?: number
+          subcategory_id?: number
         }
         Relationships: [
           {
@@ -97,73 +100,67 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "category_subcategory_sub_category_id_fkey"
-            columns: ["sub_category_id"]
-            referencedRelation: "sub_category"
+            foreignKeyName: "category_subcategory_subcategory_id_fkey"
+            columns: ["subcategory_id"]
+            referencedRelation: "subcategory"
             referencedColumns: ["id"]
           }
         ]
       }
-      order: {
+      company_location: {
         Row: {
-          customer_address: string
-          customer_name: string
-          date: string
+          address: string | null
           id: number
+          postcode: string | null
+          state: string | null
+          suburb: string | null
         }
         Insert: {
-          customer_address: string
-          customer_name: string
-          date?: string
+          address?: string | null
           id?: number
+          postcode?: string | null
+          state?: string | null
+          suburb?: string | null
         }
         Update: {
-          customer_address?: string
-          customer_name?: string
-          date?: string
+          address?: string | null
           id?: number
+          postcode?: string | null
+          state?: string | null
+          suburb?: string | null
         }
         Relationships: []
       }
-      order_item: {
+      inventory: {
         Row: {
           id: number
-          order_id: number | null
-          product_id: string | null
+          product_sku: string | null
           quantity: number | null
-          supplier_id: number | null
+          supplier_location_id: number | null
         }
         Insert: {
           id?: number
-          order_id?: number | null
-          product_id?: string | null
+          product_sku?: string | null
           quantity?: number | null
-          supplier_id?: number | null
+          supplier_location_id?: number | null
         }
         Update: {
           id?: number
-          order_id?: number | null
-          product_id?: string | null
+          product_sku?: string | null
           quantity?: number | null
-          supplier_id?: number | null
+          supplier_location_id?: number | null
         }
         Relationships: [
           {
-            foreignKeyName: "order_item_order_id_fkey"
-            columns: ["order_id"]
-            referencedRelation: "order"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "order_item_product_id_fkey"
-            columns: ["product_id"]
+            foreignKeyName: "inventory_product_sku_fkey"
+            columns: ["product_sku"]
             referencedRelation: "product"
             referencedColumns: ["sku"]
           },
           {
-            foreignKeyName: "order_item_supplier_id_fkey"
-            columns: ["supplier_id"]
-            referencedRelation: "supplier"
+            foreignKeyName: "inventory_supplier_location_id_fkey"
+            columns: ["supplier_location_id"]
+            referencedRelation: "supplier_location"
             referencedColumns: ["id"]
           }
         ]
@@ -174,14 +171,16 @@ export interface Database {
           category_id: number | null
           created_at: string | null
           description: string | null
+          featured: boolean | null
           images: string[] | null
           model: string | null
-          name: string | null
+          name: string
           price: number | null
+          release_date: string | null
           sku: string
-          status: string | null
-          stripe_product_id: string | null
-          sub_category_id: number | null
+          status: Database["public"]["Enums"]["product_status"] | null
+          stripe_product_id: string
+          subcategory_id: number | null
           thumbnail: string | null
           updated_at: string | null
           warranty: string | null
@@ -191,14 +190,16 @@ export interface Database {
           category_id?: number | null
           created_at?: string | null
           description?: string | null
+          featured?: boolean | null
           images?: string[] | null
           model?: string | null
-          name?: string | null
+          name: string
           price?: number | null
+          release_date?: string | null
           sku: string
-          status?: string | null
-          stripe_product_id?: string | null
-          sub_category_id?: number | null
+          status?: Database["public"]["Enums"]["product_status"] | null
+          stripe_product_id: string
+          subcategory_id?: number | null
           thumbnail?: string | null
           updated_at?: string | null
           warranty?: string | null
@@ -208,14 +209,16 @@ export interface Database {
           category_id?: number | null
           created_at?: string | null
           description?: string | null
+          featured?: boolean | null
           images?: string[] | null
           model?: string | null
-          name?: string | null
+          name?: string
           price?: number | null
+          release_date?: string | null
           sku?: string
-          status?: string | null
-          stripe_product_id?: string | null
-          sub_category_id?: number | null
+          status?: Database["public"]["Enums"]["product_status"] | null
+          stripe_product_id?: string
+          subcategory_id?: number | null
           thumbnail?: string | null
           updated_at?: string | null
           warranty?: string | null
@@ -234,45 +237,156 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "product_sub_category_id_fkey"
-            columns: ["sub_category_id"]
-            referencedRelation: "sub_category"
+            foreignKeyName: "product_subcategory_id_fkey"
+            columns: ["subcategory_id"]
+            referencedRelation: "subcategory"
             referencedColumns: ["id"]
           }
         ]
       }
-      product_analytics: {
+      product_filter: {
         Row: {
-          analytics_date: string
           id: number
-          product_id: string
-          purchases: number | null
-          rating: number | null
-          total_clicks: number | null
-          unique_clicks: number | null
+          product_sku: string | null
+          spec_filter_id: number | null
+          spec_id: number | null
         }
         Insert: {
-          analytics_date?: string
           id?: number
-          product_id: string
-          purchases?: number | null
-          rating?: number | null
-          total_clicks?: number | null
-          unique_clicks?: number | null
+          product_sku?: string | null
+          spec_filter_id?: number | null
+          spec_id?: number | null
         }
         Update: {
-          analytics_date?: string
           id?: number
-          product_id?: string
-          purchases?: number | null
-          rating?: number | null
-          total_clicks?: number | null
-          unique_clicks?: number | null
+          product_sku?: string | null
+          spec_filter_id?: number | null
+          spec_id?: number | null
         }
         Relationships: [
           {
-            foreignKeyName: "product_analytics_product_id_fkey"
-            columns: ["product_id"]
+            foreignKeyName: "product_filter_product_sku_fkey"
+            columns: ["product_sku"]
+            referencedRelation: "product"
+            referencedColumns: ["sku"]
+          },
+          {
+            foreignKeyName: "product_filter_spec_filter_id_fkey"
+            columns: ["spec_filter_id"]
+            referencedRelation: "spec_filter"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "product_filter_spec_id_fkey"
+            columns: ["spec_id"]
+            referencedRelation: "spec"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      product_rating: {
+        Row: {
+          created_at: string | null
+          id: number
+          product_sku: string
+          profile_id: string | null
+          rating: number
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          product_sku: string
+          profile_id?: string | null
+          rating: number
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          product_sku?: string
+          profile_id?: string | null
+          rating?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_rating_product_sku_fkey"
+            columns: ["product_sku"]
+            referencedRelation: "product"
+            referencedColumns: ["sku"]
+          },
+          {
+            foreignKeyName: "product_rating_profile_id_fkey"
+            columns: ["profile_id"]
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      product_review: {
+        Row: {
+          created_at: string | null
+          id: number
+          product_sku: string
+          profile_id: string | null
+          review: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          product_sku: string
+          profile_id?: string | null
+          review: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          product_sku?: string
+          profile_id?: string | null
+          review?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_review_product_sku_fkey"
+            columns: ["product_sku"]
+            referencedRelation: "product"
+            referencedColumns: ["sku"]
+          },
+          {
+            foreignKeyName: "product_review_profile_id_fkey"
+            columns: ["profile_id"]
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      product_shipping: {
+        Row: {
+          height: number | null
+          id: number
+          length: number | null
+          product_sku: string | null
+          weight: number | null
+          width: number | null
+        }
+        Insert: {
+          height?: number | null
+          id?: number
+          length?: number | null
+          product_sku?: string | null
+          weight?: number | null
+          width?: number | null
+        }
+        Update: {
+          height?: number | null
+          id?: number
+          length?: number | null
+          product_sku?: string | null
+          weight?: number | null
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_shipping_product_sku_fkey"
+            columns: ["product_sku"]
             referencedRelation: "product"
             referencedColumns: ["sku"]
           }
@@ -281,29 +395,26 @@ export interface Database {
       product_spec: {
         Row: {
           id: number
-          product_id: string
-          spec_id: number
-          spec_value: string | null
-          value: string
+          product_sku: string | null
+          spec_id: number | null
+          value: string | null
         }
         Insert: {
           id?: number
-          product_id: string
-          spec_id: number
-          spec_value?: string | null
-          value: string
+          product_sku?: string | null
+          spec_id?: number | null
+          value?: string | null
         }
         Update: {
           id?: number
-          product_id?: string
-          spec_id?: number
-          spec_value?: string | null
-          value?: string
+          product_sku?: string | null
+          spec_id?: number | null
+          value?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "product_spec_product_id_fkey"
-            columns: ["product_id"]
+            foreignKeyName: "product_spec_product_sku_fkey"
+            columns: ["product_sku"]
             referencedRelation: "product"
             referencedColumns: ["sku"]
           },
@@ -317,36 +428,30 @@ export interface Database {
       }
       product_supplier: {
         Row: {
-          amount: number | null
           id: number
-          lead_time: number | null
-          product_code: string
-          product_id: string | null
-          purchase_price: number | null
+          product_sku: string
+          purchase_price: number
           supplier_id: number
+          supplier_product_code: string
         }
         Insert: {
-          amount?: number | null
           id?: number
-          lead_time?: number | null
-          product_code: string
-          product_id?: string | null
-          purchase_price?: number | null
+          product_sku: string
+          purchase_price: number
           supplier_id: number
+          supplier_product_code: string
         }
         Update: {
-          amount?: number | null
           id?: number
-          lead_time?: number | null
-          product_code?: string
-          product_id?: string | null
-          purchase_price?: number | null
+          product_sku?: string
+          purchase_price?: number
           supplier_id?: number
+          supplier_product_code?: string
         }
         Relationships: [
           {
-            foreignKeyName: "product_supplier_product_id_fkey"
-            columns: ["product_id"]
+            foreignKeyName: "product_supplier_product_sku_fkey"
+            columns: ["product_sku"]
             referencedRelation: "product"
             referencedColumns: ["sku"]
           },
@@ -360,30 +465,30 @@ export interface Database {
       }
       profile: {
         Row: {
-          address: string | null
           created_at: string | null
           email: string | null
           id: string
+          is_admin: boolean | null
           is_guest: boolean
           name: string | null
           phone: string | null
           updated_at: string | null
         }
         Insert: {
-          address?: string | null
           created_at?: string | null
           email?: string | null
           id: string
+          is_admin?: boolean | null
           is_guest?: boolean
           name?: string | null
           phone?: string | null
           updated_at?: string | null
         }
         Update: {
-          address?: string | null
           created_at?: string | null
           email?: string | null
           id?: string
+          is_admin?: boolean | null
           is_guest?: boolean
           name?: string | null
           phone?: string | null
@@ -395,40 +500,6 @@ export interface Database {
             columns: ["id"]
             referencedRelation: "users"
             referencedColumns: ["id"]
-          }
-        ]
-      }
-      promotion: {
-        Row: {
-          discount: number | null
-          end_date: string | null
-          id: number
-          name: string | null
-          product_id: string
-          start_date: string | null
-        }
-        Insert: {
-          discount?: number | null
-          end_date?: string | null
-          id?: number
-          name?: string | null
-          product_id: string
-          start_date?: string | null
-        }
-        Update: {
-          discount?: number | null
-          end_date?: string | null
-          id?: number
-          name?: string | null
-          product_id?: string
-          start_date?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "promotion_product_id_fkey"
-            columns: ["product_id"]
-            referencedRelation: "product"
-            referencedColumns: ["sku"]
           }
         ]
       }
@@ -456,23 +527,20 @@ export interface Database {
       }
       spec: {
         Row: {
-          icon: string | null
           id: number
-          name: string | null
+          name: string
         }
         Insert: {
-          icon?: string | null
           id?: number
-          name?: string | null
+          name: string
         }
         Update: {
-          icon?: string | null
           id?: number
-          name?: string | null
+          name?: string
         }
         Relationships: []
       }
-      sub_category: {
+      spec_filter: {
         Row: {
           id: number
           name: string | null
@@ -484,38 +552,81 @@ export interface Database {
         Update: {
           id?: number
           name?: string | null
+        }
+        Relationships: []
+      }
+      subcategory: {
+        Row: {
+          id: number
+          name: string
+        }
+        Insert: {
+          id?: number
+          name: string
+        }
+        Update: {
+          id?: number
+          name?: string
         }
         Relationships: []
       }
       supplier: {
         Row: {
-          address: string | null
           contact_person: string | null
-          country: string | null
           email: string
           id: number
           name: string
           phone: string | null
         }
         Insert: {
-          address?: string | null
           contact_person?: string | null
-          country?: string | null
           email: string
           id?: number
           name: string
           phone?: string | null
         }
         Update: {
-          address?: string | null
           contact_person?: string | null
-          country?: string | null
           email?: string
           id?: number
           name?: string
           phone?: string | null
         }
         Relationships: []
+      }
+      supplier_location: {
+        Row: {
+          address: string | null
+          id: number
+          postcode: string | null
+          state: string | null
+          suburb: string | null
+          supplier_id: number | null
+        }
+        Insert: {
+          address?: string | null
+          id?: number
+          postcode?: string | null
+          state?: string | null
+          suburb?: string | null
+          supplier_id?: number | null
+        }
+        Update: {
+          address?: string | null
+          id?: number
+          postcode?: string | null
+          state?: string | null
+          suburb?: string | null
+          supplier_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "supplier_location_supplier_id_fkey"
+            columns: ["supplier_id"]
+            referencedRelation: "supplier"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {
@@ -529,10 +640,50 @@ export interface Database {
           _quantity: number
         }
         Returns: {
+          item_id: number
           thumbnail: string
           name: string
           price: number
           quantity: number
+        }[]
+      }
+      create_product: {
+        Args: {
+          _sku: string
+          _name: string
+          _description: string
+          _price: number
+          _model: string
+          _status: Database["public"]["Enums"]["product_status"]
+          _thumbnail: string
+          _images: Json
+          _warranty: string
+          _release_date: string
+          _featured: boolean
+          _stripe_product_id: string
+          _category_id: number
+          _subcategory_id: number
+          _brand_id: number
+          _length: number
+          _width: number
+          _height: number
+          _weight: number
+          _product_specs: Json
+          _product_filters: Json
+          _supplier_locations: Json
+        }
+        Returns: undefined
+      }
+      get_cart_items: {
+        Args: {
+          _cart_id: string
+        }
+        Returns: {
+          item_id: number
+          product_name: string
+          thumbnail: string
+          quantity: number
+          price: number
         }[]
       }
       get_categories_with_subcategories: {
@@ -540,6 +691,7 @@ export interface Database {
         Returns: {
           category_id: number
           category_name: string
+          category_image: string
           sub_categories: Json
         }[]
       }
@@ -573,10 +725,57 @@ export interface Database {
           count: number
         }[]
       }
+      get_products_by_category: {
+        Args: {
+          p_category_id: number
+          p_offset: number
+          p_limit: number
+        }
+        Returns: {
+          sku: string
+          product_name: string
+          price: number
+          thumbnail: string
+          model: string
+          rating: number
+        }[]
+      }
+      get_products_by_category_sub_category: {
+        Args: {
+          p_category_id: number
+          p_sub_category_id: number
+          p_offset: number
+          p_limit: number
+        }
+        Returns: {
+          sku: string
+          product_name: string
+          price: number
+          thumbnail: string
+          model: string
+          rating: number
+        }[]
+      }
+      remove_cart_item: {
+        Args: {
+          _cart_id: string
+          _item_id: number
+        }
+        Returns: undefined
+      }
+      update_cart_item_quantity: {
+        Args: {
+          _cart_id: string
+          _item_id: number
+          _quantity: number
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       pricing_plan_interval: "day" | "week" | "month" | "year"
       pricing_type: "one_time" | "recurring"
+      product_status: "In Stock" | "Sold out"
       subscription_status:
         | "trialing"
         | "active"
