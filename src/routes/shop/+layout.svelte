@@ -39,6 +39,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <nav class="w-full bg-secondary border-b border-gray-300">
 	<div class="mx-auto max-w-screen-2xl px-4">
 		<ul class="mr-6 mt-0 flex flex-row space-x-8 font-medium">
@@ -161,6 +162,8 @@
 								{/each}
 							</ul>
 =======
+=======
+>>>>>>> cb96b7b (Adding layout)
 <header>
 	<nav class="flex items-center justify-between bg-[#a0d8f1] px-6 py-4 dark:bg-gray-900">
 		<!-- Logo and Menu -->
@@ -225,7 +228,98 @@
 									</ul>
 								</div>
 							{/each}
+<<<<<<< HEAD
 >>>>>>> 95b2864 (Updated product add)
+=======
+=======
+<<<<<<< HEAD
+<nav class="w-full bg-secondary border-b border-gray-300">
+	<div class="mx-auto max-w-screen-2xl px-4">
+		<ul class="mr-6 mt-0 flex flex-row space-x-8 font-medium">
+			<li class="relative">
+				<button on:click={toggleDropDown} class="p-3 hover:bg-gray-300">Products</button>
+				<ul class="absolute z-50 w-44 bg-secondary {showDropDown ? '' : 'hidden'}">
+					{#each categories as category}
+						<li class="text-gray-900">
+							<a href="/shop/category/{category.name?.replace(/\s+/g, '-')}">{category.name}</a>
+						</li>
+					{/each}
+				</ul>
+			</li>
+			<li class="p-3 hover:bg-gray-300">Brands</li>
+			<li class="p-3 hover:bg-gray-300">Deals</li>
+		</ul>
+=======
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"
+/>
+
+<nav class="flex items-center justify-between bg-gray-300 px-6 py-4 dark:bg-gray-700">
+	<div class="flex items-center">
+		<div class="text-xl font-bold text-gray-900 dark:text-white">
+			<ul class="md:flow-row mt-4 flex flex-col font-medium md:mt-0 md:space-x-8">
+				<li>
+					<button
+						type="button"
+						class="flex w-full items-center justify-between border-b border-gray-100 py-2 pl-3 pr-4 font-medium text-gray-900 hover:bg-gray-50 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-blue-500 md:w-auto md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-600 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
+						on:click={showProductsMenu}
+						>Products<svg
+							aria-hidden="true"
+							class="ml-1 h-5 w-5"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+							xmlns="http://www.w3.org/2000/svg"
+							><path
+								fill-rule="evenodd"
+								d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+								clip-rule="evenodd"
+							/></svg
+						></button
+					>
+					<div
+						class="absolute z-10 {showMenu === false
+							? 'hidden'
+							: 'grid'}  w-auto grid-cols-2 rounded-lg border border-gray-100 bg-gray-300 text-sm shadow-md dark:border-gray-700 dark:bg-gray-700 md:grid-cols-3"
+					>
+						<div class="p-4 pb-0 text-gray-900 dark:text-white md:pb-4">
+							<ul class="space-y-4" aria-labelledby="mega-menu-icons-dropdown-button">
+								{#each categories as category (category.id)}
+									<li>
+										<a
+											href="/shop/{encodeURIComponent(category.name.replace(/\s+/g, '-'))}/all"
+											class="group flex items-center text-base text-gray-700 transition-colors duration-200 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
+											on:click={showProductsMenu}
+										>
+											<span class="sr-only">{category.name}</span>
+											<!-- <i
+												class="{category.icon} mr-2 h-6 w-6 text-gray-700 transition-colors duration-200 group-hover:text-blue-600 dark:text-gray-500 dark:group-hover:text-blue-500"
+											/> -->
+											{category.name}
+										</a>
+										<ul class="ml-2 mt-2 space-y-2">
+											{#each category.subCategories as sub (sub.id)}
+												<li>
+													<a
+														href="/shop/{encodeURIComponent(
+															category.name.replace(/\s+/g, '-')
+														)}/{encodeURIComponent(sub.name).replace(/\s+/g, '-')}"
+														class="group flex items-center text-sm text-gray-700 transition-colors duration-200 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
+													>
+														<span class="sr-only">{sub.name}</span>
+														<!-- <i
+															class="{sub.icon} mr-2 h-4 w-4 text-gray-700 transition-colors duration-200 group-hover:text-blue-600 dark:text-gray-500 dark:group-hover:text-blue-500"
+														/> -->
+														{sub.name}
+													</a>
+												</li>
+											{/each}
+										</ul>
+									</li>
+								{/each}
+							</ul>
+>>>>>>> origin/dev
+>>>>>>> cb96b7b (Adding layout)
 						</div>
 					</li>
 				</ul>
@@ -292,6 +386,7 @@
 					placeholder="Search"
 					class="rounded-lg border-gray-300 px-4 py-2 pl-10 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:focus:border-blue-900 dark:focus:ring-blue-900"
 				/>
+<<<<<<< HEAD
 			</div>
 			<div>
 				<button
@@ -327,5 +422,18 @@
 =======
 	</nav>
 </header>
+<<<<<<< HEAD
 >>>>>>> 95b2864 (Updated product add)
+=======
+=======
+			</svg>
+			<span class="text-sm text-gray-900 dark:text-white">Cart</span>
+			<span class="absolute left-0 top-0 rounded-full bg-blue-500 p-1 text-xs text-white" />
+		</button>
+>>>>>>> 69b7bddb43910ef7557313261eb37008a694ce8d
+	</div>
+</nav>
+
+>>>>>>> origin/dev
+>>>>>>> cb96b7b (Adding layout)
 <slot />
