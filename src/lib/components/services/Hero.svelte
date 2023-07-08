@@ -5,15 +5,18 @@
 />
 
 <section class="bg-white dark:bg-gray-900">
-	<div class="mx-auto max-w-screen-xl px-4 py-8 lg:py-16">
+	<div class="mx-auto max-w-screen-xl px-4 py-8 text-center lg:py-16">
 		<h1
-			class="mb-4 text-center text-4xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl"
+			class="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl"
 		>
 			South West Tech Services & Aus Wide Shop
 		</h1>
+		<p class="mb-8 text-base leading-relaxed text-gray-600 dark:text-gray-400 md:text-lg">
+			Tailored solutions and innovative products for your business.
+		</p>
 		<div class="grid gap-8 md:grid-cols-2">
 			<a
-				href="#contact-us"
+				href="#features"
 				class="flex transform flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-8 text-center text-gray-900 transition duration-200 ease-in hover:scale-105 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 md:p-12"
 			>
 				<i
@@ -21,12 +24,12 @@
 				/>
 				<h2 class="mb-2 text-2xl font-bold">Services</h2>
 				<p class="text-base leading-relaxed text-gray-600 dark:text-gray-400 md:text-lg">
-					Find out how we can assist you
+					Find out how we can assist you.
 				</p>
 				<span class="fas fa-arrow-right mt-4 text-blue-500" />
 			</a>
 			<a
-				href="/shop"
+				href="/"
 				class="flex transform flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-8 text-center text-gray-900 transition duration-200 ease-in hover:scale-105 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 md:p-12"
 			>
 				<i
@@ -34,7 +37,7 @@
 				/>
 				<h2 class="mb-2 text-2xl font-bold">Shop</h2>
 				<p class="text-base leading-relaxed text-gray-600 dark:text-gray-400 md:text-lg">
-					Explore our wide range of products
+					Explore our wide range of products. (Coming Soon)
 				</p>
 				<span class="fas fa-arrow-right mt-4 text-blue-500" />
 			</a>
