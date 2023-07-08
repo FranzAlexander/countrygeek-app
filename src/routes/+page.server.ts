@@ -7,7 +7,7 @@ function isValidEmail(email: string): boolean {
 }
 
 export const actions: Actions = {
-	default: async ({ request }) => {
+	default: async ({ request, locals: { supabase } }) => {
 		const formData = await request.formData();
 
 		const name = formData.get('name') as string | null;
@@ -40,7 +40,17 @@ export const actions: Actions = {
 			return fail(400, data);
 		}
 
-		// TODO: process the form data
+		const { error: serviceEnquiryErr } = await supabase.from('service_enquiry').insert({
+			name: name,
+			email: email,
+			subject: subject,
+			message: message
+		});
+
+		if (serviceEnquiryErr) {
+			return fail(400, { error: 'Failed to create enquiry' });
+		}
+
 		return { success: true };
 	}
 };

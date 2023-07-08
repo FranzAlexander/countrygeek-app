@@ -499,6 +499,33 @@ export interface Database {
         }
         Relationships: []
       }
+      service_offered: {
+        Row: {
+          benefits: string[] | null
+          created_at: string | null
+          description: string | null
+          icon: string | null
+          id: number
+          title: string | null
+        }
+        Insert: {
+          benefits?: string[] | null
+          created_at?: string | null
+          description?: string | null
+          icon?: string | null
+          id?: number
+          title?: string | null
+        }
+        Update: {
+          benefits?: string[] | null
+          created_at?: string | null
+          description?: string | null
+          icon?: string | null
+          id?: number
+          title?: string | null
+        }
+        Relationships: []
+      }
       shopping_cart: {
         Row: {
           created_at: string | null

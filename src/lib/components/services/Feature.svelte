@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { features } from '../../data/services';
+	import type { ServiceOffered } from '$lib/interfaces/service';
 	import { scale } from 'svelte/transition';
+
+	export let services: ServiceOffered[];
 
 	let showBenefits: Record<string, boolean> = {};
 
-	features.forEach((feature) => {
-		showBenefits[feature.title] = false;
+	services.forEach((service) => {
+		showBenefits[service.title] = false;
 	});
 
 	function toggleBenefits(title: string) {
@@ -23,37 +25,37 @@
 		Our Services
 	</h2>
 	<div class="grid grid-cols-1 justify-items-start gap-8 md:grid-cols-2 lg:grid-cols-3">
-		{#each features as feature (feature.title)}
+		{#each services as service (service.title)}
 			<div
 				class="flex transform flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-6 text-center text-gray-900 shadow-md transition-all duration-200 ease-in-out hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
 				in:scale={{ duration: 300 }}
-				class:scale-105={showBenefits[feature.title]}
+				class:scale-105={showBenefits[service.title]}
 			>
 				<div class="flex flex-grow flex-col justify-between">
 					<div>
 						<div class="mb-4 flex w-full items-center justify-center">
-							<i class={feature.icon + ' text-4xl text-blue-500'} />
+							<i class={service.icon + ' text-4xl text-blue-500'} />
 						</div>
 
 						<h3 class="mb-4 text-center font-heading text-xl font-bold">
-							{feature.title}
+							{service.title}
 						</h3>
 
-						<p class="font-sans text-base text-gray-700">{feature.description}</p>
+						<p class="font-sans text-base text-gray-700">{service.description}</p>
 					</div>
 					<div>
 						<button
 							type="button"
 							class="text-xm mb-2 rounded-lg bg-[#008080] px-3 py-1 font-body font-semibold text-white hover:bg-[#009999]"
-							on:click={() => toggleBenefits(feature.title)}
+							on:click={() => toggleBenefits(service.title)}
 						>
-							{showBenefits[feature.title] ? 'Hide Details' : 'Learn More'}
+							{showBenefits[service.title] ? 'Hide Details' : 'Learn More'}
 						</button>
 
-						{#if showBenefits[feature.title]}
+						{#if showBenefits[service.title]}
 							<div class="mt-4 w-full overflow-auto text-gray-700 dark:text-gray-400">
 								<ul>
-									{#each feature.benefits as benefit}
+									{#each service.benefits as benefit}
 										<li class="mt-2 flex">
 											<span class="fas fa-check mr-2 text-green-500" />
 											<span>{benefit}</span>

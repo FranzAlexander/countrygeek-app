@@ -56,11 +56,9 @@ export const load = (async ({ params, fetch, parent }) => {
 	// });
 
 	const products = await response.json();
-	console.log(products);
 
 	// const specFilters = await specResponse.json();
 	const specFilters: any = [];
-	console.log(specFilters);
 
 	return {
 		products: products,
