@@ -284,74 +284,40 @@ export interface Database {
           }
         ]
       }
-      product_rating: {
+      product_review_rating: {
         Row: {
           created_at: string | null
           id: number
           product_sku: string
           profile_id: string | null
-          rating: number
+          rating: number | null
+          review: string | null
         }
         Insert: {
           created_at?: string | null
           id?: number
           product_sku: string
           profile_id?: string | null
-          rating: number
+          rating?: number | null
+          review?: string | null
         }
         Update: {
           created_at?: string | null
           id?: number
           product_sku?: string
           profile_id?: string | null
-          rating?: number
+          rating?: number | null
+          review?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "product_rating_product_sku_fkey"
+            foreignKeyName: "product_review_rating_product_sku_fkey"
             columns: ["product_sku"]
             referencedRelation: "product"
             referencedColumns: ["sku"]
           },
           {
-            foreignKeyName: "product_rating_profile_id_fkey"
-            columns: ["profile_id"]
-            referencedRelation: "profile"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      product_review: {
-        Row: {
-          created_at: string | null
-          id: number
-          product_sku: string
-          profile_id: string | null
-          review: string
-        }
-        Insert: {
-          created_at?: string | null
-          id?: number
-          product_sku: string
-          profile_id?: string | null
-          review: string
-        }
-        Update: {
-          created_at?: string | null
-          id?: number
-          product_sku?: string
-          profile_id?: string | null
-          review?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "product_review_product_sku_fkey"
-            columns: ["product_sku"]
-            referencedRelation: "product"
-            referencedColumns: ["sku"]
-          },
-          {
-            foreignKeyName: "product_review_profile_id_fkey"
+            foreignKeyName: "product_review_rating_profile_id_fkey"
             columns: ["profile_id"]
             referencedRelation: "profile"
             referencedColumns: ["id"]
@@ -502,6 +468,36 @@ export interface Database {
             referencedColumns: ["id"]
           }
         ]
+      }
+      service_enquiry: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: number
+          message: string
+          name: string
+          subject: string
+          viewed: boolean | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: number
+          message: string
+          name: string
+          subject: string
+          viewed?: boolean | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: number
+          message?: string
+          name?: string
+          subject?: string
+          viewed?: boolean | null
+        }
+        Relationships: []
       }
       shopping_cart: {
         Row: {
@@ -738,12 +734,13 @@ export interface Database {
           thumbnail: string
           model: string
           rating: number
+          status: Database["public"]["Enums"]["product_status"]
         }[]
       }
-      get_products_by_category_sub_category: {
+      get_products_by_category_subcategory: {
         Args: {
           p_category_id: number
-          p_sub_category_id: number
+          p_subcategory_id: number
           p_offset: number
           p_limit: number
         }
@@ -753,7 +750,8 @@ export interface Database {
           price: number
           thumbnail: string
           model: string
-          rating: number
+          status: string
+          avg_rating: number
         }[]
       }
       remove_cart_item: {

@@ -130,7 +130,7 @@ export const actions = {
 			)
 			.map(([key, value], i) => ({
 				supplier_id: Number(value),
-				supplier_price: Number(formData.get(`supplier-price-${i}`)),
+				supplier_price: Number(formData.get(`supplier-price-${i}`)) * 100,
 				supplier_product_code: formData.get(`supplier-code-${i}`),
 				locations: Array.from(formData.entries())
 					.filter(([key]) => key.startsWith(`supplier-${i}-loc-`))
@@ -163,93 +163,44 @@ export const actions = {
 				)
 		);
 
-		const priceInCents = Math.round(Number(productPrice) * 100);
+		// const priceInCents = Math.round(Number(productPrice) * 100);
 
-		const stripeId = await createStripeProduct(productName as string, priceInCents);
-
-		// let i = 0;
-		// while (formData.has(`spec-id-${i}`)) {
-		// 	const specId = Number(formData.get(`spec-id-${i}`));
-		// 	const value = formData.get(`spec-value-${i}`) as string;
-		// 	const specValueId = Number(formData.get(`spec-value-id-${i}`));
-
-		// 	specs.push({
-		// 		specId,
-		// 		value,
-		// 		specValueId: specValueId === -1 ? null : specValueId
-		// 	});
-
-		// 	i++;
-		// }
-
-		// const currentSuppliers = [];
-		// let index = 0;
-
-		// while (formData.has(`supplier-${index}`)) {
-		// 	const supplierLocations = [];
-		// 	let ii = 0;
-
-		// 	while (formData.has(`supplier-${index}-loc-${ii}`)) {
-		// 		supplierLocations.push({
-		// 			locationId: Number(formData.get(`supplier-${index}-loc-${ii}`)),
-		// 			amount: Number(formData.get(`supplier-${index}-amount-${ii}`))
-		// 		});
-		// 		ii++;
-		// 	}
-
-		// 	currentSuppliers.push({
-		// 		supplierId: Number(formData.get(`supplier-${index}`)),
-		// 		supplierCode: formData.get(`supplier-code-${index}`) as string,
-		// 		supplierPrice: Number(formData.get(`supplier-price-${index}`)),
-		// 		supplierLocations
-		// 	});
-		// 	index++;
-		// }
-		// console.log(currentSuppliers);
-		// console.log(specs);
+		// const stripeId = await createStripeProduct(productName as string, priceInCents);
 
 		// const thumbnailVariantUrl = await uploadFileAndGetShopUrl(thumbnail, fetch);
 		// const imageVariantUrls = await Promise.all(
 		// 	images.map((image) => uploadFileAndGetShopUrl(image, fetch))
 		// );
 
-		// const { error: createProductError } = await supabase.rpc('create_product', {
-		// 	_brand_id: Number(brand),
-		// 	_category_id: Number(category),
-		// 	_description: productDescription as string,
-		// 	_featured: false,
-		// 	_height: Number(height) * 100,
-		// 	_images: imageVariantUrls,
-		// 	_length: Number(length) * 100,
-		// 	_model: model as string,
-		// 	_name: productName as string,
-		// 	_product_specs: JSON.stringify(specs),
-		// 	_release_date: Date.parse(release as string),
-		// 	_sku: sku as string,
-		// 	_status: status as string,
-		// 	_stripe_product_id: stripeId,
-		// 	_subcategory_id: Number(subCategory),
-		// 	_supplier_locations: JSON.stringify(currentSuppliers),
-		// 	_thumbnail: thumbnailVariantUrl,
-		// 	_warranty: warranty as string,
-		// 	_weight: Number(weight) * 100,
-		// 	_width: Number(width) * 100
-		// });
+		const { error: createProductError } = await supabase.rpc('create_product', {
+			_sku: sku as string,
+			_brand_id: Number(brand),
+			_category_id: Number(category),
+			_description: productDescription as string,
+			_featured: false,
+			_images: [''],
+			_model: model as string,
+			_name: productName as string,
+			_release_date: new Date(release as string),
+			_status: status as string,
+			_stripe_product_id: '',
+			_subcategory_id: Number(subCategory),
+			_thumbnail: '',
+			_warranty: warranty as string,
+			_length: Number(length) * 100,
+			_weight: Number(weight) * 100,
+			_height: Number(height) * 100,
+			_width: Number(width) * 100,
+			_product_specs: product_specs,
+			_product_filters: product_filters,
+			_supplier_locations: supplier_locations
+		});
 
-		// if (createProductError) {
-		// 	console.log('Error: ' + createProductError);
-		// }
+		if (createProductError) {
+			console.log('Error: ' + createProductError.message);
+		}
 
-		// // const supplierInserts = currentSuppliers.flatMap((supplier) => {
-		// // 	return supplier.supplierLocations.map((location) => ({
-		// // 		supplier_id: supplier.supplierId,
-		// // 		product_code: supplier.supplierCode,
-		// // 		purchase_price: Math.round(Number(supplier.supplierPrice) * 100),
-		// // 		amount: location.amount,
-		// // 		product_id: sku as string, // Assuming sku is defined earlier in your function
-		// // 		supplier_location_id: location.locationId
-		// // 	}));
-		// // });
+		return { success: true };
 	}
 } satisfies Actions;
 

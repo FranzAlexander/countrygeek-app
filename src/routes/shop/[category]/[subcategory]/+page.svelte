@@ -72,7 +72,7 @@
 			<Filter filters={data.specFilters} on:newFilter={addFilter} />
 		</div>
 	</div>
-	<div class="grid w-full grid-cols-2 justify-evenly p-2 md:grid-cols-3 xl:grid-cols-4">
+	<div class="grid w-full grid-cols-2 justify-evenly gap-y-4 p-2 md:grid-cols-3 2xl:grid-cols-4">
 		{#each products as product (product.sku)}
 			<ProductCard
 				categoryName={data?.category?.name ?? ''}

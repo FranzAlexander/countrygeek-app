@@ -43,6 +43,7 @@ export interface DatabaseProductDisplay {
 	price: number;
 	thumbnail: string;
 	model: string;
+	status: string;
 	rating: number;
 }
 

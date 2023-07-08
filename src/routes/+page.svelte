@@ -1,8 +1,19 @@
-<script>
+<script lang="ts">
+	import Contact from '$lib/components/services/Contact.svelte';
 	import Feature from '../lib/components/services/Feature.svelte';
 	import Hero from '../lib/components/services/Hero.svelte';
-	import Testimonial from '../lib/components/services/Testimonial.svelte';
+	import type { ActionData } from './$types';
+
+	export let form: ActionData;
 </script>
+
+<svelte:head>
+	<title>Country Geek: Custom Software, Web Development, Data Analytics for Agriculture</title>
+	<meta
+		name="description"
+		content="Specializing in custom software solutions, web development, and data analysis for agriculture. At Country Geek, we help businesses, farms, wineries, and researchers in the South West streamline operations and optimize yields for increased productivity."
+	/>
+</svelte:head>
 
 <main
 	class=" flex h-full w-full flex-col gap-20 bg-fixed pb-10"
@@ -25,6 +36,6 @@
 =======
 	<Hero />
 	<Feature />
-	<Testimonial />
+	<Contact {form} />
 </main>
 >>>>>>> 69b7bddb43910ef7557313261eb37008a694ce8d

@@ -40,6 +40,8 @@ export async function getProductsByCategorySubcategory(
 			}
 		);
 
+		console.log(data);
+
 		if (getProductByCateogryError || !data) {
 			throw error(400, 'Could not get products');
 		}
@@ -47,16 +49,18 @@ export async function getProductsByCategorySubcategory(
 		return transformProductData(data);
 	} else {
 		const { data, error: getProductByCateogryError } = await supabase.rpc(
-			'get_products_by_category_sub_category',
+			'get_products_by_category_subcategory',
 			{
 				p_category_id: categorySubcategory.categoryId,
-				p_sub_category_id: categorySubcategory.subCategoryId,
+				p_subcategory_id: categorySubcategory.subCategoryId,
 				p_offset: categorySubcategory.offset,
 				p_limit: categorySubcategory.limit
 			}
 		);
 
 		if (getProductByCateogryError || !data) {
+			console.log(getProductByCateogryError);
+
 			throw error(400, 'Could not get products');
 		}
 

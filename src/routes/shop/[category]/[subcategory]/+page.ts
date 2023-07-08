@@ -47,16 +47,19 @@ export const load = (async ({ params, fetch, parent }) => {
 		}
 	});
 
-	const specResponse = await fetch('/api/spec', {
-		method: 'POST',
-		body: JSON.stringify({ subCategoryId: subCategoryId }),
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
+	// const specResponse = await fetch('/api/spec', {
+	// 	method: 'POST',
+	// 	body: JSON.stringify({ subCategoryId: subCategoryId }),
+	// 	headers: {
+	// 		'Content-Type': 'application/json'
+	// 	}
+	// });
 
 	const products = await response.json();
-	const specFilters = await specResponse.json();
+	console.log(products);
+
+	// const specFilters = await specResponse.json();
+	const specFilters: any = [];
 	console.log(specFilters);
 
 	return {
