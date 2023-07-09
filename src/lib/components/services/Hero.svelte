@@ -1,46 +1,26 @@
-<!-- Include the necessary icon libraries -->
-<link
-	rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"
-/>
-
 <section class="bg-white dark:bg-gray-900">
-	<div class="mx-auto max-w-screen-xl px-4 py-8 text-center lg:py-16">
+	<div class="container mx-auto max-w-screen-xl px-4 py-8 text-center lg:py-16">
 		<h1
 			class="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl"
 		>
-			South West Tech Services & Aus Wide Shop
+			Country Geek - Empowering Businesses & Researchers with Innovative Solutions
 		</h1>
 		<p class="mb-8 text-base leading-relaxed text-gray-600 dark:text-gray-400 md:text-lg">
-			Tailored solutions and innovative products for your business.
+			Unlock Your Business Potential and Advance Your Research with Tailor-Made Solutions and
+			Cutting-Edge Technology Services.
 		</p>
-		<div class="grid gap-8 md:grid-cols-2">
-			<a
-				href="#features"
-				class="flex transform flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-8 text-center text-gray-900 transition duration-200 ease-in hover:scale-105 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 md:p-12"
+		<a
+			href="#services"
+			class="mx-auto flex w-fit items-center justify-center rounded-lg border-gray-200 bg-[#008080] p-4 text-center transition duration-200 ease-in hover:scale-105 hover:bg-[#009999]"
+		>
+			<p class="text-base leading-relaxed text-white md:text-lg">
+				Discover how our services can assit you.
+			</p>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-6 w-6 fill-[#a0d8f1]"
+				><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path
+					d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
+				/></svg
 			>
-				<i
-					class="fas fa-cogs mb-4 transform text-4xl text-blue-500 transition duration-500 ease-in-out hover:rotate-12"
-				/>
-				<h2 class="mb-2 text-2xl font-bold">Services</h2>
-				<p class="text-base leading-relaxed text-gray-600 dark:text-gray-400 md:text-lg">
-					Find out how we can assist you.
-				</p>
-				<span class="fas fa-arrow-right mt-4 text-blue-500" />
-			</a>
-			<a
-				href="/"
-				class="flex transform flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-8 text-center text-gray-900 transition duration-200 ease-in hover:scale-105 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 md:p-12"
-			>
-				<i
-					class="fas fa-shopping-bag hover:bounce mb-4 transform text-4xl text-blue-500 transition duration-500 ease-in-out"
-				/>
-				<h2 class="mb-2 text-2xl font-bold">Shop</h2>
-				<p class="text-base leading-relaxed text-gray-600 dark:text-gray-400 md:text-lg">
-					Explore our wide range of products. (Coming Soon)
-				</p>
-				<span class="fas fa-arrow-right mt-4 text-blue-500" />
-			</a>
-		</div>
+		</a>
 	</div>
 </section>
