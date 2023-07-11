@@ -1,5 +1,8 @@
 <script lang="ts">
 	import '../app.css';
+	import '@fontsource/roboto';
+	import '@fontsource/montserrat';
+	import '@fontsource/open-sans';
 
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
