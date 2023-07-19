@@ -14,7 +14,7 @@
 			class="mx-auto flex w-fit items-center justify-center rounded-lg border-gray-200 bg-[#008080] p-4 text-center transition duration-200 ease-in hover:scale-105 hover:bg-[#009999]"
 		>
 			<p class="text-base leading-relaxed text-white md:text-lg">
-				Discover how our services can assit you.
+				Discover how our services can assist you.
 			</p>
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-6 w-6 fill-[#a0d8f1]"
 				><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path
