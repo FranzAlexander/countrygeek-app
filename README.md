@@ -1,38 +1,58 @@
-# create-svelte
+Country Geek website
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Status: Complete with a couple of bugs. Website no longer up.
 
-## Creating a project
+----------------------------------
 
-If you're seeing this, you've probably already done this step. Congrats!
+Project Overview
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+Developed for Country Geek, this SvelteKit-based web application aimed to effectively showcase the company's services and facilitate user engagement through a user-friendly contact form. The design focuses on simplicity and ease of access while ensuring a professional online presence.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+----------------------------------
 
-## Developing
+Key Features:
+- Clean and Simple Hero Section: Designed to capture user attention and convey the core message succinctly.
+- Compact Services Section: Lists main services in a grid layout using cards, making information accessible and visually appealing.
+- Expandable Service Cards: Each card provides additional details upon expansion, offering in-depth insights into each service.
+- Simple Contact Form: Streamlined for ease of use, encouraging user interaction.
+- Responsive Design: Ensures a seamless experience across different devices.
+- SEO Optimization: Implemented both manual SEO strategies and server-side rendering for enhanced search engine visibility.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+----------------------------------
 
-```bash
-npm run dev
+Technologies Used:
+- Frontend: SvelteKit with Tailwind CSS for styling.
+- Backend: Supabase for handling form data.
+- Hosting: Cloudflare for reliable and efficient web hosting.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+----------------------------------
 
-## Building
+Bugs and Potential Fixes:
+- Form Submission Notification: Currently, there is no notification after a user submits the contact form. This can be addressed by implementing a modal pop-up that confirms the submission.
+- Map Display Issue: The map occasionally fails to show the correct location, likely due to Google API settings. Adjusting these settings should resolve this issue.
 
-To create a production version of your app:
+----------------------------------
 
-```bash
-npm run build
-```
+Installation and Running
 
-You can preview the production build with `npm run preview`.
+Ensure you have Node.js installed on your system to run this SvelteKit project.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Clone the repository using Git:
+  
+    git clone https://github.com/FranzAlexander/countrygeek-app.git
+
+Installing Dependencies:
+
+    cd countrygeek-app
+    npm install
+
+Running the Project:
+
+    npm run dev
+
+This will start the development server. By default, the site should be available at http://localhost:3000.
+
+----------------------------------
+
+Contact For any inquiries or discussions related to this project, feel free to contact me at alexbalcombe4@gmail.com.
+
